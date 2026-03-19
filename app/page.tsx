@@ -555,7 +555,7 @@ export default function Home() {
                   <div style={{ padding: '1.75rem 1.5rem' }}>
                     <div style={{
                       width: 44, height: 44, borderRadius: 10,
-                      backgroundColor: 'var(--light-accent)',
+                      backgroundColor: '#fff',
                       display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16,
                     }}>
                       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--mantis-a)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
