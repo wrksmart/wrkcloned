@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
 
 // ─────────────────────────────────────────────
 // CONTENT DATA (exact wrksourcing.com copy)
@@ -139,35 +140,41 @@ const STEPS = [
 ]
 
 // ─────────────────────────────────────────────
-// ROTATING TEXT
+// ROTATING TEXT (framer-motion)
 // ─────────────────────────────────────────────
 function RotatingText() {
   const [index, setIndex] = useState(0)
-  const [fade, setFade] = useState(true)
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setFade(false)
-      setTimeout(() => {
-        setIndex(i => (i + 1) % ROTATING_WORDS.length)
-        setFade(true)
-      }, 300)
-    }, 2800)
+      setIndex(i => (i + 1) % ROTATING_WORDS.length)
+    }, 3000)
     return () => clearInterval(timer)
   }, [])
 
   return (
-    <span style={{
-      fontWeight: 800,
-      background: 'linear-gradient(135deg, #76d669, #DDEA7F)',
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-      opacity: fade ? 1 : 0,
-      transform: fade ? 'translateY(0)' : 'translateY(6px)',
-      transition: 'opacity 0.3s ease, transform 0.3s ease',
-      display: 'inline-block',
-    }}>
-      {ROTATING_WORDS[index]}
+    <span style={{ display: 'inline-block', position: 'relative', height: '1.2em', verticalAlign: 'bottom' }}>
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={index}
+          initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, y: -30, filter: 'blur(8px)' }}
+          transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+          style={{
+            fontWeight: 900,
+            background: 'linear-gradient(135deg, #76d669, #DDEA7F)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            display: 'inline-block',
+            position: 'absolute',
+            left: 0,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {ROTATING_WORDS[index]}
+        </motion.span>
+      </AnimatePresence>
     </span>
   )
 }
@@ -278,18 +285,13 @@ export default function Home() {
               letterSpacing: '-0.025em',
               marginBottom: 20,
             }}>
-              expert support for{' '}
-              <span style={{
-                background: 'linear-gradient(135deg, var(--mantis-a), var(--mantis-b))',
-                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-              }}>entrepreneurs</span>{' '}
-              and SMBs.
+              expert support for entrepreneurs and SMBs.
             </h1>
 
             <p style={{ fontSize: '1.05rem', color: 'var(--subtext)', lineHeight: 1.6, marginBottom: 6 }}>
               200,000+ hours of proven results across
             </p>
-            <p style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.4rem)', letterSpacing: '-0.025em', lineHeight: 1.12, marginBottom: 14, minHeight: '1.3em' }}>
+            <p style={{ fontSize: 'clamp(2.6rem, 5vw, 3.6rem)', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 16, minHeight: '1.3em' }}>
               <RotatingText />
             </p>
 
