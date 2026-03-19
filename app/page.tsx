@@ -158,8 +158,10 @@ function RotatingText() {
 
   return (
     <span style={{
-      fontWeight: 700,
-      color: 'var(--mantis-a)',
+      fontWeight: 800,
+      background: 'linear-gradient(135deg, #76d669, #DDEA7F)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
       opacity: fade ? 1 : 0,
       transform: fade ? 'translateY(0)' : 'translateY(6px)',
       transition: 'opacity 0.3s ease, transform 0.3s ease',
