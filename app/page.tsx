@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useInView, useScroll, useSpring } from 'framer-motion'
 
 // ─────────────────────────────────────────────
 // CONTENT DATA (exact wrksourcing.com copy)
@@ -26,6 +26,13 @@ const ROTATING_WORDS = [
   'marketing',
   'sales',
   'project-based wrk',
+]
+
+const STATS = [
+  { value: 200, suffix: 'K+', label: 'hours delivered' },
+  { value: 50,  suffix: '+',  label: 'active clients' },
+  { value: 40,  suffix: '+',  label: 'wrk Specialists' },
+  { value: 95,  suffix: '%',  label: 'client retention' },
 ]
 
 const PILLARS = [
@@ -80,57 +87,21 @@ const SERVICES = [
 ]
 
 const INDUSTRIES = [
-  {
-    title: 'Professional Services',
-    icon: <><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path d="M9 12l2 2 4-4"/></>,
-  },
-  {
-    title: 'Entrepreneurs',
-    icon: <><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></>,
-  },
-  {
-    title: 'Start-ups',
-    icon: <><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></>,
-  },
-  {
-    title: 'Creative Services',
-    icon: <><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></>,
-  },
-  {
-    title: 'E-commerce',
-    icon: <><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></>,
-  },
-  {
-    title: 'Tech, IT, and Software',
-    icon: <><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8"/><path d="M12 17v4"/></>,
-  },
+  { title: 'Professional Services', icon: <><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path d="M9 12l2 2 4-4"/></> },
+  { title: 'Entrepreneurs', icon: <><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></> },
+  { title: 'Start-ups', icon: <><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></> },
+  { title: 'Creative Services', icon: <><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></> },
+  { title: 'E-commerce', icon: <><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></> },
+  { title: 'Tech, IT, and Software', icon: <><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8"/><path d="M12 17v4"/></> },
 ]
 
 const TESTIMONIALS = [
-  {
-    name: 'Mathew Glowacki', company: 'MPG Law',
-    text: 'Are you an owner of a growing business and are finding yourself bogged down with all the nitty-gritty aspects of the business? Tyler and his experienced team are great to work with.',
-  },
-  {
-    name: 'Andrew Thurston', company: 'BeSpoke Contracting',
-    text: 'The entire team at wrksourcing are amazing to deal with. If you are looking to free up time in your day, I highly recommend using wrksourcing.',
-  },
-  {
-    name: 'Stephanie van Dam', company: 'Sandler',
-    text: 'wrksourcing has been an integral part of the growth of my business. I am so grateful for the ease of interaction, communication structure, and expertise of the team.',
-  },
-  {
-    name: 'Mike Stroh', company: 'Starts w/ Me',
-    text: 'I have thoroughly enjoyed working with wrksourcing! We found great matches for my needs and it has been great customer service.',
-  },
-  {
-    name: 'Mike Antico', company: 'Green Link Recycling',
-    text: 'Working with Tyler and his team is an absolute pleasure. Very professional, and resourceful for whatever your companies unique needs are.',
-  },
-  {
-    name: 'Tom Hall', company: 'BluRoot',
-    text: 'The talent that wrksourcing has provided our business is excellent — skilled individuals, who can contribute immediately.',
-  },
+  { name: 'Mathew Glowacki', company: 'MPG Law', text: 'Are you an owner of a growing business and are finding yourself bogged down with all the nitty-gritty aspects of the business? Tyler and his experienced team are great to work with.' },
+  { name: 'Andrew Thurston', company: 'BeSpoke Contracting', text: 'The entire team at wrksourcing are amazing to deal with. If you are looking to free up time in your day, I highly recommend using wrksourcing.' },
+  { name: 'Stephanie van Dam', company: 'Sandler', text: 'wrksourcing has been an integral part of the growth of my business. I am so grateful for the ease of interaction, communication structure, and expertise of the team.' },
+  { name: 'Mike Stroh', company: 'Starts w/ Me', text: 'I have thoroughly enjoyed working with wrksourcing! We found great matches for my needs and it has been great customer service.' },
+  { name: 'Mike Antico', company: 'Green Link Recycling', text: 'Working with Tyler and his team is an absolute pleasure. Very professional, and resourceful for whatever your companies unique needs are.' },
+  { name: 'Tom Hall', company: 'BluRoot', text: 'The talent that wrksourcing has provided our business is excellent — skilled individuals, who can contribute immediately.' },
 ]
 
 const STEPS = [
@@ -140,7 +111,49 @@ const STEPS = [
 ]
 
 // ─────────────────────────────────────────────
-// ROTATING TEXT (framer-motion)
+// SCROLL REVEAL WRAPPER
+// ─────────────────────────────────────────────
+function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ duration: 0.6, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+// ─────────────────────────────────────────────
+// ANIMATED COUNTER
+// ─────────────────────────────────────────────
+function Counter({ target, suffix }: { target: number; suffix: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-50px' })
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (!inView) return
+    let start = 0
+    const duration = 1600
+    const step = Math.ceil(target / (duration / 16))
+    const timer = setInterval(() => {
+      start += step
+      if (start >= target) { setCount(target); clearInterval(timer) }
+      else setCount(start)
+    }, 16)
+    return () => clearInterval(timer)
+  }, [inView, target])
+
+  return <span ref={ref}>{inView ? count : 0}{suffix}</span>
+}
+
+// ─────────────────────────────────────────────
+// ROTATING TEXT
 // ─────────────────────────────────────────────
 function RotatingText() {
   const [index, setIndex] = useState(0)
@@ -157,10 +170,10 @@ function RotatingText() {
       <AnimatePresence mode="wait">
         <motion.span
           key={index}
-          initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+          initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          exit={{ opacity: 0, y: -30, filter: 'blur(8px)' }}
-          transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+          exit={{ opacity: 0, y: -40, filter: 'blur(10px)' }}
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{
             fontWeight: 900,
             background: 'linear-gradient(135deg, #76d669, #DDEA7F)',
@@ -175,24 +188,19 @@ function RotatingText() {
           {ROTATING_WORDS[index]}
         </motion.span>
       </AnimatePresence>
-      {/* Blinking cursor */}
       <span style={{
-        display: 'inline-block',
-        width: 3,
-        height: '0.85em',
+        display: 'inline-block', width: 3, height: '0.85em',
         background: 'linear-gradient(180deg, #76d669, #DDEA7F)',
-        borderRadius: 2,
-        marginLeft: 4,
+        borderRadius: 2, marginLeft: 4,
         animation: 'blink 1s step-end infinite',
-        position: 'relative',
-        top: '0.05em',
+        position: 'relative', top: '0.05em',
       }} />
     </span>
   )
 }
 
 // ─────────────────────────────────────────────
-// STARS (Google yellow)
+// STARS
 // ─────────────────────────────────────────────
 function Stars() {
   return (
@@ -214,6 +222,9 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [tIdx, setTIdx] = useState(0)
 
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
+
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', fn, { passive: true })
@@ -226,11 +237,18 @@ export default function Home() {
   }, [])
 
   return (
-    <div style={{ fontFamily: "var(--font, 'Avenir', 'Plus Jakarta Sans', sans-serif)" }}>
+    <div style={{ fontFamily: "'Avenir', 'Plus Jakarta Sans', sans-serif" }}>
+
+      {/* SCROLL PROGRESS BAR */}
+      <motion.div style={{
+        scaleX, position: 'fixed', top: 0, left: 0, right: 0,
+        height: 3, background: 'linear-gradient(90deg, #76d669, #DDEA7F)',
+        transformOrigin: 'left', zIndex: 9999,
+      }} />
 
       {/* ═══════════════ NAV ═══════════════ */}
       <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+        position: 'fixed', top: 3, left: 0, right: 0, zIndex: 100,
         transition: 'all 0.3s',
         backgroundColor: scrolled ? 'rgba(255,255,255,0.97)' : 'transparent',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
@@ -289,59 +307,95 @@ export default function Home() {
           display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '3rem', alignItems: 'center',
         }}>
           <div>
-            <h1 style={{
-              fontSize: 'clamp(2.4rem, 4.5vw, 3.4rem)',
-              fontWeight: 800,
-              color: 'var(--eerie)',
-              lineHeight: 1.12,
-              letterSpacing: '-0.025em',
-              marginBottom: 20,
-            }}>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              style={{
+                fontSize: 'clamp(2.4rem, 4.5vw, 3.4rem)',
+                fontWeight: 900, color: 'var(--eerie)',
+                lineHeight: 1.12, letterSpacing: '-0.025em', marginBottom: 20,
+              }}
+            >
               expert support for entrepreneurs and SMBs.
-            </h1>
+            </motion.h1>
 
-            <p style={{ fontSize: '1.05rem', color: 'var(--subtext)', lineHeight: 1.6, marginBottom: 6 }}>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              style={{ fontSize: '1.05rem', color: 'var(--subtext)', lineHeight: 1.6, marginBottom: 6 }}
+            >
               200,000+ hours of proven results across
-            </p>
-            <p style={{ fontSize: 'clamp(2.6rem, 5vw, 3.6rem)', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 16, minHeight: '1.3em' }}>
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.55 }}
+              style={{ fontSize: 'clamp(2.6rem, 5vw, 3.6rem)', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 16, minHeight: '1.3em' }}
+            >
               <RotatingText />
-            </p>
+            </motion.p>
 
-            <p style={{ fontSize: '0.95rem', color: 'var(--muted)', lineHeight: 1.7, marginBottom: 36 }}>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.65 }}
+              style={{ fontSize: '0.95rem', color: 'var(--muted)', lineHeight: 1.7, marginBottom: 36 }}
+            >
               growing businesses since 2019, we combine decades of experience with innovative
               strategies that streamline processes, maximize efficiency, and scale with confidence.
-            </p>
+            </motion.p>
 
-            <div className="hero-cta-row" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="hero-cta-row" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}
+            >
               <a className="btn-gradient" href="#contact">BOOK A FREE CALL</a>
               <a className="btn-outline" href="#services">EXPLORE OUR SERVICES</a>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Hero illustration */}
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            style={{ display: 'flex', justifyContent: 'center' }}
+          >
             <Image
               src="/images/hero-illustration.png"
               alt="Remote team collaboration"
-              width={391}
-              height={439}
-              priority
+              width={391} height={439} priority
               style={{ maxWidth: '100%', height: 'auto' }}
             />
-          </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ═══════════════ STATS BAR ═══════════════ */}
+      <section style={{ backgroundColor: 'var(--forest)', padding: '3rem 2rem' }}>
+        <div className="stats-grid" style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32, textAlign: 'center' }}>
+          {STATS.map((s, i) => (
+            <Reveal key={s.label} delay={i * 0.08}>
+              <div style={{ fontSize: 'clamp(2rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--mindaro)', letterSpacing: '-0.03em', lineHeight: 1 }}>
+                <Counter target={s.value} suffix={s.suffix} />
+              </div>
+              <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.5)', marginTop: 6, fontWeight: 500 }}>{s.label}</div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
       {/* ═══════════════ LOGO STRIP ═══════════════ */}
       <section style={{
         backgroundColor: 'var(--seasalt)', padding: '1.75rem 0',
-        borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)',
-        overflow: 'hidden',
+        borderBottom: '1px solid var(--line)', overflow: 'hidden',
       }}>
         <p style={{
           textAlign: 'center', fontSize: '0.72rem', fontWeight: 700,
-          letterSpacing: '0.12em', color: 'var(--subtle)', textTransform: 'uppercase',
-          marginBottom: 16,
+          letterSpacing: '0.12em', color: 'var(--subtle)', textTransform: 'uppercase', marginBottom: 16,
         }}>
           trusted by the best
         </p>
@@ -365,30 +419,34 @@ export default function Home() {
       {/* ═══════════════ WHY WRKSOURCING ═══════════════ */}
       <section id="about" style={{ padding: '6rem 2rem', backgroundColor: '#fff' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>
-              why wrksourcing?
-            </p>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 800, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
-              why wrksourcing?
-            </h2>
-            <p style={{ maxWidth: 600, margin: '14px auto 0', color: 'var(--muted)', fontSize: '1.02rem', lineHeight: 1.7 }}>
-              partner with us for streamlined processes, access to specialized expertise, and the
-              implementation of smarter workflows that drive results.
-            </p>
-          </div>
+          <Reveal>
+            <div style={{ textAlign: 'center', marginBottom: 48 }}>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>
+                why wrksourcing?
+              </p>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+                why wrksourcing?
+              </h2>
+              <p style={{ maxWidth: 600, margin: '14px auto 0', color: 'var(--muted)', fontSize: '1.02rem', lineHeight: 1.7 }}>
+                partner with us for streamlined processes, access to specialized expertise, and the
+                implementation of smarter workflows that drive results.
+              </p>
+            </div>
+          </Reveal>
 
           <div className="pillars-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 16 }}>
-            {PILLARS.map(p => (
-              <div key={p.title} className="card" style={{ padding: '1.75rem 1.25rem' }}>
-                <div className="pillar-icon">
-                  <svg viewBox="0 0 24 24">{p.icon}</svg>
+            {PILLARS.map((p, i) => (
+              <Reveal key={p.title} delay={i * 0.08}>
+                <div className="card" style={{ padding: '1.75rem 1.25rem', height: '100%' }}>
+                  <div className="pillar-icon">
+                    <svg viewBox="0 0 24 24">{p.icon}</svg>
+                  </div>
+                  <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--eerie)', marginBottom: 8, textTransform: 'lowercase' }}>
+                    {p.title.toLowerCase()}
+                  </h3>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }}>{p.desc}</p>
                 </div>
-                <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--eerie)', marginBottom: 8, textTransform: 'lowercase' }}>
-                  {p.title.toLowerCase()}
-                </h3>
-                <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }}>{p.desc}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -397,37 +455,34 @@ export default function Home() {
       {/* ═══════════════ SERVICES ═══════════════ */}
       <section id="services" style={{ padding: '6rem 2rem', backgroundColor: 'var(--seasalt)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>
-              services
-            </p>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 800, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
-              what we do best
-            </h2>
-          </div>
+          <Reveal>
+            <div style={{ textAlign: 'center', marginBottom: 48 }}>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>services</p>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>what we do best</h2>
+            </div>
+          </Reveal>
 
           <div className="services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
-            {SERVICES.map(s => (
-              <div key={s.title} className="card" style={{ overflow: 'hidden' }}>
-                <div className="service-card-bar" />
-                <div style={{ padding: '1.75rem 1.5rem' }}>
-                  <div style={{
-                    width: 44, height: 44, borderRadius: 10,
-                    backgroundColor: 'var(--light-accent)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    marginBottom: 16,
-                  }}>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                      stroke="var(--mantis-a)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      {s.icon}
-                    </svg>
+            {SERVICES.map((s, i) => (
+              <Reveal key={s.title} delay={i * 0.1}>
+                <div className="card" style={{ overflow: 'hidden', height: '100%' }}>
+                  <div className="service-card-bar" />
+                  <div style={{ padding: '1.75rem 1.5rem' }}>
+                    <div style={{
+                      width: 44, height: 44, borderRadius: 10,
+                      backgroundColor: 'var(--light-accent)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16,
+                    }}>
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="var(--mantis-a)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        {s.icon}
+                      </svg>
+                    </div>
+                    <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--eerie)', marginBottom: 12 }}>{s.title}</h3>
+                    <p style={{ fontSize: '0.88rem', color: 'var(--muted)', lineHeight: 1.65 }}>{s.desc}</p>
                   </div>
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--eerie)', marginBottom: 12 }}>
-                    {s.title}
-                  </h3>
-                  <p style={{ fontSize: '0.88rem', color: 'var(--muted)', lineHeight: 1.65 }}>{s.desc}</p>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -436,43 +491,35 @@ export default function Home() {
       {/* ═══════════════ INDUSTRIES ═══════════════ */}
       <section style={{ padding: '6rem 2rem', backgroundColor: '#fff' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>
-              industries
-            </p>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 800, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 8 }}>
-              from emerging startups to industry giants
-            </h2>
-            <p style={{ color: 'var(--muted)', fontSize: '1.02rem' }}>
-              we fuel growth across diverse sectors
-            </p>
-          </div>
+          <Reveal>
+            <div style={{ textAlign: 'center', marginBottom: 40 }}>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>industries</p>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 8 }}>from emerging startups to industry giants</h2>
+              <p style={{ color: 'var(--muted)', fontSize: '1.02rem' }}>we fuel growth across diverse sectors</p>
+            </div>
+          </Reveal>
           <div className="industries-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 14 }}>
-            {INDUSTRIES.map(ind => (
-              <div key={ind.title} className="industry-card">
-                <div style={{
-                  width: 56, height: 56, borderRadius: 14,
-                  background: 'linear-gradient(135deg, rgba(118,214,105,0.1), rgba(221,234,127,0.1))',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  margin: '0 auto 14px',
-                }}>
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
-                    strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <defs>
-                      <linearGradient id={`grad-${ind.title.replace(/\s/g, '')}`} x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="#76d669" />
-                        <stop offset="100%" stopColor="#DDEA7F" />
-                      </linearGradient>
-                    </defs>
-                    <g stroke={`url(#grad-${ind.title.replace(/\s/g, '')})`}>
-                      {ind.icon}
-                    </g>
-                  </svg>
+            {INDUSTRIES.map((ind, i) => (
+              <Reveal key={ind.title} delay={i * 0.06}>
+                <div className="industry-card">
+                  <div style={{
+                    width: 56, height: 56, borderRadius: 14,
+                    background: 'linear-gradient(135deg, rgba(118,214,105,0.1), rgba(221,234,127,0.1))',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px',
+                  }}>
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <defs>
+                        <linearGradient id={`g-${ind.title.replace(/\s/g, '')}`} x1="0" y1="0" x2="1" y2="1">
+                          <stop offset="0%" stopColor="#76d669" />
+                          <stop offset="100%" stopColor="#DDEA7F" />
+                        </linearGradient>
+                      </defs>
+                      <g stroke={`url(#g-${ind.title.replace(/\s/g, '')})`}>{ind.icon}</g>
+                    </svg>
+                  </div>
+                  <p style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--eerie)', lineHeight: 1.35 }}>{ind.title}</p>
                 </div>
-                <p style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--eerie)', lineHeight: 1.35 }}>
-                  {ind.title}
-                </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -481,66 +528,62 @@ export default function Home() {
       {/* ═══════════════ TESTIMONIALS ═══════════════ */}
       <section style={{ padding: '6rem 2rem', backgroundColor: 'var(--seasalt)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>
-              testimonials
-            </p>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 800, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
-              real results corner
-            </h2>
-          </div>
-
-          {/* Featured testimonial */}
-          <div style={{ maxWidth: 680, margin: '0 auto 32px', textAlign: 'center', minHeight: 160 }}>
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}>
-              <Stars />
+          <Reveal>
+            <div style={{ textAlign: 'center', marginBottom: 40 }}>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>testimonials</p>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>real results corner</h2>
             </div>
-            <blockquote style={{
-              fontSize: 'clamp(1rem, 2vw, 1.12rem)', color: 'var(--subtext)',
-              lineHeight: 1.72, margin: '0 0 1rem', fontStyle: 'italic',
-            }}>
-              &ldquo;{TESTIMONIALS[tIdx].text}&rdquo;
-            </blockquote>
-            <p style={{ fontWeight: 700, color: 'var(--eerie)', fontSize: '0.9rem' }}>
-              {TESTIMONIALS[tIdx].name}
-            </p>
-            <p style={{ color: 'var(--muted)', fontSize: '0.8rem', marginTop: 3 }}>
-              {TESTIMONIALS[tIdx].company}
-            </p>
+          </Reveal>
+
+          {/* Featured testimonial with AnimatePresence */}
+          <div style={{ maxWidth: 680, margin: '0 auto 32px', textAlign: 'center', minHeight: 180 }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={tIdx}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.4 }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}><Stars /></div>
+                <blockquote style={{
+                  fontSize: 'clamp(1rem, 2vw, 1.12rem)', color: 'var(--subtext)',
+                  lineHeight: 1.72, margin: '0 0 1rem', fontStyle: 'italic',
+                }}>
+                  &ldquo;{TESTIMONIALS[tIdx].text}&rdquo;
+                </blockquote>
+                <p style={{ fontWeight: 700, color: 'var(--eerie)', fontSize: '0.9rem' }}>{TESTIMONIALS[tIdx].name}</p>
+                <p style={{ color: 'var(--muted)', fontSize: '0.8rem', marginTop: 3 }}>{TESTIMONIALS[tIdx].company}</p>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
-          {/* Dots */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: 6, marginBottom: 40 }}>
             {TESTIMONIALS.map((_, i) => (
-              <button key={i} className="dot-btn"
-                onClick={() => setTIdx(i)}
-                style={{
-                  width: tIdx === i ? 24 : 8,
-                  backgroundColor: tIdx === i ? 'var(--mantis-a)' : '#ddd',
-                }}
-                aria-label={`Testimonial ${i + 1}`}
-              />
+              <button key={i} className="dot-btn" onClick={() => setTIdx(i)}
+                style={{ width: tIdx === i ? 24 : 8, backgroundColor: tIdx === i ? 'var(--mantis-a)' : '#ddd' }}
+                aria-label={`Testimonial ${i + 1}`} />
             ))}
           </div>
 
-          {/* Grid */}
           <div className="testimonials-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
             {TESTIMONIALS.map((t, i) => (
-              <div key={i} onClick={() => setTIdx(i)}
-                className="card"
-                style={{
-                  padding: '1.5rem', cursor: 'pointer',
-                  borderColor: tIdx === i ? 'var(--mantis-a)' : 'var(--line)',
-                  background: tIdx === i ? 'var(--light-accent)' : '#fff',
-                }}
-              >
-                <Stars />
-                <p style={{ color: 'var(--subtext)', fontSize: '0.85rem', lineHeight: 1.6, margin: '10px 0', fontStyle: 'italic' }}>
-                  &ldquo;{t.text.length > 100 ? t.text.slice(0, 100) + '…' : t.text}&rdquo;
-                </p>
-                <p style={{ fontWeight: 700, color: 'var(--eerie)', fontSize: '0.82rem' }}>{t.name}</p>
-                <p style={{ color: 'var(--muted)', fontSize: '0.75rem', marginTop: 2 }}>{t.company}</p>
-              </div>
+              <Reveal key={i} delay={i * 0.06}>
+                <div onClick={() => setTIdx(i)} className="card"
+                  style={{
+                    padding: '1.5rem', cursor: 'pointer', height: '100%',
+                    borderColor: tIdx === i ? 'var(--mantis-a)' : 'var(--line)',
+                    background: tIdx === i ? 'var(--light-accent)' : '#fff',
+                    transition: 'all 0.3s',
+                  }}>
+                  <Stars />
+                  <p style={{ color: 'var(--subtext)', fontSize: '0.85rem', lineHeight: 1.6, margin: '10px 0', fontStyle: 'italic' }}>
+                    &ldquo;{t.text.length > 100 ? t.text.slice(0, 100) + '…' : t.text}&rdquo;
+                  </p>
+                  <p style={{ fontWeight: 700, color: 'var(--eerie)', fontSize: '0.82rem' }}>{t.name}</p>
+                  <p style={{ color: 'var(--muted)', fontSize: '0.75rem', marginTop: 2 }}>{t.company}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -549,58 +592,63 @@ export default function Home() {
       {/* ═══════════════ HOW IT WORKS ═══════════════ */}
       <section id="how-it-works" style={{ padding: '6rem 2rem', backgroundColor: '#fff' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>
-              how it works
-            </p>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 800, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
-              three steps to get started
-            </h2>
-          </div>
-          <div className="steps-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
-            {STEPS.map(s => (
-              <div key={s.n} className="card" style={{ padding: '2rem 1.75rem' }}>
-                <div className="step-number">{s.n}</div>
-                <h3 style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--eerie)', marginBottom: 10, lineHeight: 1.3 }}>
-                  {s.title}
-                </h3>
-                <p style={{ color: 'var(--muted)', fontSize: '0.88rem', lineHeight: 1.7 }}>{s.desc}</p>
-              </div>
+          <Reveal>
+            <div style={{ textAlign: 'center', marginBottom: 48 }}>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>how it works</p>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>three steps to get started</h2>
+            </div>
+          </Reveal>
+          <div className="steps-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, position: 'relative' }}>
+            {/* Connector line */}
+            <div className="steps-connector" style={{
+              position: 'absolute', top: 24, left: 'calc(16.67% + 24px)', right: 'calc(16.67% + 24px)',
+              height: 2, background: 'linear-gradient(90deg, var(--mantis-a), var(--mantis-b))', zIndex: 0,
+              borderRadius: 1,
+            }} />
+            {STEPS.map((s, i) => (
+              <Reveal key={s.n} delay={i * 0.15}>
+                <div className="card" style={{ padding: '2rem 1.75rem', position: 'relative', zIndex: 1 }}>
+                  <div className="step-number">{s.n}</div>
+                  <h3 style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--eerie)', marginBottom: 10, lineHeight: 1.3 }}>{s.title}</h3>
+                  <p style={{ color: 'var(--muted)', fontSize: '0.88rem', lineHeight: 1.7 }}>{s.desc}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
-          <div style={{ textAlign: 'center', marginTop: 40 }}>
-            <a className="btn-gradient" href="#contact">WRK SMARTER TODAY</a>
-          </div>
+          <Reveal delay={0.3}>
+            <div style={{ textAlign: 'center', marginTop: 40 }}>
+              <a className="btn-gradient" href="#contact">WRK SMARTER TODAY</a>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ═══════════════ CTA ═══════════════ */}
-      <section id="contact" className="gradient-bg" style={{
-        padding: '7rem 2rem',
-      }}>
-        <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{
-            fontSize: 'clamp(2rem, 4.5vw, 2.8rem)', fontWeight: 900,
-            color: 'var(--white)', letterSpacing: '-0.025em', lineHeight: 1.12, marginBottom: 16,
-          }}>
-            let&apos;s make your brand unforgettable, shall we?
-          </h2>
-          <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '1.02rem', lineHeight: 1.72, marginBottom: 40 }}>
-            find out what partnering with wrksourcing can do for you. schedule a chat
-            now for a free assessment to identify your business support needs.
-          </p>
-          <a className="btn-dark" href="https://wrksourcing.com/contact" style={{ fontSize: '0.88rem', padding: '1rem 2.5rem' }}>
-            BOOK OUR DISCOVERY CALL
-          </a>
-        </div>
+      <section id="contact" className="gradient-bg" style={{ padding: '7rem 2rem' }}>
+        <Reveal>
+          <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center' }}>
+            <h2 style={{
+              fontSize: 'clamp(2rem, 4.5vw, 2.8rem)', fontWeight: 900,
+              color: 'var(--white)', letterSpacing: '-0.025em', lineHeight: 1.12, marginBottom: 16,
+            }}>
+              let&apos;s make your brand unforgettable, shall we?
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '1.02rem', lineHeight: 1.72, marginBottom: 40 }}>
+              find out what partnering with wrksourcing can do for you. schedule a chat
+              now for a free assessment to identify your business support needs.
+            </p>
+            <a className="btn-dark" href="https://wrksourcing.com/contact" style={{ fontSize: '0.88rem', padding: '1rem 2.5rem' }}>
+              BOOK OUR DISCOVERY CALL
+            </a>
+          </div>
+        </Reveal>
       </section>
 
       {/* ═══════════════ FOOTER ═══════════════ */}
       <footer style={{ backgroundColor: 'var(--forest)', padding: '3.5rem 2rem', color: '#fff' }}>
         <div className="footer-inner" style={{
           maxWidth: 1200, margin: '0 auto',
-          display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start',
-          gap: 32, flexWrap: 'wrap',
+          display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 32, flexWrap: 'wrap',
         }}>
           <div>
             <div style={{ marginBottom: 12 }}>
@@ -612,21 +660,13 @@ export default function Home() {
               enhance efficiency, and drive sustainable growth.
             </p>
           </div>
-
           <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap' }}>
             {NAV.map(l => (
-              <a key={l.href} href={l.href} style={{
-                color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem',
-                transition: 'color 0.2s',
-              }}
+              <a key={l.href} href={l.href} style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', transition: 'color 0.2s' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#fff' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)' }}
-              >
-                {l.label}
-              </a>
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)' }}>{l.label}</a>
             ))}
           </div>
-
           <div style={{ display: 'flex', gap: 10 }}>
             {[
               { label: 'FB', href: 'https://facebook.com/wrksourcing' },
@@ -634,38 +674,27 @@ export default function Home() {
               { label: 'LI', href: 'https://linkedin.com/company/wrksourcing' },
             ].map(s => (
               <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" style={{
-                width: 36, height: 36, borderRadius: '50%',
-                background: 'rgba(255,255,255,0.1)',
+                width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.1)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: 'rgba(255,255,255,0.6)',
-                fontSize: '0.65rem', fontWeight: 700, transition: 'all 0.2s',
+                color: 'rgba(255,255,255,0.6)', fontSize: '0.65rem', fontWeight: 700, transition: 'all 0.2s',
               }}
                 onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'linear-gradient(135deg, #76d669, #DDEA7F)'; el.style.color = '#fff' }}
                 onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(255,255,255,0.1)'; el.style.color = 'rgba(255,255,255,0.6)' }}
-              >
-                {s.label}
-              </a>
+              >{s.label}</a>
             ))}
           </div>
         </div>
-
         <div className="footer-bottom" style={{
           maxWidth: 1200, margin: '2rem auto 0', paddingTop: '1.5rem',
           borderTop: '1px solid rgba(255,255,255,0.1)',
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          flexWrap: 'wrap', gap: 12,
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12,
         }}>
-          <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem' }}>
-            © 2025 wrksourcing. All rights reserved.
-          </p>
+          <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem' }}>© 2025 wrksourcing. All rights reserved.</p>
           <div style={{ display: 'flex', gap: 20 }}>
             {['Privacy Policy', 'Terms & Conditions'].map(l => (
               <a key={l} href="#" style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', transition: 'color 0.2s' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.7)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.35)' }}
-              >
-                {l}
-              </a>
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.35)' }}>{l}</a>
             ))}
           </div>
         </div>

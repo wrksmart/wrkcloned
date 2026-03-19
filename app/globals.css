@@ -301,6 +301,7 @@ label.form-label {
   .industries-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .testimonials-grid { grid-template-columns: 1fr !important; }
   .steps-grid { grid-template-columns: 1fr !important; }
+  .steps-connector { display: none !important; }
   .services-grid { grid-template-columns: 1fr !important; }
   .form-row { grid-template-columns: 1fr !important; }
   .footer-inner { flex-direction: column; gap: 1.5rem; }
