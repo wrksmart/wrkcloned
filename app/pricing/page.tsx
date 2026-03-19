@@ -10,7 +10,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion'
 const NAV = [
   { label: 'Services', href: '/#services' },
   { label: 'Pricing', href: '/pricing' },
-  { label: 'how it wrks', href: '/#how-it-works' },
+  { label: 'How It Wrks', href: '/#how-it-works' },
   { label: 'About Us', href: '/#about' },
   { label: 'Contact Us', href: '/#contact' },
 ]

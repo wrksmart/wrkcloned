@@ -10,7 +10,7 @@ import { motion, AnimatePresence, useInView, useScroll, useSpring } from 'framer
 const NAV = [
   { label: 'Services', href: '#services' },
   { label: 'Pricing', href: '/pricing' },
-  { label: 'how it wrks', href: '#how-it-works' },
+  { label: 'How It Wrks', href: '#how-it-works' },
   { label: 'About Us', href: '#about' },
   { label: 'Contact Us', href: '#contact' },
 ]
@@ -217,12 +217,61 @@ function Stars() {
 }
 
 // ─────────────────────────────────────────────
+// AVATAR (initials circle)
+// ─────────────────────────────────────────────
+function Avatar({ name }: { name: string }) {
+  const initials = name.split(' ').map(n => n[0]).join('').slice(0, 2)
+  return (
+    <div style={{
+      width: 40, height: 40, borderRadius: '50%',
+      background: 'linear-gradient(135deg, var(--mantis-a), var(--mantis-b))',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      fontSize: '0.78rem', fontWeight: 800, color: '#fff', flexShrink: 0,
+    }}>
+      {initials}
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────
+// SOCIAL ICONS (SVG)
+// ─────────────────────────────────────────────
+const SOCIALS = [
+  { label: 'Facebook', href: 'https://facebook.com/wrksourcing', icon: <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" /> },
+  { label: 'Instagram', href: 'https://instagram.com/wrksourcing', icon: <><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><path d="M17.5 6.5h.01"/></> },
+  { label: 'LinkedIn', href: 'https://linkedin.com/company/wrksourcing', icon: <><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></> },
+]
+
+// ─────────────────────────────────────────────
+// GOOGLE BADGE
+// ─────────────────────────────────────────────
+function GoogleBadge() {
+  return (
+    <div style={{
+      display: 'inline-flex', alignItems: 'center', gap: 8,
+      background: '#fff', border: '1px solid var(--line)', borderRadius: 100,
+      padding: '0.4rem 1rem', fontSize: '0.8rem', fontWeight: 600, color: 'var(--subtext)',
+    }}>
+      <svg width="16" height="16" viewBox="0 0 24 24">
+        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+      </svg>
+      <Stars />
+      <span>5.0</span>
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────
 // PAGE
 // ─────────────────────────────────────────────
 export default function Home() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [tIdx, setTIdx] = useState(0)
+  const [formSent, setFormSent] = useState(false)
 
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
@@ -282,20 +331,30 @@ export default function Home() {
           </button>
         </div>
 
-        {menuOpen && (
-          <div style={{ backgroundColor: '#fff', padding: '1rem 2rem 1.5rem', borderTop: '1px solid #eee' }}>
-            {NAV.map(l => (
-              <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}
-                style={{ display: 'block', color: 'var(--eerie)', textDecoration: 'none', padding: '0.8rem 0', fontSize: '1rem', fontWeight: 500, borderBottom: '1px solid #f0f0f0' }}>
-                {l.label}
-              </a>
-            ))}
-            <a href="#contact" onClick={() => setMenuOpen(false)}
-              className="btn-gradient" style={{ display: 'block', marginTop: '1rem', textAlign: 'center' }}>
-              BOOK A FREE CALL
-            </a>
-          </div>
-        )}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              style={{ overflow: 'hidden', backgroundColor: '#fff', borderTop: '1px solid #eee' }}
+            >
+              <div style={{ padding: '1rem 2rem 1.5rem' }}>
+                {NAV.map(l => (
+                  <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}
+                    style={{ display: 'block', color: 'var(--eerie)', textDecoration: 'none', padding: '0.8rem 0', fontSize: '1rem', fontWeight: 500, borderBottom: '1px solid #f0f0f0' }}>
+                    {l.label}
+                  </a>
+                ))}
+                <a href="#contact" onClick={() => setMenuOpen(false)}
+                  className="btn-gradient" style={{ display: 'block', marginTop: '1rem', textAlign: 'center' }}>
+                  BOOK A FREE CALL
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* ═══════════════ HERO ═══════════════ */}
@@ -353,10 +412,19 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="hero-cta-row" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}
+              className="hero-cta-row" style={{ display: 'flex', gap: 14, flexWrap: 'wrap', alignItems: 'center' }}
             >
               <a className="btn-gradient" href="#contact">BOOK A FREE CALL</a>
               <a className="btn-outline" href="#services">EXPLORE OUR SERVICES</a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1 }}
+              style={{ marginTop: 24 }}
+            >
+              <GoogleBadge />
             </motion.div>
           </div>
 
@@ -559,12 +627,17 @@ export default function Home() {
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}><Stars /></div>
                 <blockquote style={{
                   fontSize: 'clamp(1rem, 2vw, 1.12rem)', color: 'var(--subtext)',
-                  lineHeight: 1.72, margin: '0 0 1rem', fontStyle: 'italic',
+                  lineHeight: 1.72, margin: '0 0 1.25rem', fontStyle: 'italic',
                 }}>
                   &ldquo;{TESTIMONIALS[tIdx].text}&rdquo;
                 </blockquote>
-                <p style={{ fontWeight: 700, color: 'var(--eerie)', fontSize: '0.9rem' }}>{TESTIMONIALS[tIdx].name}</p>
-                <p style={{ color: 'var(--muted)', fontSize: '0.8rem', marginTop: 3 }}>{TESTIMONIALS[tIdx].company}</p>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+                  <Avatar name={TESTIMONIALS[tIdx].name} />
+                  <div>
+                    <p style={{ fontWeight: 700, color: 'var(--eerie)', fontSize: '0.9rem', textAlign: 'left' }}>{TESTIMONIALS[tIdx].name}</p>
+                    <p style={{ color: 'var(--muted)', fontSize: '0.8rem', textAlign: 'left' }}>{TESTIMONIALS[tIdx].company}</p>
+                  </div>
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -588,11 +661,16 @@ export default function Home() {
                     transition: 'all 0.3s',
                   }}>
                   <Stars />
-                  <p style={{ color: 'var(--subtext)', fontSize: '0.85rem', lineHeight: 1.6, margin: '10px 0', fontStyle: 'italic' }}>
-                    &ldquo;{t.text.length > 100 ? t.text.slice(0, 100) + '…' : t.text}&rdquo;
+                  <p style={{ color: 'var(--subtext)', fontSize: '0.85rem', lineHeight: 1.6, margin: '10px 0 14px', fontStyle: 'italic' }}>
+                    &ldquo;{t.text.length > 140 ? t.text.slice(0, 140) + '…' : t.text}&rdquo;
                   </p>
-                  <p style={{ fontWeight: 700, color: 'var(--eerie)', fontSize: '0.82rem' }}>{t.name}</p>
-                  <p style={{ color: 'var(--muted)', fontSize: '0.75rem', marginTop: 2 }}>{t.company}</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <Avatar name={t.name} />
+                    <div>
+                      <p style={{ fontWeight: 700, color: 'var(--eerie)', fontSize: '0.82rem' }}>{t.name}</p>
+                      <p style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>{t.company}</p>
+                    </div>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -634,25 +712,74 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════ CTA ═══════════════ */}
-      <section id="contact" className="gradient-bg" style={{ padding: '7rem 2rem' }}>
-        <Reveal>
-          <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center' }}>
-            <h2 style={{
-              fontSize: 'clamp(2rem, 4.5vw, 2.8rem)', fontWeight: 900,
-              color: 'var(--white)', letterSpacing: '-0.025em', lineHeight: 1.12, marginBottom: 16,
-            }}>
-              let&apos;s make your brand unforgettable, shall we?
-            </h2>
-            <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '1.02rem', lineHeight: 1.72, marginBottom: 40 }}>
-              find out what partnering with wrksourcing can do for you. schedule a chat
-              now for a free assessment to identify your business support needs.
-            </p>
-            <a className="btn-dark" href="https://wrksourcing.com/contact" style={{ fontSize: '0.88rem', padding: '1rem 2.5rem' }}>
-              BOOK OUR DISCOVERY CALL
-            </a>
-          </div>
-        </Reveal>
+      {/* ═══════════════ CTA + FORM ═══════════════ */}
+      <section id="contact" style={{ padding: '7rem 2rem', backgroundColor: 'var(--seasalt)' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }} className="hero-grid">
+          <Reveal>
+            <div>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>contact us</p>
+              <h2 style={{
+                fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900,
+                color: 'var(--eerie)', letterSpacing: '-0.025em', lineHeight: 1.12, marginBottom: 16,
+              }}>
+                let&apos;s make your brand unforgettable, shall we?
+              </h2>
+              <p style={{ color: 'var(--subtext)', fontSize: '1rem', lineHeight: 1.72, marginBottom: 24 }}>
+                find out what partnering with wrksourcing can do for you. schedule a chat
+                now for a free assessment to identify your business support needs.
+              </p>
+              <GoogleBadge />
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.15}>
+            {formSent ? (
+              <div style={{
+                background: '#fff', border: '1px solid var(--line)', borderRadius: 16,
+                padding: '3rem 2rem', textAlign: 'center',
+              }}>
+                <div style={{
+                  width: 56, height: 56, borderRadius: '50%', margin: '0 auto 16px',
+                  background: 'linear-gradient(135deg, var(--mantis-a), var(--mantis-b))',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 6L9 17l-5-5"/>
+                  </svg>
+                </div>
+                <p style={{ fontWeight: 700, color: 'var(--eerie)', fontSize: '1.1rem', marginBottom: 6 }}>message received.</p>
+                <p style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>we&apos;ll be in touch within one business day.</p>
+              </div>
+            ) : (
+              <form onSubmit={e => { e.preventDefault(); setFormSent(true) }} style={{
+                background: '#fff', border: '1px solid var(--line)', borderRadius: 16,
+                padding: '2rem',
+              }}>
+                <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
+                  <div>
+                    <label className="form-label">First Name</label>
+                    <input type="text" placeholder="Tyler" required className="form-input" />
+                  </div>
+                  <div>
+                    <label className="form-label">Company</label>
+                    <input type="text" placeholder="Acme Inc." required className="form-input" />
+                  </div>
+                </div>
+                <div style={{ marginBottom: 12 }}>
+                  <label className="form-label">Work Email</label>
+                  <input type="email" placeholder="tyler@yourcompany.com" required className="form-input" />
+                </div>
+                <div style={{ marginBottom: 12 }}>
+                  <label className="form-label">What do you need help with?</label>
+                  <textarea rows={3} placeholder="We need help with..." required className="form-input" style={{ resize: 'vertical' }} />
+                </div>
+                <button type="submit" className="btn-gradient" style={{ width: '100%', padding: '0.9rem', fontSize: '0.85rem', display: 'block', textAlign: 'center' }}>
+                  Book a discovery call
+                </button>
+              </form>
+            )}
+          </Reveal>
+        </div>
       </section>
 
       {/* ═══════════════ FOOTER ═══════════════ */}
@@ -679,19 +806,19 @@ export default function Home() {
             ))}
           </div>
           <div style={{ display: 'flex', gap: 10 }}>
-            {[
-              { label: 'FB', href: 'https://facebook.com/wrksourcing' },
-              { label: 'IG', href: 'https://instagram.com/wrksourcing' },
-              { label: 'LI', href: 'https://linkedin.com/company/wrksourcing' },
-            ].map(s => (
-              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" style={{
+            {SOCIALS.map(s => (
+              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} style={{
                 width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.1)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: 'rgba(255,255,255,0.6)', fontSize: '0.65rem', fontWeight: 700, transition: 'all 0.2s',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s',
               }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'linear-gradient(135deg, #76d669, #DDEA7F)'; el.style.color = '#fff' }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(255,255,255,0.1)'; el.style.color = 'rgba(255,255,255,0.6)' }}
-              >{s.label}</a>
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'linear-gradient(135deg, #76d669, #DDEA7F)' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.1)' }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="rgba(255,255,255,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  {s.icon}
+                </svg>
+              </a>
             ))}
           </div>
         </div>
