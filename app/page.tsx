@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence, useInView, useScroll, useSpring } from 'framer-motion'
 import { PixelTrail } from './components/pixel-trail'
+import { GlowingCard } from './components/glowing-card'
 
 // ─────────────────────────────────────────────
 // CONTENT DATA (exact wrksourcing.com copy)
@@ -38,46 +39,38 @@ const STATS = [
   { value: 95,  suffix: '%',  label: 'client retention' },
 ]
 
-// Custom gradient-filled icons (not generic stroke icons)
-const GradDef = () => (
-  <defs>
-    <linearGradient id="wrk-grad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stopColor="#76d669" />
-      <stop offset="100%" stopColor="#DDEA7F" />
-    </linearGradient>
-  </defs>
+// Singular pillar icons (clean, minimal, white stroke)
+const PillarIcon = ({ d }: { d: string }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#76d669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d={d} />
+  </svg>
 )
 
 const PILLARS = [
   {
     title: 'Process',
-    desc: 'optimizing wrkflows for faster, more effective results. we audit before we hire, building the right foundation for your operations.',
-    illustration: '/images/illustrations/process.svg',
-    span: 'bento-wide',
+    desc: 'we audit before we hire. every engagement starts with understanding your workflows.',
+    iconPath: 'M4 12h16M4 6h16M4 18h10',
   },
   {
     title: 'Personalization',
-    desc: 'custom solutions built to fit your business. no cookie-cutter placements.',
-    illustration: '/images/illustrations/tools.svg',
-    span: '',
+    desc: 'no cookie-cutter placements. every specialist matched to your specific needs.',
+    iconPath: 'M12 3v18M3 12h18',
   },
   {
     title: 'People',
-    desc: 'a team of skilled talent dedicated to drive your success. trained, retained, and continuously developed wrk Specialists.',
-    illustration: '/images/illustrations/team.svg',
-    span: 'bento-tall',
+    desc: 'trained, retained, and continuously developed wrk Specialists. not freelancers.',
+    iconPath: 'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2',
   },
   {
     title: 'Platforms',
-    desc: 'equipping you with the right tools for growth. Zoho, Notion, n8n, Clockify.',
-    illustration: '/images/illustrations/growth.svg',
-    span: '',
+    desc: 'Zoho, Notion, n8n, Clockify. we build around the tools that run your business.',
+    iconPath: 'M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z',
   },
   {
     title: 'Partners',
-    desc: 'continuously collaborating to create lasting value and impact across your entire operation.',
-    illustration: '/images/illustrations/partnership.svg',
-    span: 'bento-wide',
+    desc: 'strategic relationships that expand what wrksourcing delivers for you.',
+    iconPath: 'M7 17l9.2-9.2M17 17V7H7',
   },
 ]
 
@@ -85,36 +78,32 @@ const SERVICES = [
   {
     title: 'wrkflow Solutions',
     desc: 'for businesses needing to establish and optimize their processes, our wrk specialists will help you build the foundational systems you need to improve your core business operations.',
-    // Interlocking arrows — flow/process
-    icon: <><GradDef/><path d="M4 12h10" stroke="url(#wrk-grad)" strokeWidth="2.5" strokeLinecap="round"/><path d="M11 8l4 4-4 4" stroke="url(#wrk-grad)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/><path d="M20 12h-4" stroke="url(#wrk-grad)" strokeWidth="2.5" strokeLinecap="round" opacity="0.4"/></>,
+    iconPath: 'M5 12h14M12 5l7 7-7 7',
   },
   {
     title: 'Admin',
     desc: 'for start-ups and SMBs needing to offload administrative tasks, our wrk specialists will handle your admin work so you can focus on running your business.',
-    // Stacked cards — organized tasks
-    icon: <><GradDef/><rect x="5" y="3" width="14" height="10" rx="2" fill="url(#wrk-grad)" opacity="0.35"/><rect x="3" y="7" width="14" height="10" rx="2" fill="url(#wrk-grad)" opacity="0.55"/><rect x="7" y="11" width="14" height="10" rx="2" fill="url(#wrk-grad)"/></>,
+    iconPath: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2',
   },
   {
     title: 'Marketing',
     desc: 'for entrepreneurs and business owners looking to increase their brand awareness and reach, our wrk specialists will help you grow and nurture a community and build your brand reputation.',
-    // Expanding ripples — reach/broadcast
-    icon: <><GradDef/><circle cx="12" cy="12" r="3" fill="url(#wrk-grad)"/><circle cx="12" cy="12" r="7" fill="none" stroke="url(#wrk-grad)" strokeWidth="1.5" opacity="0.5"/><circle cx="12" cy="12" r="11" fill="none" stroke="url(#wrk-grad)" strokeWidth="1.5" opacity="0.25"/></>,
+    iconPath: 'M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z',
   },
   {
     title: 'Sales',
     desc: 'for start-ups to established businesses aiming to boost sales, our wrk specialists can help identify growth opportunities and maximize your sales potential.',
-    // Rising bars — growth
-    icon: <><GradDef/><rect x="3" y="14" width="4" height="7" rx="1" fill="url(#wrk-grad)" opacity="0.35"/><rect x="10" y="9" width="4" height="12" rx="1" fill="url(#wrk-grad)" opacity="0.6"/><rect x="17" y="4" width="4" height="17" rx="1" fill="url(#wrk-grad)"/></>,
+    iconPath: 'M3 17l6-6 4 4 8-8M17 7h4v4',
   },
 ]
 
 const INDUSTRIES = [
-  { title: 'Professional Services', icon: <><GradDef/><rect x="4" y="6" width="16" height="14" rx="2" fill="url(#wrk-grad)" opacity="0.25"/><rect x="7" y="3" width="10" height="4" rx="1" fill="url(#wrk-grad)"/><rect x="8" y="12" width="8" height="1.5" rx="0.75" fill="url(#wrk-grad)" opacity="0.5"/><rect x="8" y="15.5" width="5" height="1.5" rx="0.75" fill="url(#wrk-grad)" opacity="0.35"/></> },
-  { title: 'Entrepreneurs', icon: <><GradDef/><circle cx="12" cy="10" r="4" fill="url(#wrk-grad)" opacity="0.5"/><path d="M12 2v4" stroke="url(#wrk-grad)" strokeWidth="2.5" strokeLinecap="round"/><path d="M12 14v8" stroke="url(#wrk-grad)" strokeWidth="2.5" strokeLinecap="round"/><path d="M8 18h8" stroke="url(#wrk-grad)" strokeWidth="2.5" strokeLinecap="round" opacity="0.4"/></> },
-  { title: 'Start-ups', icon: <><GradDef/><path d="M12 3l2.5 6h6l-5 4 2 6.5L12 16l-5.5 3.5 2-6.5-5-4h6z" fill="url(#wrk-grad)" opacity="0.6"/></> },
-  { title: 'Creative Services', icon: <><GradDef/><circle cx="8" cy="16" r="5" fill="url(#wrk-grad)" opacity="0.3"/><circle cx="16" cy="16" r="5" fill="url(#wrk-grad)" opacity="0.3"/><circle cx="12" cy="9" r="5" fill="url(#wrk-grad)" opacity="0.3"/></> },
-  { title: 'E-commerce', icon: <><GradDef/><rect x="3" y="8" width="18" height="13" rx="2" fill="url(#wrk-grad)" opacity="0.25"/><rect x="6" y="4" width="12" height="7" rx="1.5" fill="url(#wrk-grad)"/><circle cx="9" cy="17" r="1.5" fill="url(#wrk-grad)" opacity="0.5"/><circle cx="15" cy="17" r="1.5" fill="url(#wrk-grad)" opacity="0.5"/></> },
-  { title: 'Tech, IT, and Software', icon: <><GradDef/><rect x="4" y="4" width="7" height="7" rx="1.5" fill="url(#wrk-grad)"/><rect x="13" y="4" width="7" height="7" rx="1.5" fill="url(#wrk-grad)" opacity="0.5"/><rect x="4" y="13" width="7" height="7" rx="1.5" fill="url(#wrk-grad)" opacity="0.5"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="url(#wrk-grad)" opacity="0.25"/></> },
+  { title: 'Professional Services', iconPath: 'M3 21h18M5 21V7l7-4 7 4v14' },
+  { title: 'Entrepreneurs', iconPath: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z' },
+  { title: 'Start-ups', iconPath: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z' },
+  { title: 'Creative Services', iconPath: 'M12 19l7-7 3 3-7 7-3-3zM18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z' },
+  { title: 'E-commerce', iconPath: 'M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0' },
+  { title: 'Tech, IT, and Software', iconPath: 'M16 18l6-6-6-6M8 6l-6 6 6 6' },
 ]
 
 const TESTIMONIALS = [
@@ -521,44 +510,27 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <div className="bento-grid">
-            {PILLARS.map((p, i) => (
-              <Reveal key={p.title} delay={i * 0.07}>
-                <div className={`bento-card ${p.span}`}>
-                  {/* Background illustration */}
-                  <div style={{
-                    position: 'absolute', top: p.span === 'bento-tall' ? -10 : -20,
-                    right: p.span === 'bento-wide' ? 10 : -10,
-                    width: p.span === 'bento-tall' ? 140 : 120,
-                    height: p.span === 'bento-tall' ? 140 : 120,
-                    opacity: 0.18, pointerEvents: 'none',
-                  }}>
-                    <Image src={p.illustration} alt="" width={140} height={140} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                  </div>
-                  <div className="bento-content">
-                    <p style={{
-                      fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.12em',
-                      color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 8,
-                    }}>
-                      {p.title}
-                    </p>
-                    <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--eerie)', marginBottom: 8, lineHeight: 1.25 }}>
-                      {p.title.toLowerCase()}
-                    </h3>
-                    <p style={{ fontSize: '0.88rem', color: 'var(--muted)', lineHeight: 1.6 }}>{p.desc}</p>
-                  </div>
-                  <div className="bento-cta">
-                    <a href="#services" style={{
-                      display: 'inline-flex', alignItems: 'center', gap: 6,
-                      fontSize: '0.8rem', fontWeight: 600, color: 'var(--mantis-a)',
-                    }}>
-                      Learn more
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14"/><path d="M12 5l7 7-7 7"/>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
+          {/* Row 1: 3 cards */}
+          <div className="pillars-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, marginBottom: 20 }}>
+            {PILLARS.slice(0, 3).map((p, i) => (
+              <Reveal key={p.title} delay={i * 0.08}>
+                <GlowingCard
+                  title={p.title.toLowerCase()}
+                  desc={p.desc}
+                  icon={<PillarIcon d={p.iconPath} />}
+                />
+              </Reveal>
+            ))}
+          </div>
+          {/* Row 2: 2 cards, centered */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20, maxWidth: 'calc(66.666% + 7px)', margin: '0 auto' }} className="pillars-grid">
+            {PILLARS.slice(3, 5).map((p, i) => (
+              <Reveal key={p.title} delay={(i + 3) * 0.08}>
+                <GlowingCard
+                  title={p.title.toLowerCase()}
+                  desc={p.desc}
+                  icon={<PillarIcon d={p.iconPath} />}
+                />
               </Reveal>
             ))}
           </div>
@@ -586,8 +558,8 @@ export default function Home() {
                       backgroundColor: 'var(--light-accent)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16,
                     }}>
-                      <svg width="22" height="22" viewBox="0 0 24 24">
-                        {s.icon}
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--mantis-a)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d={s.iconPath} />
                       </svg>
                     </div>
                     <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#fff', marginBottom: 12 }}>{s.title}</h3>
@@ -618,12 +590,12 @@ export default function Home() {
               <Reveal key={ind.title} delay={i * 0.06}>
                 <div className="industry-card">
                   <div style={{
-                    width: 56, height: 56, borderRadius: 14,
-                    background: 'linear-gradient(135deg, rgba(118,214,105,0.1), rgba(221,234,127,0.1))',
+                    width: 48, height: 48, borderRadius: 12,
+                    background: 'rgba(118,214,105,0.1)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px',
                   }}>
-                    <svg width="26" height="26" viewBox="0 0 24 24">
-                      {ind.icon}
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--mantis-a)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d={ind.iconPath} />
                     </svg>
                   </div>
                   <p style={{ fontWeight: 700, fontSize: '0.85rem', color: '#fff', lineHeight: 1.35 }}>{ind.title}</p>
