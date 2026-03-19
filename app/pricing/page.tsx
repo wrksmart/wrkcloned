@@ -5,119 +5,18 @@ import Image from 'next/image'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 
 // ─────────────────────────────────────────────
-// NAV DATA
+// NAV
 // ─────────────────────────────────────────────
 const NAV = [
-  { label: 'Services & Pricing', href: '/pricing' },
-  { label: 'How It Works', href: '/#how-it-works' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'How It Wrks', href: '/#how-it-works' },
   { label: 'About Us', href: '/#about' },
   { label: 'Contact Us', href: '/#contact' },
 ]
 
 // ─────────────────────────────────────────────
-// PRICING DATA
-// ─────────────────────────────────────────────
-const TIERS = [
-  {
-    name: 'Starter',
-    price: 1800,
-    perHour: 45,
-    hours: 40,
-    tagline: 'for growing teams ready to delegate',
-    popular: false,
-    features: [
-      'Dedicated wrk Specialist',
-      'Admin and ops support',
-      'CRM hygiene and maintenance',
-      'Email and calendar management',
-      'Weekly check-ins',
-      'Slack/Chat channel access',
-    ],
-  },
-  {
-    name: 'Growth',
-    price: 3500,
-    perHour: 43.75,
-    hours: 80,
-    tagline: 'for scaling businesses that need more firepower',
-    popular: true,
-    features: [
-      'Everything in Starter, plus:',
-      'Marketing and content support',
-      'Social media management',
-      'Process optimization',
-      'Bi-weekly strategy calls',
-      'Priority support',
-      'Dedicated account manager',
-    ],
-  },
-  {
-    name: 'Scale',
-    price: 5000,
-    perHour: 31.25,
-    hours: 160,
-    tagline: 'for established companies building an ops engine',
-    popular: false,
-    features: [
-      'Everything in Growth, plus:',
-      'Multiple wrk Specialists',
-      'Full wrkflow implementation',
-      'Zoho CRM setup and config',
-      'Notion OS workspace build',
-      'Custom automation (n8n)',
-      'Weekly strategy calls',
-      'Executive-level oversight',
-    ],
-  },
-]
-
-const STEPS = [
-  {
-    n: '01',
-    title: 'book a discovery call',
-    desc: 'we learn your business, understand your pain points, and recommend the right plan for where you are today.',
-  },
-  {
-    n: '02',
-    title: 'we build your systems',
-    desc: 'process audit, tool setup, and specialist matching. we get everything running before your team starts.',
-  },
-  {
-    n: '03',
-    title: 'your team scales',
-    desc: 'ongoing support, monthly reviews, and the flexibility to adjust as you grow. no surprises.',
-  },
-]
-
-const FAQS = [
-  {
-    q: "What's included in my hours?",
-    a: 'Your wrk Specialist works dedicated hours on your tasks. Hours are tracked in Clockify with full transparency. Hours don\u2019t roll over month to month.',
-  },
-  {
-    q: 'Can I change plans?',
-    a: 'Yes. Upgrade or downgrade anytime with 30 days notice. We make transitions seamless so your business never skips a beat.',
-  },
-  {
-    q: 'Is there a contract?',
-    a: 'No long-term contracts. Month-to-month billing. Cancel anytime with 30 days notice.',
-  },
-  {
-    q: 'What if I need more hours?',
-    a: 'Additional hours are available at $25 CAD/hr. Or upgrade to a bigger plan for better per-hour value.',
-  },
-  {
-    q: 'Where are your specialists based?',
-    a: 'All wrk Specialists are based in the Philippines, working North American hours (EST). Same timezone, same work hours, zero friction.',
-  },
-  {
-    q: 'What tools do you support?',
-    a: 'Zoho CRM, Notion, Clockify, Google Workspace, HubSpot, and more. If you use it, we can learn it.',
-  },
-]
-
-// ─────────────────────────────────────────────
-// SCROLL REVEAL WRAPPER
+// SCROLL REVEAL
 // ─────────────────────────────────────────────
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef(null)
@@ -135,85 +34,113 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 }
 
 // ─────────────────────────────────────────────
-// CHECKMARK ICON
+// PRICING DATA
 // ─────────────────────────────────────────────
-function Check() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
-      <circle cx="12" cy="12" r="10" fill="var(--light-accent)" />
-      <path d="M8 12.5l2.5 2.5 5.5-5.5" stroke="var(--mantis-a)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
+const TIERS = [
+  {
+    name: 'Focus',
+    session: '45-min assessment',
+    price: '$1,800',
+    description: 'Pick one system or process. We go deep on it.',
+    ideal: 'businesses that want a simple system to improve capacity — CRM, automating, PM.',
+    deliverables: [
+      'Deep-dive assessment of one system or process',
+      'Written strategy report with prioritized recommendations',
+      'Notable issues identified and flagged',
+      'Two custom deliverables to guide next steps',
+    ],
+    outcome: 'Walk away with a clear picture of what to fix first and a plan to get it done.',
+  },
+  {
+    name: 'Momentum',
+    session: '60-min assessment',
+    price: '$3,500',
+    description: 'Full client journey audit. Lead to close, mapped and optimized.',
+    ideal: 'companies ready to know what is working efficiently without a full rebuild.',
+    deliverables: [
+      'Full client journey audit (lead → nurture → close)',
+      '50 ICP-matched leads delivered',
+      'Up to 3 email templates built for the journey',
+      'Implementation plan with phased next steps',
+    ],
+    outcome: 'Optimize the full client journey and get ready to scale.',
+    popular: true,
+  },
+  {
+    name: 'Transform',
+    session: '90-min assessment',
+    price: '$5,000',
+    description: 'Company-wide workflow audit. Every department. Every gap.',
+    ideal: 'businesses wanting clarity and a structured operating model to scale.',
+    deliverables: [
+      'Company-wide workflow audit across Sales, Marketing, Admin, Ops, Delivery',
+      'Role scoping and capacity analysis',
+      'Phased roadmap (Foundation → Structure → Scale)',
+      'Automation recommendations',
+    ],
+    outcome: 'Map the entire operation and get a blueprint to scale without chaos.',
+  },
+]
+
+const EXECUTION = {
+  description: 'After the assessment, you can execute in-house or hire wrksourcing to run it. Sprints, retainers, or a hybrid — scoped to the plan that came out of your assessment.',
+  features: [
+    'Sprints and/or implementation retainer',
+    'Based on the phased plan from your assessment',
+    'Foundation → Structure → Scale',
+    'Custom-scoped, custom-priced',
+  ],
 }
+
+const PHASES = [
+  { n: '01', title: 'Foundation', desc: 'Audit your current systems, identify gaps, and build the baseline. This is where the strategy report lives.' },
+  { n: '02', title: 'Structure', desc: 'Implement the systems, templates, and workflows recommended in the report. CRM setup, process mapping, automation wiring.' },
+  { n: '03', title: 'Scale', desc: 'Optimize, measure, and expand. Ongoing retainer or sprint-based support to keep your systems running clean.' },
+]
+
+const FAQ = [
+  { q: 'Is this a monthly subscription?', a: 'No. Focus, Momentum, and Transform are one-time project engagements. You pay once, get your assessment and deliverables, and decide what to do next.' },
+  { q: 'What happens after the assessment?', a: 'You get a full strategy report with a phased plan. From there, you can execute in-house or hire wrksourcing to run the Execution phase — sprints, retainer, or a mix.' },
+  { q: 'How long does the process take?', a: 'The assessment session itself is 45–90 minutes depending on tier. The full strategy report is delivered within 2 weeks. Execution timelines vary by scope.' },
+  { q: 'Which tier should I pick?', a: "Focus if you need one thing fixed fast. Momentum if you want your full client journey mapped. Transform if you want the whole operation audited. Not sure? Book a discovery call and we'll tell you." },
+  { q: 'Can I upgrade from Focus to Transform later?', a: 'Yes. If you start with Focus and realize you need more, we credit the Focus fee toward a Momentum or Transform engagement.' },
+  { q: 'What tools do you wrk with?', a: 'Zoho CRM, Notion, Google Workspace, Clockify, n8n, HubSpot, and more. If your team uses it, we can audit and optimize it.' },
+]
 
 // ─────────────────────────────────────────────
 // FAQ ITEM
 // ─────────────────────────────────────────────
-function FaqItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) {
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false)
   return (
-    <div style={{
-      borderBottom: '1px solid var(--line)',
-      overflow: 'hidden',
-    }}>
-      <button
-        onClick={onToggle}
-        style={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '1.25rem 0',
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          fontFamily: 'inherit',
-          textAlign: 'left',
-          gap: 16,
-        }}
-      >
-        <span style={{
-          fontSize: '1.02rem',
-          fontWeight: 600,
-          color: 'var(--eerie)',
-          lineHeight: 1.4,
-        }}>
-          {q}
-        </span>
-        <motion.span
-          animate={{ rotate: isOpen ? 45 : 0 }}
-          transition={{ duration: 0.2 }}
-          style={{
-            fontSize: '1.5rem',
-            fontWeight: 300,
-            color: 'var(--mantis-a)',
-            lineHeight: 1,
-            flexShrink: 0,
-          }}
-        >
-          +
-        </motion.span>
+    <div style={{ borderBottom: '1px solid var(--line)', padding: '1.25rem 0' }}>
+      <button onClick={() => setOpen(o => !o)} style={{
+        width: '100%', textAlign: 'left', background: 'none', border: 'none',
+        cursor: 'pointer', fontFamily: 'inherit',
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16,
+      }}>
+        <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--eerie)' }}>{q}</span>
+        <motion.span animate={{ rotate: open ? 45 : 0 }} transition={{ duration: 0.2 }}
+          style={{ fontSize: '1.5rem', color: 'var(--mantis-a)', fontWeight: 300, flexShrink: 0, lineHeight: 1 }}>+</motion.span>
       </button>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            <p style={{
-              fontSize: '0.92rem',
-              color: 'var(--subtext)',
-              lineHeight: 1.7,
-              paddingBottom: '1.25rem',
-              maxWidth: 640,
-            }}>
-              {a}
-            </p>
+      <AnimatePresence>
+        {open && (
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }} style={{ overflow: 'hidden' }}>
+            <p style={{ padding: '0.75rem 0 0.25rem', color: 'var(--subtext)', fontSize: '0.92rem', lineHeight: 1.7, maxWidth: 640 }}>{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
     </div>
+  )
+}
+
+function Check() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+      <circle cx="12" cy="12" r="10" fill="var(--mantis-a)" opacity="0.12" />
+      <path d="M9 12l2 2 4-4" stroke="var(--mantis-a)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   )
 }
 
@@ -222,366 +149,189 @@ function FaqItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boo
 // ─────────────────────────────────────────────
 export default function PricingPage() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [openFaq, setOpenFaq] = useState<number | null>(null)
-
-  // Scroll detection for nav
-  if (typeof window !== 'undefined') {
-    if (!scrolled) {
-      const handleScroll = () => setScrolled(window.scrollY > 50)
-      window.addEventListener('scroll', handleScroll, { passive: true })
-    }
-  }
 
   return (
     <div style={{ fontFamily: "'Avenir', 'Plus Jakarta Sans', sans-serif" }}>
 
-      {/* ═══════════════ NAV ═══════════════ */}
+      {/* NAV */}
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        transition: 'all 0.3s',
-        backgroundColor: scrolled ? 'rgba(255,255,255,0.97)' : 'rgba(255,255,255,0.97)',
-        backdropFilter: 'blur(12px)',
-        boxShadow: scrolled ? '0 1px 0 rgba(0,0,0,0.06)' : 'none',
+        backgroundColor: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(12px)',
+        boxShadow: '0 1px 0 rgba(0,0,0,0.06)',
       }}>
-        <div style={{
-          maxWidth: 1200, margin: '0 auto', padding: '0 2rem',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72,
-        }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
           <a href="/" style={{ display: 'flex', alignItems: 'center' }}>
             <Image src="/images/logo-horizontal.png" alt="wrksourcing" width={180} height={40} style={{ objectFit: 'contain' }} />
           </a>
-
           <div className="nav-desktop">
-            {NAV.map(l => (
-              <a key={l.href} className="nav-link" href={l.href}>{l.label}</a>
-            ))}
-            <a className="btn-gradient" href="https://wrksourcing.com/contact" style={{ fontSize: '0.76rem', padding: '0.55rem 1.3rem' }}>
-              BOOK A FREE CALL
-            </a>
+            {NAV.map(l => <a key={l.href} className="nav-link" href={l.href}>{l.label}</a>)}
+            <a className="btn-gradient" href="/#contact" style={{ fontSize: '0.76rem', padding: '0.55rem 1.3rem' }}>BOOK A FREE CALL</a>
           </div>
-
           <button className="nav-mobile-btn" onClick={() => setMenuOpen(o => !o)} aria-label="Menu">
             <svg width="26" height="26" fill="none" stroke="var(--eerie)" strokeWidth="2" viewBox="0 0 24 24">
-              {menuOpen
-                ? <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
-                : <path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" />}
+              {menuOpen ? <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" />}
             </svg>
           </button>
         </div>
-
         {menuOpen && (
           <div style={{ backgroundColor: '#fff', padding: '1rem 2rem 1.5rem', borderTop: '1px solid #eee' }}>
             {NAV.map(l => (
               <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}
-                style={{ display: 'block', color: 'var(--eerie)', textDecoration: 'none', padding: '0.8rem 0', fontSize: '1rem', fontWeight: 500, borderBottom: '1px solid #f0f0f0' }}>
-                {l.label}
-              </a>
+                style={{ display: 'block', color: 'var(--eerie)', padding: '0.8rem 0', fontSize: '1rem', fontWeight: 500, borderBottom: '1px solid #f0f0f0' }}>{l.label}</a>
             ))}
-            <a href="https://wrksourcing.com/contact" onClick={() => setMenuOpen(false)}
-              className="btn-gradient" style={{ display: 'block', marginTop: '1rem', textAlign: 'center' }}>
-              BOOK A FREE CALL
-            </a>
           </div>
         )}
       </nav>
 
-      {/* ═══════════════ HERO ═══════════════ */}
-      <section style={{
-        backgroundColor: '#fff',
-        padding: '140px 2rem 80px',
-        textAlign: 'center',
-      }}>
-        <div style={{ maxWidth: 760, margin: '0 auto' }}>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            style={{
-              fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em',
-              color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 16,
-            }}
-          >
-            pricing
+      {/* HERO */}
+      <section style={{ padding: '140px 2rem 5rem', backgroundColor: '#fff' }}>
+        <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
+            style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 14 }}>
+            wrkflow Solutions
           </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            style={{
-              fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)',
-              fontWeight: 900, color: 'var(--eerie)',
-              lineHeight: 1.12, letterSpacing: '-0.025em', marginBottom: 20,
-            }}
-          >
-            transparent pricing, real results.
+          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
+            style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 18 }}>
+            your operations, audited and rebuilt.
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            style={{
-              fontSize: '1.08rem', color: 'var(--subtext)',
-              lineHeight: 1.7, marginBottom: 28, maxWidth: 580, margin: '0 auto 28px',
-            }}
-          >
-            no hidden fees. no long-term contracts. just scalable support that grows with your business.
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.35 }}
+            style={{ fontSize: '1.05rem', color: 'var(--subtext)', lineHeight: 1.7, maxWidth: 580, margin: '0 auto 28px' }}>
+            every engagement starts with an Assessment and Strategy — choose a tier,
+            get the report, then decide how to execute. one-time investment. no subscriptions.
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              backgroundColor: 'var(--light-accent)',
-              padding: '0.5rem 1.25rem', borderRadius: 100,
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--mantis-a)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 00-3-3.87" />
-              <path d="M16 3.13a4 4 0 010 7.75" />
-            </svg>
-            <span style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--forest)' }}>
-              trusted by 50+ businesses across Canada
-            </span>
-          </motion.div>
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
+            style={{ fontSize: '0.82rem', color: 'var(--muted)' }}>
+            all pricing in CAD. no hidden fees.
+          </motion.p>
         </div>
       </section>
 
-      {/* ═══════════════ GUARANTEE BAR ═══════════════ */}
-      <section style={{
-        backgroundColor: 'var(--forest)',
-        padding: '1rem 2rem',
-        textAlign: 'center',
-      }}>
-        <p style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--mindaro)', letterSpacing: '0.02em' }}>
-          100% satisfaction guarantee. if we&apos;re not the right fit in the first 30 days, you don&apos;t pay.
-        </p>
-      </section>
-
-      {/* ═══════════════ PRICING TIERS ═══════════════ */}
-      <section style={{ padding: '5rem 2rem', backgroundColor: 'var(--seasalt)' }}>
+      {/* PRICING TIERS */}
+      <section style={{ padding: '4rem 2rem 6rem', backgroundColor: 'var(--seasalt)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div className="pricing-grid" style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 24,
-            alignItems: 'stretch',
-          }}>
-            {TIERS.map((tier, i) => (
-              <Reveal key={tier.name} delay={i * 0.12}>
+          <div className="services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, alignItems: 'stretch' }}>
+            {TIERS.map((t, i) => (
+              <Reveal key={t.name} delay={i * 0.1}>
                 <div style={{
-                  position: 'relative',
-                  height: '100%',
-                  borderRadius: 14,
-                  padding: tier.popular ? 2 : 0,
-                  background: tier.popular
-                    ? 'linear-gradient(135deg, var(--mantis-a), var(--mantis-b))'
-                    : 'transparent',
+                  background: '#fff', borderRadius: 16,
+                  border: t.popular ? 'none' : '1px solid var(--line)',
+                  boxShadow: t.popular ? '0 0 0 2px #76d669, 0 16px 48px rgba(118,214,105,0.12)' : undefined,
+                  padding: '2.25rem 2rem', display: 'flex', flexDirection: 'column' as const,
+                  height: '100%', position: 'relative' as const, overflow: 'hidden' as const,
                 }}>
-                  {/* Most Popular badge */}
-                  {tier.popular && (
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: 'linear-gradient(90deg, var(--mantis-a), var(--mantis-b))' }} />
+
+                  {t.popular && (
                     <div style={{
-                      position: 'absolute',
-                      top: -14,
-                      left: '50%',
-                      transform: 'translateX(-50%)',
+                      position: 'absolute', top: 16, right: -32,
                       background: 'linear-gradient(135deg, var(--mantis-a), var(--mantis-b))',
-                      color: '#fff',
-                      padding: '0.35rem 1.25rem',
-                      borderRadius: 100,
-                      fontSize: '0.72rem',
-                      fontWeight: 800,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      whiteSpace: 'nowrap',
-                      zIndex: 2,
-                    }}>
-                      Most Popular
-                    </div>
+                      color: '#fff', fontSize: '0.65rem', fontWeight: 800,
+                      padding: '4px 40px', transform: 'rotate(45deg)',
+                      letterSpacing: '0.08em', textTransform: 'uppercase',
+                    }}>Popular</div>
                   )}
 
-                  <div style={{
-                    backgroundColor: '#fff',
-                    borderRadius: tier.popular ? 12 : 14,
-                    border: tier.popular ? 'none' : '1px solid var(--line)',
-                    padding: '2.25rem 2rem',
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    transition: 'box-shadow 0.25s, transform 0.25s',
-                  }}
-                    onMouseEnter={e => {
-                      const el = e.currentTarget
-                      el.style.boxShadow = '0 12px 40px rgba(0,0,0,0.08)'
-                      el.style.transform = 'translateY(-4px)'
-                    }}
-                    onMouseLeave={e => {
-                      const el = e.currentTarget
-                      el.style.boxShadow = 'none'
-                      el.style.transform = 'translateY(0)'
-                    }}
-                  >
-                    {/* Tier name */}
-                    <p style={{
-                      fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em',
-                      color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 8,
-                    }}>
-                      {tier.name}
-                    </p>
-
-                    {/* Price */}
-                    <div style={{ marginBottom: 4 }}>
-                      <span style={{
-                        fontSize: 'clamp(2.2rem, 4vw, 2.8rem)',
-                        fontWeight: 900,
-                        color: 'var(--eerie)',
-                        letterSpacing: '-0.03em',
-                        lineHeight: 1,
-                      }}>
-                        ${tier.price.toLocaleString()}
-                      </span>
-                      <span style={{ fontSize: '0.9rem', color: 'var(--muted)', fontWeight: 500, marginLeft: 4 }}>
-                        CAD/mo
-                      </span>
-                    </div>
-
-                    {/* Per hour value */}
-                    <p style={{
-                      fontSize: '0.78rem', color: 'var(--mantis-a)', fontWeight: 700, marginBottom: 12,
-                    }}>
-                      ${tier.perHour}/hr value
-                      {tier.name === 'Scale' && (
-                        <span style={{
-                          marginLeft: 8,
-                          backgroundColor: 'var(--light-accent)',
-                          padding: '2px 8px',
-                          borderRadius: 4,
-                          fontSize: '0.7rem',
-                          fontWeight: 800,
-                          color: 'var(--forest)',
-                        }}>
-                          BEST VALUE
-                        </span>
-                      )}
-                    </p>
-
-                    {/* Tagline */}
-                    <p style={{
-                      fontSize: '0.9rem', color: 'var(--subtext)',
-                      lineHeight: 1.5, marginBottom: 8,
-                    }}>
-                      {tier.tagline}
-                    </p>
-
-                    {/* Hours */}
-                    <p style={{
-                      fontSize: '0.82rem', color: 'var(--muted)', fontWeight: 600, marginBottom: 20,
-                      paddingBottom: 20, borderBottom: '1px solid var(--line)',
-                    }}>
-                      {tier.hours} hours/month
-                    </p>
-
-                    {/* Features */}
-                    <div style={{ flex: 1, marginBottom: 24 }}>
-                      {tier.features.map((f, fi) => (
-                        <div key={fi} style={{
-                          display: 'flex', alignItems: 'flex-start', gap: 10,
-                          marginBottom: 12,
-                        }}>
-                          <Check />
-                          <span style={{
-                            fontSize: '0.88rem',
-                            color: fi === 0 && (tier.name === 'Growth' || tier.name === 'Scale')
-                              ? 'var(--mantis-a)'
-                              : 'var(--subtext)',
-                            fontWeight: fi === 0 && (tier.name === 'Growth' || tier.name === 'Scale') ? 700 : 400,
-                            lineHeight: 1.5,
-                          }}>
-                            {f}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* CTA */}
-                    <a
-                      href="https://wrksourcing.com/contact"
-                      className={tier.popular ? 'btn-gradient' : 'btn-outline'}
-                      style={{
-                        display: 'block',
-                        textAlign: 'center',
-                        width: '100%',
-                        padding: '0.9rem 2rem',
-                        fontSize: '0.82rem',
-                      }}
-                    >
-                      GET STARTED
-                    </a>
+                  <div style={{ marginBottom: 20 }}>
+                    <p style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 6 }}>{t.session}</p>
+                    <h3 style={{ fontSize: '1.6rem', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', marginBottom: 8 }}>{t.name}</h3>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--subtext)', lineHeight: 1.6 }}>{t.description}</p>
                   </div>
+
+                  <div style={{ marginBottom: 20, paddingBottom: 20, borderBottom: '1px solid var(--line)' }}>
+                    <span style={{ fontSize: '2.6rem', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.03em' }}>{t.price}</span>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--muted)', marginLeft: 6 }}>CAD</span>
+                    <p style={{ fontSize: '0.78rem', color: 'var(--subtle)', marginTop: 4 }}>one-time</p>
+                  </div>
+
+                  <p style={{ fontSize: '0.8rem', color: 'var(--muted)', marginBottom: 16, fontStyle: 'italic' }}>ideal for {t.ideal}</p>
+
+                  <div style={{ flex: 1, marginBottom: 24 }}>
+                    <p style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.08em', color: 'var(--eerie)', textTransform: 'uppercase', marginBottom: 12 }}>what you get</p>
+                    {t.deliverables.map(d => (
+                      <div key={d} style={{ display: 'flex', gap: 10, marginBottom: 10, alignItems: 'flex-start' }}>
+                        <Check />
+                        <span style={{ fontSize: '0.88rem', color: 'var(--subtext)', lineHeight: 1.5 }}>{d}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{
+                    background: 'linear-gradient(135deg, rgba(118,214,105,0.06), rgba(221,234,127,0.06))',
+                    borderRadius: 10, padding: '0.9rem 1rem', marginBottom: 20,
+                  }}>
+                    <p style={{ fontSize: '0.82rem', color: 'var(--forest)', lineHeight: 1.6, fontWeight: 500 }}>{t.outcome}</p>
+                  </div>
+
+                  <a href="/#contact" className={t.popular ? 'btn-gradient' : 'btn-outline'}
+                    style={{ textAlign: 'center', width: '100%', display: 'block' }}>
+                    Book a discovery call
+                  </a>
                 </div>
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Satisfaction note */}
-          <Reveal delay={0.3}>
-            <p style={{
-              textAlign: 'center', marginTop: 32,
-              fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6,
-            }}>
-              all plans are month-to-month. no setup fees. cancel anytime with 30 days notice.
-            </p>
+      {/* EXECUTION */}
+      <section style={{ padding: '5rem 2rem', backgroundColor: '#fff' }}>
+        <div style={{ maxWidth: 800, margin: '0 auto' }}>
+          <Reveal>
+            <div style={{ background: 'var(--forest)', borderRadius: 18, padding: '2.5rem', color: '#fff' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                <div style={{
+                  background: 'linear-gradient(135deg, var(--mantis-a), var(--mantis-b))',
+                  borderRadius: 8, padding: '6px 14px', fontSize: '0.72rem', fontWeight: 800,
+                  letterSpacing: '0.08em', textTransform: 'uppercase', color: '#fff',
+                }}>Phase 2+</div>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: 900 }}>Execution</h3>
+              </div>
+              <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1rem', lineHeight: 1.7, marginBottom: 20 }}>{EXECUTION.description}</p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
+                {EXECUTION.features.map(f => (
+                  <div key={f} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, marginTop: 3 }}>
+                      <path d="M9 12l2 2 4-4" stroke="var(--mindaro)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>{f}</span>
+                  </div>
+                ))}
+              </div>
+              <div style={{ marginTop: 24 }}>
+                <a href="/#contact" style={{
+                  display: 'inline-block', padding: '0.75rem 1.8rem', borderRadius: 6,
+                  border: '1px solid rgba(255,255,255,0.25)', color: '#fff',
+                  fontSize: '0.82rem', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', transition: 'all 0.2s',
+                }}
+                  onMouseEnter={e => { const el = e.currentTarget; el.style.borderColor = 'var(--mindaro)'; el.style.color = 'var(--mindaro)' }}
+                  onMouseLeave={e => { const el = e.currentTarget; el.style.borderColor = 'rgba(255,255,255,0.25)'; el.style.color = '#fff' }}
+                >Discuss your project</a>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ═══════════════ HOW PRICING WORKS ═══════════════ */}
-      <section style={{ padding: '6rem 2rem', backgroundColor: '#fff' }}>
+      {/* THREE PHASES */}
+      <section style={{ padding: '5rem 2rem', backgroundColor: 'var(--seasalt)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
-              <p style={{
-                fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em',
-                color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12,
-              }}>
-                how it works
-              </p>
-              <h2 style={{
-                fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)',
-                fontWeight: 900, color: 'var(--eerie)',
-                letterSpacing: '-0.02em', lineHeight: 1.15,
-              }}>
-                three steps to get started
-              </h2>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>our approach</p>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.4rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>Foundation → Structure → Scale</h2>
             </div>
           </Reveal>
-
-          <div className="steps-grid" style={{
-            display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 24, position: 'relative',
-          }}>
-            {/* Connector line */}
+          <div className="steps-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, position: 'relative' }}>
             <div className="steps-connector" style={{
               position: 'absolute', top: 24, left: 'calc(16.67% + 24px)', right: 'calc(16.67% + 24px)',
-              height: 2, background: 'linear-gradient(90deg, var(--mantis-a), var(--mantis-b))',
-              zIndex: 0, borderRadius: 1,
+              height: 2, background: 'linear-gradient(90deg, var(--mantis-a), var(--mantis-b))', zIndex: 0, borderRadius: 1,
             }} />
-            {STEPS.map((s, i) => (
-              <Reveal key={s.n} delay={i * 0.15}>
-                <div className="card" style={{ padding: '2rem 1.75rem', position: 'relative', zIndex: 1 }}>
-                  <div className="step-number">{s.n}</div>
-                  <h3 style={{
-                    fontWeight: 700, fontSize: '1.05rem', color: 'var(--eerie)',
-                    marginBottom: 10, lineHeight: 1.3,
-                  }}>
-                    {s.title}
-                  </h3>
-                  <p style={{ color: 'var(--muted)', fontSize: '0.88rem', lineHeight: 1.7 }}>
-                    {s.desc}
-                  </p>
+            {PHASES.map((p, i) => (
+              <Reveal key={p.n} delay={i * 0.12}>
+                <div className="card" style={{ padding: '2rem 1.75rem', position: 'relative', zIndex: 1, height: '100%' }}>
+                  <div className="step-number">{p.n}</div>
+                  <h3 style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--eerie)', marginBottom: 10, lineHeight: 1.3 }}>{p.title}</h3>
+                  <p style={{ color: 'var(--muted)', fontSize: '0.88rem', lineHeight: 1.7 }}>{p.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -589,115 +339,57 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* ═══════════════ FAQ ═══════════════ */}
-      <section style={{ padding: '6rem 2rem', backgroundColor: 'var(--seasalt)' }}>
+      {/* FAQ */}
+      <section style={{ padding: '5rem 2rem', backgroundColor: '#fff' }}>
         <div style={{ maxWidth: 720, margin: '0 auto' }}>
           <Reveal>
-            <div style={{ textAlign: 'center', marginBottom: 48 }}>
-              <p style={{
-                fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em',
-                color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12,
-              }}>
-                frequently asked questions
-              </p>
-              <h2 style={{
-                fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)',
-                fontWeight: 900, color: 'var(--eerie)',
-                letterSpacing: '-0.02em', lineHeight: 1.15,
-              }}>
-                got questions? we&apos;ve got answers.
-              </h2>
+            <div style={{ textAlign: 'center', marginBottom: 40 }}>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>questions</p>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.4rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>common questions</h2>
             </div>
           </Reveal>
-
           <Reveal delay={0.1}>
-            <div style={{
-              backgroundColor: '#fff',
-              borderRadius: 14,
-              border: '1px solid var(--line)',
-              padding: '0.5rem 2rem',
-            }}>
-              {FAQS.map((faq, i) => (
-                <FaqItem
-                  key={i}
-                  q={faq.q}
-                  a={faq.a}
-                  isOpen={openFaq === i}
-                  onToggle={() => setOpenFaq(openFaq === i ? null : i)}
-                />
-              ))}
+            <div style={{ borderTop: '1px solid var(--line)' }}>
+              {FAQ.map(f => <FaqItem key={f.q} q={f.q} a={f.a} />)}
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ═══════════════ CTA ═══════════════ */}
-      <section className="gradient-bg" style={{ padding: '7rem 2rem' }}>
+      {/* CTA */}
+      <section className="gradient-bg" style={{ padding: '6rem 2rem' }}>
         <Reveal>
-          <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center' }}>
-            <h2 style={{
-              fontSize: 'clamp(2rem, 4.5vw, 2.8rem)', fontWeight: 900,
-              color: 'var(--white)', letterSpacing: '-0.025em', lineHeight: 1.12, marginBottom: 16,
-            }}>
-              not sure which plan fits?
+          <div style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 900, color: '#fff', letterSpacing: '-0.025em', lineHeight: 1.12, marginBottom: 16 }}>
+              not sure which tier fits?
             </h2>
-            <p style={{
-              color: 'rgba(255,255,255,0.85)', fontSize: '1.02rem',
-              lineHeight: 1.72, marginBottom: 40,
-            }}>
-              book a free discovery call and we&apos;ll recommend the right plan for your business.
-              no pressure, no commitment.
+            <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '1rem', lineHeight: 1.7, marginBottom: 32 }}>
+              book a free discovery call and we&apos;ll recommend the right assessment for your business.
             </p>
-            <a className="btn-dark" href="https://wrksourcing.com/contact" style={{
-              fontSize: '0.88rem', padding: '1rem 2.5rem',
-            }}>
-              BOOK A FREE CALL
-            </a>
+            <a className="btn-dark" href="/#contact" style={{ fontSize: '0.85rem', padding: '0.95rem 2.2rem' }}>Book a discovery call</a>
           </div>
         </Reveal>
       </section>
 
-      {/* ═══════════════ FOOTER ═══════════════ */}
+      {/* FOOTER */}
       <footer style={{ backgroundColor: 'var(--forest)', padding: '3.5rem 2rem', color: '#fff' }}>
         <div className="footer-inner" style={{
-          maxWidth: 1200, margin: '0 auto',
-          display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 32, flexWrap: 'wrap',
+          maxWidth: 1200, margin: '0 auto', display: 'flex', justifyContent: 'space-between',
+          alignItems: 'flex-start', gap: 32, flexWrap: 'wrap',
         }}>
           <div>
             <div style={{ marginBottom: 12 }}>
               <Image src="/images/logo-horizontal-white.png" alt="wrksourcing" width={160} height={36} style={{ objectFit: 'contain' }} />
             </div>
             <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.55)', maxWidth: 280, lineHeight: 1.6 }}>
-              wrksourcing connects businesses with highly skilled remote wrk Specialists to
-              optimize strategy, workflow, and execution. our experts drive sustainable growth.
+              wrksourcing connects businesses with highly skilled remote wrk specialists to optimize strategy, workflow, and execution.
             </p>
           </div>
           <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap' }}>
-            {[
-              { label: 'Home', href: '/' },
-              { label: 'Pricing', href: '/pricing' },
-              { label: 'How It Works', href: '/#how-it-works' },
-              { label: 'Contact Us', href: '/#contact' },
-            ].map(l => (
+            {NAV.map(l => (
               <a key={l.href} href={l.href} style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', transition: 'color 0.2s' }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#fff' }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)' }}>{l.label}</a>
-            ))}
-          </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            {[
-              { label: 'FB', href: 'https://facebook.com/wrksourcing' },
-              { label: 'IG', href: 'https://instagram.com/wrksourcing' },
-              { label: 'LI', href: 'https://linkedin.com/company/wrksourcing' },
-            ].map(s => (
-              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" style={{
-                width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.1)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: 'rgba(255,255,255,0.6)', fontSize: '0.65rem', fontWeight: 700, transition: 'all 0.2s',
-              }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'linear-gradient(135deg, #76d669, #DDEA7F)'; el.style.color = '#fff' }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(255,255,255,0.1)'; el.style.color = 'rgba(255,255,255,0.6)' }}
-              >{s.label}</a>
             ))}
           </div>
         </div>
@@ -706,7 +398,7 @@ export default function PricingPage() {
           borderTop: '1px solid rgba(255,255,255,0.1)',
           display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12,
         }}>
-          <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem' }}>&copy; 2025 wrksourcing. All rights reserved.</p>
+          <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem' }}>© 2025 wrksourcing. All rights reserved.</p>
           <div style={{ display: 'flex', gap: 20 }}>
             {['Privacy Policy', 'Terms & Conditions'].map(l => (
               <a key={l} href="#" style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', transition: 'color 0.2s' }}
@@ -716,17 +408,6 @@ export default function PricingPage() {
           </div>
         </div>
       </footer>
-
-      {/* ═══════════════ RESPONSIVE STYLES ═══════════════ */}
-      <style jsx>{`
-        @media (max-width: 900px) {
-          .pricing-grid {
-            grid-template-columns: 1fr !important;
-            max-width: 440px !important;
-            margin: 0 auto !important;
-          }
-        }
-      `}</style>
     </div>
   )
 }
