@@ -382,11 +382,10 @@ export default function Home() {
         display: 'flex', alignItems: 'center',
         padding: '120px 2rem 80px',
       }}>
-        <div className="hero-grid" style={{
+        <div style={{
           maxWidth: 1200, margin: '0 auto', width: '100%',
-          display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '3rem', alignItems: 'center',
         }}>
-          <div>
+          <div style={{ maxWidth: 680 }}>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -447,19 +446,6 @@ export default function Home() {
             </motion.div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-            style={{ display: 'flex', justifyContent: 'center' }}
-          >
-            <Image
-              src="/images/hero-illustration.png"
-              alt="Remote team collaboration"
-              width={391} height={439} priority
-              style={{ maxWidth: '100%', height: 'auto' }}
-            />
-          </motion.div>
         </div>
       </section>
 
