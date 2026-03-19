@@ -120,7 +120,7 @@ export function Footer() {
           fontSize: 'clamp(1.5rem, 5vw, 3.5rem)',
           lineHeight: 1, pointerEvents: 'none', userSelect: 'none',
           textAlign: 'center', maxWidth: '95vw',
-          background: 'linear-gradient(180deg, rgba(37,53,48,0.3) 0%, rgba(37,53,48,0.12) 60%, transparent 100%)',
+          background: 'linear-gradient(180deg, rgba(118,214,105,0.25) 0%, rgba(221,234,127,0.12) 50%, transparent 100%)',
           WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
         }}>
           wrk smart today.
@@ -134,12 +134,6 @@ export function Footer() {
           background: 'linear-gradient(90deg, transparent, var(--line), transparent)',
         }} />
 
-        {/* Bottom fade */}
-        <div style={{
-          position: 'absolute', bottom: 40, left: 0, width: '100%', height: 50,
-          background: 'linear-gradient(to top, var(--seasalt), rgba(247,248,249,0.8), transparent)',
-          filter: 'blur(8px)', pointerEvents: 'none',
-        }} />
       </footer>
     </section>
   )
