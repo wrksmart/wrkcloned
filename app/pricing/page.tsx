@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react'
 import Image from 'next/image'
+import { Footer } from '../components/footer'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 
 // ─────────────────────────────────────────────
@@ -370,43 +371,7 @@ export default function PricingPage() {
         </Reveal>
       </section>
 
-      {/* FOOTER */}
-      <footer style={{ backgroundColor: 'var(--forest)', padding: '3.5rem 2rem', color: '#fff' }}>
-        <div className="footer-inner" style={{
-          maxWidth: 1200, margin: '0 auto', display: 'flex', justifyContent: 'space-between',
-          alignItems: 'flex-start', gap: 32, flexWrap: 'wrap',
-        }}>
-          <div>
-            <div style={{ marginBottom: 12 }}>
-              <Image src="/images/logo-horizontal-white.png" alt="wrksourcing" width={160} height={36} style={{ objectFit: 'contain' }} />
-            </div>
-            <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.55)', maxWidth: 280, lineHeight: 1.6 }}>
-              wrksourcing connects businesses with highly skilled remote wrk specialists to optimize strategy, workflow, and execution.
-            </p>
-          </div>
-          <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap' }}>
-            {NAV.map(l => (
-              <a key={l.href} href={l.href} style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', transition: 'color 0.2s' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#fff' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)' }}>{l.label}</a>
-            ))}
-          </div>
-        </div>
-        <div className="footer-bottom" style={{
-          maxWidth: 1200, margin: '2rem auto 0', paddingTop: '1.5rem',
-          borderTop: '1px solid rgba(255,255,255,0.1)',
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12,
-        }}>
-          <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem' }}>© 2025 wrksourcing. All rights reserved.</p>
-          <div style={{ display: 'flex', gap: 20 }}>
-            {['Privacy Policy', 'Terms & Conditions'].map(l => (
-              <a key={l} href="#" style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', transition: 'color 0.2s' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.7)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.35)' }}>{l}</a>
-            ))}
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

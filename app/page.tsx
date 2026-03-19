@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { motion, AnimatePresence, useInView, useScroll, useSpring } from 'framer-motion'
 import { PixelTrail } from './components/pixel-trail'
 import { GlowingCard } from './components/glowing-card'
+import { Footer } from './components/footer'
 
 // ─────────────────────────────────────────────
 // CONTENT DATA (exact wrksourcing.com copy)
@@ -242,14 +243,6 @@ function Avatar({ name }: { name: string }) {
   )
 }
 
-// ─────────────────────────────────────────────
-// SOCIAL ICONS (SVG)
-// ─────────────────────────────────────────────
-const SOCIALS = [
-  { label: 'Facebook', href: 'https://facebook.com/wrksourcing', icon: <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" /> },
-  { label: 'Instagram', href: 'https://instagram.com/wrksourcing', icon: <><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><path d="M17.5 6.5h.01"/></> },
-  { label: 'LinkedIn', href: 'https://linkedin.com/company/wrksourcing', icon: <><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></> },
-]
 
 // ─────────────────────────────────────────────
 // GOOGLE BADGE
@@ -781,61 +774,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════ FOOTER ═══════════════ */}
-      <footer style={{ backgroundColor: 'var(--forest)', padding: '3.5rem 2rem', color: '#fff' }}>
-        <div className="footer-inner" style={{
-          maxWidth: 1200, margin: '0 auto',
-          display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 32, flexWrap: 'wrap',
-        }}>
-          <div>
-            <div style={{ marginBottom: 12 }}>
-              <Image src="/images/logo-horizontal-white.png" alt="wrksourcing" width={160} height={36} style={{ objectFit: 'contain' }} />
-            </div>
-            <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.55)', maxWidth: 280, lineHeight: 1.6 }}>
-              wrksourcing connects businesses with highly skilled remote wrk specialists to
-              optimize strategy, workflow, and execution. our experts streamline operations,
-              enhance efficiency, and drive sustainable growth.
-            </p>
-          </div>
-          <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap' }}>
-            {NAV.map(l => (
-              <a key={l.href} href={l.href} style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', transition: 'color 0.2s' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#fff' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)' }}>{l.label}</a>
-            ))}
-          </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            {SOCIALS.map(s => (
-              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} style={{
-                width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.1)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s',
-              }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'linear-gradient(135deg, #76d669, #DDEA7F)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.1)' }}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                  stroke="rgba(255,255,255,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  {s.icon}
-                </svg>
-              </a>
-            ))}
-          </div>
-        </div>
-        <div className="footer-bottom" style={{
-          maxWidth: 1200, margin: '2rem auto 0', paddingTop: '1.5rem',
-          borderTop: '1px solid rgba(255,255,255,0.1)',
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12,
-        }}>
-          <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem' }}>© 2025 wrksourcing. All rights reserved.</p>
-          <div style={{ display: 'flex', gap: 20 }}>
-            {['Privacy Policy', 'Terms & Conditions'].map(l => (
-              <a key={l} href="#" style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', transition: 'color 0.2s' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.7)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.35)' }}>{l}</a>
-            ))}
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
