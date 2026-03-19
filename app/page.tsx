@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence, useInView, useScroll, useSpring } from 'framer-motion'
+import { PixelTrail } from './components/pixel-trail'
 
 // ─────────────────────────────────────────────
 // CONTENT DATA (exact wrksourcing.com copy)
@@ -381,11 +382,16 @@ export default function Home() {
         minHeight: '100vh',
         display: 'flex', alignItems: 'center',
         padding: '120px 2rem 80px',
+        position: 'relative', overflow: 'hidden',
       }}>
+        {/* Interactive pixel trail background */}
+        <PixelTrail pixelSize={70} fadeDuration={0} delay={1500} color="rgba(118,214,105,0.15)" />
+
         <div style={{
           maxWidth: 1200, margin: '0 auto', width: '100%',
+          position: 'relative', zIndex: 1, pointerEvents: 'none',
         }}>
-          <div style={{ maxWidth: 680 }}>
+          <div style={{ maxWidth: 680, pointerEvents: 'auto' }}>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
