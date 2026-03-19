@@ -46,7 +46,7 @@ export function Footer() {
         <div style={{
           maxWidth: 1200, margin: '0 auto',
           display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-          minHeight: '38rem', position: 'relative',
+          minHeight: '22rem', position: 'relative',
           padding: '3rem 2rem',
         }}>
           {/* Top content */}
@@ -94,7 +94,7 @@ export function Footer() {
 
           {/* Bottom bar */}
           <div style={{
-            marginTop: 80, display: 'flex', flexWrap: 'wrap', gap: 12,
+            marginTop: 40, display: 'flex', flexWrap: 'wrap', gap: 12,
             alignItems: 'center', justifyContent: 'space-between',
           }}>
             <p style={{ fontSize: '0.82rem', color: 'var(--muted)' }}>
@@ -116,8 +116,8 @@ export function Footer() {
         {/* Large background text */}
         <div style={{
           position: 'absolute', left: '50%', transform: 'translateX(-50%)',
-          bottom: 160, fontWeight: 900, letterSpacing: '-0.04em',
-          fontSize: 'clamp(2rem, 8vw, 6.5rem)',
+          bottom: 60, fontWeight: 900, letterSpacing: '-0.04em',
+          fontSize: 'clamp(1.5rem, 5vw, 3.5rem)',
           lineHeight: 1, pointerEvents: 'none', userSelect: 'none',
           textAlign: 'center', maxWidth: '95vw',
           background: 'linear-gradient(180deg, rgba(37,53,48,0.15) 0%, rgba(37,53,48,0.06) 50%, transparent 100%)',
@@ -129,14 +129,14 @@ export function Footer() {
 
         {/* Divider line */}
         <div style={{
-          position: 'absolute', bottom: 140, left: '50%', transform: 'translateX(-50%)',
+          position: 'absolute', bottom: 50, left: '50%', transform: 'translateX(-50%)',
           width: '100%', height: 1,
           background: 'linear-gradient(90deg, transparent, var(--line), transparent)',
         }} />
 
         {/* Bottom fade */}
         <div style={{
-          position: 'absolute', bottom: 110, left: 0, width: '100%', height: 80,
+          position: 'absolute', bottom: 40, left: 0, width: '100%', height: 50,
           background: 'linear-gradient(to top, var(--seasalt), rgba(247,248,249,0.8), transparent)',
           filter: 'blur(8px)', pointerEvents: 'none',
         }} />
