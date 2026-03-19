@@ -286,8 +286,10 @@ export default function Home() {
               and SMBs.
             </h1>
 
-            <p style={{ fontSize: 'clamp(1.2rem, 2vw, 1.45rem)', color: 'var(--subtext)', lineHeight: 1.6, marginBottom: 10 }}>
-              200,000+ hours of proven results across{' '}
+            <p style={{ fontSize: '1.05rem', color: 'var(--subtext)', lineHeight: 1.6, marginBottom: 6 }}>
+              200,000+ hours of proven results across
+            </p>
+            <p style={{ fontSize: 'clamp(1.5rem, 2.8vw, 2rem)', marginBottom: 14, minHeight: '2.4em' }}>
               <RotatingText />
             </p>
 
