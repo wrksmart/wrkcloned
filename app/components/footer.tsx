@@ -123,7 +123,7 @@ export function Footer() {
           background: 'linear-gradient(180deg, rgba(37,53,48,0.15) 0%, rgba(37,53,48,0.06) 50%, transparent 100%)',
           WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
         }}>
-          wrksourcing
+          wrk smart today.
         </div>
 
 
