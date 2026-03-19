@@ -289,7 +289,7 @@ export default function Home() {
             <p style={{ fontSize: '1.05rem', color: 'var(--subtext)', lineHeight: 1.6, marginBottom: 6 }}>
               200,000+ hours of proven results across
             </p>
-            <p style={{ fontSize: 'clamp(1.5rem, 2.8vw, 2rem)', marginBottom: 14, minHeight: '2.4em' }}>
+            <p style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.4rem)', letterSpacing: '-0.025em', lineHeight: 1.12, marginBottom: 14, minHeight: '1.3em' }}>
               <RotatingText />
             </p>
 
