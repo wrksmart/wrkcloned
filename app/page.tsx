@@ -51,36 +51,31 @@ const PILLARS = [
   {
     title: 'Process',
     desc: 'optimizing wrkflows for faster, more effective results. we audit before we hire, building the right foundation for your operations.',
-    // Three stacked horizontal bars — workflow/process
-    icon: <><GradDef/><rect x="3" y="4" width="18" height="3.5" rx="1.75" fill="url(#wrk-grad)" opacity="0.4"/><rect x="3" y="10.25" width="14" height="3.5" rx="1.75" fill="url(#wrk-grad)" opacity="0.65"/><rect x="3" y="16.5" width="10" height="3.5" rx="1.75" fill="url(#wrk-grad)"/></>,
+    illustration: '/images/illustrations/process.svg',
     span: 'bento-wide',
   },
   {
     title: 'Personalization',
     desc: 'custom solutions built to fit your business. no cookie-cutter placements.',
-    // Crosshair/target — precision targeting
-    icon: <><GradDef/><circle cx="12" cy="12" r="9" fill="none" stroke="url(#wrk-grad)" strokeWidth="2"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="url(#wrk-grad)" strokeWidth="2" opacity="0.6"/><circle cx="12" cy="12" r="1.5" fill="url(#wrk-grad)"/></>,
+    illustration: '/images/illustrations/tools.svg',
     span: '',
   },
   {
     title: 'People',
     desc: 'a team of skilled talent dedicated to drive your success. trained, retained, and continuously developed wrk Specialists.',
-    // Three overlapping circles — team/collaboration
-    icon: <><GradDef/><circle cx="8" cy="13" r="5" fill="url(#wrk-grad)" opacity="0.3"/><circle cx="16" cy="13" r="5" fill="url(#wrk-grad)" opacity="0.3"/><circle cx="12" cy="8" r="5" fill="url(#wrk-grad)" opacity="0.5"/></>,
+    illustration: '/images/illustrations/team.svg',
     span: 'bento-tall',
   },
   {
     title: 'Platforms',
     desc: 'equipping you with the right tools for growth. Zoho, Notion, n8n, Clockify.',
-    // Grid of 4 rounded squares — modular tools
-    icon: <><GradDef/><rect x="3" y="3" width="8" height="8" rx="2" fill="url(#wrk-grad)"/><rect x="13" y="3" width="8" height="8" rx="2" fill="url(#wrk-grad)" opacity="0.6"/><rect x="3" y="13" width="8" height="8" rx="2" fill="url(#wrk-grad)" opacity="0.6"/><rect x="13" y="13" width="8" height="8" rx="2" fill="url(#wrk-grad)" opacity="0.35"/></>,
+    illustration: '/images/illustrations/growth.svg',
     span: '',
   },
   {
     title: 'Partners',
     desc: 'continuously collaborating to create lasting value and impact across your entire operation.',
-    // Two interlocking rings — partnership
-    icon: <><GradDef/><circle cx="9" cy="12" r="6.5" fill="none" stroke="url(#wrk-grad)" strokeWidth="2.5"/><circle cx="15" cy="12" r="6.5" fill="none" stroke="url(#wrk-grad)" strokeWidth="2.5" opacity="0.5"/></>,
+    illustration: '/images/illustrations/partnership.svg',
     span: 'bento-wide',
   },
 ]
@@ -538,11 +533,24 @@ export default function Home() {
             {PILLARS.map((p, i) => (
               <Reveal key={p.title} delay={i * 0.07}>
                 <div className={`bento-card ${p.span}`}>
+                  {/* Background illustration */}
+                  <div style={{
+                    position: 'absolute', top: p.span === 'bento-tall' ? -10 : -20,
+                    right: p.span === 'bento-wide' ? 10 : -10,
+                    width: p.span === 'bento-tall' ? 140 : 120,
+                    height: p.span === 'bento-tall' ? 140 : 120,
+                    opacity: 0.18, pointerEvents: 'none',
+                  }}>
+                    <Image src={p.illustration} alt="" width={140} height={140} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                  </div>
                   <div className="bento-content">
-                    <div className="pillar-icon">
-                      <svg viewBox="0 0 24 24">{p.icon}</svg>
-                    </div>
-                    <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--eerie)', marginBottom: 6 }}>
+                    <p style={{
+                      fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.12em',
+                      color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 8,
+                    }}>
+                      {p.title}
+                    </p>
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--eerie)', marginBottom: 8, lineHeight: 1.25 }}>
                       {p.title.toLowerCase()}
                     </h3>
                     <p style={{ fontSize: '0.88rem', color: 'var(--muted)', lineHeight: 1.6 }}>{p.desc}</p>
@@ -601,13 +609,13 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ INDUSTRIES ═══════════════ */}
-      <section className="glass-mesh" style={{ padding: '6rem 2rem' }}>
+      <section style={{ padding: '6rem 2rem', backgroundColor: 'var(--forest)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 40 }}>
-              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>industries we improve</p>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 12 }}>from emerging startups to industry giants</h2>
-              <p style={{ maxWidth: 640, margin: '0 auto', color: 'var(--subtext)', fontSize: '1rem', lineHeight: 1.7 }}>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mindaro)', textTransform: 'uppercase', marginBottom: 12 }}>industries we improve</p>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 12 }}>from emerging startups to industry giants</h2>
+              <p style={{ maxWidth: 640, margin: '0 auto', color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: 1.7 }}>
                 we fuel growth across diverse sectors. our experts bridge the gap between your ambitions and
                 your customers&apos; needs, positioning you to lead, not follow.
               </p>
@@ -626,7 +634,7 @@ export default function Home() {
                       {ind.icon}
                     </svg>
                   </div>
-                  <p style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--eerie)', lineHeight: 1.35 }}>{ind.title}</p>
+                  <p style={{ fontWeight: 700, fontSize: '0.85rem', color: '#fff', lineHeight: 1.35 }}>{ind.title}</p>
                 </div>
               </Reveal>
             ))}
@@ -640,7 +648,6 @@ export default function Home() {
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 40 }}>
               <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>testimonials</p>
-
               <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>real results corner</h2>
             </div>
           </Reveal>
@@ -743,18 +750,18 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ CTA + FORM ═══════════════ */}
-      <section id="contact" style={{ padding: '7rem 2rem', backgroundColor: 'var(--seasalt)' }}>
+      <section id="contact" style={{ padding: '7rem 2rem', backgroundColor: 'var(--forest)' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }} className="hero-grid">
           <Reveal>
             <div>
-              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>contact us</p>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mindaro)', textTransform: 'uppercase', marginBottom: 12 }}>contact us</p>
               <h2 style={{
                 fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900,
-                color: 'var(--eerie)', letterSpacing: '-0.025em', lineHeight: 1.12, marginBottom: 16,
+                color: '#fff', letterSpacing: '-0.025em', lineHeight: 1.12, marginBottom: 16,
               }}>
                 let&apos;s make your brand unforgettable, shall we?
               </h2>
-              <p style={{ color: 'var(--subtext)', fontSize: '1rem', lineHeight: 1.72, marginBottom: 24 }}>
+              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: 1.72, marginBottom: 24 }}>
                 find out what partnering with wrksourcing can do for you. schedule a chat
                 now for a free assessment to identify your business support needs.
               </p>
@@ -764,7 +771,7 @@ export default function Home() {
 
           <Reveal delay={0.15}>
             {formSent ? (
-              <div className="glass" style={{
+              <div className="glass-dark" style={{
                 padding: '3rem 2rem', textAlign: 'center',
               }}>
                 <div style={{
@@ -776,11 +783,11 @@ export default function Home() {
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
                 </div>
-                <p style={{ fontWeight: 700, color: 'var(--eerie)', fontSize: '1.1rem', marginBottom: 6 }}>message received.</p>
-                <p style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>we&apos;ll be in touch within one business day.</p>
+                <p style={{ fontWeight: 700, color: '#fff', fontSize: '1.1rem', marginBottom: 6 }}>message received.</p>
+                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>we&apos;ll be in touch within one business day.</p>
               </div>
             ) : (
-              <form onSubmit={e => { e.preventDefault(); setFormSent(true) }} className="glass" style={{
+              <form onSubmit={e => { e.preventDefault(); setFormSent(true) }} className="glass-dark" style={{
                 padding: '2rem',
               }}>
                 <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>

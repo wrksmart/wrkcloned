@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Background soft shape -->
+  <ellipse cx="100" cy="110" rx="85" ry="70" fill="#f7f8f9"/>
+
+  <!-- Person 1 - left -->
+  <circle cx="55" cy="75" r="16" fill="#253530"/>
+  <circle cx="55" cy="72" r="10" fill="#253530"/>
+  <!-- Head -->
+  <circle cx="55" cy="55" r="12" fill="#DDEA7F"/>
+  <!-- Face dot -->
+  <circle cx="55" cy="54" r="1.5" fill="#253530" opacity="0.5"/>
+  <!-- Body -->
+  <path d="M35 95 C35 80, 45 75, 55 75 C65 75, 75 80, 75 95 L75 120 C75 125, 72 128, 67 128 L43 128 C38 128, 35 125, 35 120 Z" fill="#76d669" opacity="0.85"/>
+  <!-- Arm suggestion -->
+  <path d="M72 90 Q80 88 82 95" stroke="#76d669" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Person 2 - center (taller, slightly forward) -->
+  <circle cx="100" cy="48" r="14" fill="#76d669" opacity="0.3"/>
+  <!-- Head -->
+  <circle cx="100" cy="48" r="13" fill="#253530"/>
+  <circle cx="100" cy="47" r="1.5" fill="#76d669" opacity="0.6"/>
+  <!-- Body -->
+  <path d="M78 70 C78 62, 88 58, 100 58 C112 58, 122 62, 122 70 L122 125 C122 130, 118 133, 113 133 L87 133 C82 133, 78 130, 78 125 Z" fill="#253530" opacity="0.9"/>
+  <!-- Subtle collar -->
+  <path d="M92 68 L100 74 L108 68" stroke="#76d669" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Person 3 - right -->
+  <circle cx="145" cy="55" r="12" fill="#DDEA7F"/>
+  <circle cx="145" cy="54" r="1.5" fill="#253530" opacity="0.5"/>
+  <!-- Body -->
+  <path d="M125 95 C125 80, 135 75, 145 75 C155 75, 165 80, 165 95 L165 120 C165 125, 162 128, 157 128 L133 128 C128 128, 125 125, 125 120 Z" fill="#DDEA7F" opacity="0.7"/>
+  <!-- Arm suggestion -->
+  <path d="M128 90 Q120 88 118 95" stroke="#DDEA7F" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Ground shadow -->
+  <ellipse cx="100" cy="140" rx="65" ry="6" fill="#253530" opacity="0.06"/>
+
+  <!-- Small connection dots between people -->
+  <circle cx="78" cy="85" r="2" fill="#76d669" opacity="0.4"/>
+  <circle cx="122" cy="85" r="2" fill="#76d669" opacity="0.4"/>
+
+  <!-- Warm sparkle accents -->
+  <circle cx="38" cy="45" r="2.5" fill="#DDEA7F" opacity="0.5"/>
+  <circle cx="165" cy="42" r="2" fill="#76d669" opacity="0.4"/>
+  <circle cx="100" cy="30" r="2" fill="#DDEA7F" opacity="0.3"/>
+</svg>

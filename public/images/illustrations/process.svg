@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Background soft circle -->
+  <circle cx="100" cy="100" r="88" fill="#f7f8f9"/>
+
+  <!-- Node 1 - top left -->
+  <rect x="30" y="40" width="40" height="40" rx="12" fill="#76d669" opacity="0.9"/>
+  <rect x="38" y="52" width="24" height="4" rx="2" fill="#f7f8f9"/>
+  <rect x="38" y="60" width="16" height="4" rx="2" fill="#f7f8f9" opacity="0.6"/>
+
+  <!-- Node 2 - top right -->
+  <rect x="130" y="40" width="40" height="40" rx="12" fill="#DDEA7F" opacity="0.9"/>
+  <rect x="138" y="52" width="24" height="4" rx="2" fill="#253530"/>
+  <rect x="138" y="60" width="16" height="4" rx="2" fill="#253530" opacity="0.4"/>
+
+  <!-- Node 3 - center -->
+  <rect x="80" y="85" width="40" height="40" rx="12" fill="#253530"/>
+  <rect x="88" y="97" width="24" height="4" rx="2" fill="#76d669"/>
+  <rect x="88" y="105" width="16" height="4" rx="2" fill="#76d669" opacity="0.5"/>
+
+  <!-- Node 4 - bottom left -->
+  <rect x="30" y="135" width="40" height="40" rx="12" fill="#DDEA7F" opacity="0.7"/>
+  <rect x="38" y="147" width="24" height="4" rx="2" fill="#253530"/>
+  <rect x="38" y="155" width="16" height="4" rx="2" fill="#253530" opacity="0.4"/>
+
+  <!-- Node 5 - bottom right -->
+  <rect x="130" y="135" width="40" height="40" rx="12" fill="#76d669" opacity="0.8"/>
+  <rect x="138" y="147" width="24" height="4" rx="2" fill="#f7f8f9"/>
+  <rect x="138" y="155" width="16" height="4" rx="2" fill="#f7f8f9" opacity="0.6"/>
+
+  <!-- Connecting lines -->
+  <line x1="70" y1="60" x2="130" y2="60" stroke="#253530" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4" opacity="0.3"/>
+  <line x1="60" y1="80" x2="85" y2="90" stroke="#253530" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4" opacity="0.3"/>
+  <line x1="140" y1="80" x2="115" y2="90" stroke="#253530" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4" opacity="0.3"/>
+  <line x1="85" y1="125" x2="60" y2="140" stroke="#253530" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4" opacity="0.3"/>
+  <line x1="115" y1="125" x2="140" y2="140" stroke="#253530" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4" opacity="0.3"/>
+  <line x1="70" y1="155" x2="130" y2="155" stroke="#253530" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4" opacity="0.3"/>
+
+  <!-- Small accent dots at line midpoints -->
+  <circle cx="100" cy="60" r="3" fill="#76d669" opacity="0.6"/>
+  <circle cx="100" cy="155" r="3" fill="#76d669" opacity="0.6"/>
+</svg>

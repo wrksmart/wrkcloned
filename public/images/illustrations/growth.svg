@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Background soft circle -->
+  <circle cx="100" cy="100" r="88" fill="#f7f8f9"/>
+
+  <!-- Pot / base -->
+  <path d="M65 150 L72 170 C73 173, 76 175, 80 175 L120 175 C124 175, 127 173, 128 170 L135 150 Z" fill="#253530" opacity="0.85"/>
+  <path d="M60 145 L140 145 C143 145, 145 147, 145 150 L145 152 C145 155, 143 157, 140 157 L60 157 C57 157, 55 155, 55 152 L55 150 C55 147, 57 145, 60 145 Z" fill="#253530"/>
+  <!-- Soil -->
+  <ellipse cx="100" cy="148" rx="35" ry="4" fill="#76d669" opacity="0.2"/>
+
+  <!-- Main stem -->
+  <path d="M100 145 C100 130, 98 115, 100 100 C102 85, 95 70, 100 55" stroke="#76d669" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <!-- Left leaf pair - lower -->
+  <path d="M98 120 C85 115, 65 118, 60 108 C58 104, 68 100, 82 105 C90 108, 96 115, 98 120 Z" fill="#76d669" opacity="0.7"/>
+  <path d="M98 120 C90 112, 75 110, 68 108" stroke="#253530" stroke-width="0.8" stroke-linecap="round" fill="none" opacity="0.2"/>
+
+  <!-- Right leaf pair - lower -->
+  <path d="M102 110 C115 105, 135 108, 140 98 C142 94, 132 90, 118 95 C110 98, 104 105, 102 110 Z" fill="#DDEA7F" opacity="0.8"/>
+  <path d="M102 110 C112 103, 125 100, 132 98" stroke="#253530" stroke-width="0.8" stroke-linecap="round" fill="none" opacity="0.2"/>
+
+  <!-- Left leaf - upper -->
+  <path d="M99 85 C90 80, 75 82, 72 74 C71 71, 78 68, 88 73 C93 76, 97 81, 99 85 Z" fill="#DDEA7F" opacity="0.6"/>
+
+  <!-- Right leaf - upper -->
+  <path d="M101 75 C110 70, 125 72, 128 64 C129 61, 122 58, 112 63 C107 66, 103 71, 101 75 Z" fill="#76d669" opacity="0.8"/>
+
+  <!-- Top sprouting leaves -->
+  <path d="M100 55 C95 48, 85 42, 82 35 C80 30, 88 28, 94 36 C97 40, 99 48, 100 55 Z" fill="#76d669"/>
+  <path d="M100 55 C105 48, 115 42, 118 35 C120 30, 112 28, 106 36 C103 40, 101 48, 100 55 Z" fill="#DDEA7F" opacity="0.9"/>
+
+  <!-- Small growth sparkles -->
+  <circle cx="80" cy="32" r="2" fill="#DDEA7F" opacity="0.5"/>
+  <circle cx="123" cy="30" r="1.5" fill="#76d669" opacity="0.4"/>
+  <circle cx="100" cy="25" r="2" fill="#76d669" opacity="0.3"/>
+
+  <!-- Upward arrow suggestion (subtle) -->
+  <path d="M155 90 L155 50" stroke="#253530" stroke-width="1.5" stroke-linecap="round" opacity="0.15"/>
+  <path d="M150 56 L155 48 L160 56" stroke="#253530" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.15"/>
+
+  <!-- Small chart bars in background (subtle) -->
+  <rect x="148" y="100" width="6" height="20" rx="2" fill="#253530" opacity="0.06"/>
+  <rect x="157" y="88" width="6" height="32" rx="2" fill="#253530" opacity="0.06"/>
+  <rect x="166" y="75" width="6" height="45" rx="2" fill="#253530" opacity="0.06"/>
+</svg>

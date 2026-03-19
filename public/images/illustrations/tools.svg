@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Background soft circle -->
+  <circle cx="100" cy="100" r="88" fill="#f7f8f9"/>
+
+  <!-- Puzzle piece 1 - top left (green) -->
+  <path d="M40 45 L80 45 L80 55 C80 55, 75 55, 75 62 C75 69, 85 69, 85 62 C85 55, 80 55, 80 55 L80 45 L80 45 L80 85 L70 85 C70 85, 70 80, 63 80 C56 80, 56 90, 63 90 C70 90, 70 85, 70 85 L40 85 Z" fill="#76d669" opacity="0.85"/>
+  <!-- Inner detail -->
+  <rect x="50" y="58" width="18" height="3" rx="1.5" fill="#f7f8f9" opacity="0.6"/>
+  <rect x="50" y="65" width="12" height="3" rx="1.5" fill="#f7f8f9" opacity="0.4"/>
+
+  <!-- Puzzle piece 2 - top right (yellow-green) -->
+  <path d="M90 45 L130 45 L130 85 L120 85 C120 85, 120 80, 113 80 C106 80, 106 90, 113 90 C120 90, 120 85, 120 85 L90 85 L90 75 C90 75, 95 75, 95 68 C95 61, 85 61, 85 68 C85 75, 90 75, 90 75 Z" fill="#DDEA7F" opacity="0.85"/>
+  <rect x="100" y="58" width="18" height="3" rx="1.5" fill="#253530" opacity="0.2"/>
+  <rect x="100" y="65" width="12" height="3" rx="1.5" fill="#253530" opacity="0.15"/>
+
+  <!-- Puzzle piece 3 - bottom left (dark) -->
+  <path d="M40 95 L70 95 C70 95, 70 90, 63 90 C56 90, 56 100, 63 100 C70 100, 70 95, 70 95 L80 95 L80 135 L70 135 C70 135, 70 130, 63 130 C56 130, 56 140, 63 140 C70 140, 70 135, 70 135 L40 135 Z" fill="#253530" opacity="0.85"/>
+  <rect x="50" y="108" width="18" height="3" rx="1.5" fill="#76d669" opacity="0.5"/>
+  <rect x="50" y="115" width="12" height="3" rx="1.5" fill="#76d669" opacity="0.3"/>
+
+  <!-- Puzzle piece 4 - bottom right (green variant) -->
+  <path d="M90 95 L120 95 C120 95, 120 90, 113 90 C106 90, 106 100, 113 100 C120 100, 120 95, 120 95 L130 95 L130 135 L90 135 L90 125 C90 125, 95 125, 95 118 C95 111, 85 111, 85 118 C85 125, 90 125, 90 125 Z" fill="#76d669" opacity="0.6"/>
+  <rect x="100" y="108" width="18" height="3" rx="1.5" fill="#253530" opacity="0.2"/>
+  <rect x="100" y="115" width="12" height="3" rx="1.5" fill="#253530" opacity="0.15"/>
+
+  <!-- Floating piece - not yet connected -->
+  <g transform="translate(140, 110) rotate(-15)">
+    <rect width="30" height="30" rx="8" fill="#DDEA7F" opacity="0.5"/>
+    <rect x="6" y="10" width="18" height="3" rx="1.5" fill="#253530" opacity="0.15"/>
+    <rect x="6" y="16" width="12" height="3" rx="1.5" fill="#253530" opacity="0.1"/>
+  </g>
+
+  <!-- Motion lines for floating piece -->
+  <line x1="138" y1="108" x2="134" y2="104" stroke="#253530" stroke-width="1" stroke-linecap="round" opacity="0.1"/>
+  <line x1="140" y1="105" x2="137" y2="100" stroke="#253530" stroke-width="1" stroke-linecap="round" opacity="0.1"/>
+
+  <!-- Warm sparkle accents -->
+  <circle cx="155" cy="50" r="3" fill="#DDEA7F" opacity="0.4"/>
+  <circle cx="30" cy="110" r="2.5" fill="#76d669" opacity="0.3"/>
+  <circle cx="85" cy="155" r="2" fill="#253530" opacity="0.1"/>
+
+  <!-- Small gear accent -->
+  <circle cx="160" cy="65" r="8" stroke="#253530" stroke-width="1.5" fill="none" opacity="0.1"/>
+  <circle cx="160" cy="65" r="3" fill="#253530" opacity="0.08"/>
+</svg>
