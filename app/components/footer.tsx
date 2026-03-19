@@ -120,7 +120,7 @@ export function Footer() {
           fontSize: 'clamp(1.5rem, 5vw, 3.5rem)',
           lineHeight: 1, pointerEvents: 'none', userSelect: 'none',
           textAlign: 'center', maxWidth: '95vw',
-          background: 'linear-gradient(180deg, rgba(37,53,48,0.15) 0%, rgba(37,53,48,0.06) 50%, transparent 100%)',
+          background: 'linear-gradient(180deg, rgba(37,53,48,0.3) 0%, rgba(37,53,48,0.12) 60%, transparent 100%)',
           WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
         }}>
           wrk smart today.
