@@ -273,10 +273,10 @@ export default function PricingPage() {
       </section>
 
       {/* EXECUTION */}
-      <section style={{ padding: '5rem 2rem', backgroundColor: '#fff' }}>
+      <section style={{ padding: '5rem 2rem', backgroundColor: 'var(--forest)', color: '#fff' }}>
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
           <Reveal>
-            <div style={{ background: 'var(--forest)', borderRadius: 18, padding: '2.5rem', color: '#fff' }}>
+            <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
                 <div style={{
                   background: 'linear-gradient(135deg, var(--mantis-a), var(--mantis-b))',
