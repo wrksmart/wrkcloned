@@ -227,6 +227,86 @@ a { color: inherit; text-decoration: none; }
     var(--seasalt);
 }
 
+/* ────────────── BENTO GRID ────────────── */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 13rem;
+  gap: 16px;
+}
+
+.bento-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(255,255,255,0.5);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.bento-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(118,214,105,0.04) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+.bento-card:hover::before { opacity: 1; }
+.bento-card:hover {
+  background: rgba(255,255,255,0.75);
+  border-color: rgba(118,214,105,0.3);
+  box-shadow: 0 16px 48px rgba(118,214,105,0.08), 0 0 0 1px rgba(118,214,105,0.06);
+  transform: translateY(-3px);
+}
+
+.bento-card .bento-content {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.bento-card:hover .bento-content {
+  transform: translateY(-28px);
+}
+
+.bento-card .bento-cta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 1.75rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 3;
+}
+.bento-card:hover .bento-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Bento span variants */
+.bento-wide { grid-column: span 2; }
+.bento-tall { grid-row: span 2; }
+
+@media (max-width: 900px) {
+  .bento-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: auto; }
+  .bento-wide { grid-column: span 2; }
+  .bento-tall { grid-row: span 1; }
+  .bento-card .bento-content { transform: none !important; }
+  .bento-card .bento-cta { position: static; opacity: 1; transform: none; padding: 0.5rem 0 0; }
+}
+@media (max-width: 600px) {
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-wide { grid-column: span 1; }
+}
+
 /* ────────────── PILLAR ICON ────────────── */
 .pillar-icon {
   width: 52px;

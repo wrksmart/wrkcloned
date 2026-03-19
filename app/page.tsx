@@ -40,28 +40,33 @@ const STATS = [
 const PILLARS = [
   {
     title: 'Process',
-    desc: 'optimizing wrkflows for faster, more effective results',
+    desc: 'optimizing wrkflows for faster, more effective results. we audit before we hire, building the right foundation for your operations.',
     icon: <><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></>,
+    span: 'bento-wide',
   },
   {
     title: 'Personalization',
-    desc: 'custom solutions built to fit your business',
+    desc: 'custom solutions built to fit your business. no cookie-cutter placements.',
     icon: <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></>,
+    span: '',
   },
   {
     title: 'People',
-    desc: 'a team of skilled talent dedicated to drive your success',
+    desc: 'a team of skilled talent dedicated to drive your success. trained, retained, and continuously developed wrk Specialists.',
     icon: <><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></>,
+    span: 'bento-tall',
   },
   {
     title: 'Platforms',
-    desc: 'equipping you with the right tools for growth',
+    desc: 'equipping you with the right tools for growth. Zoho, Notion, n8n, Clockify.',
     icon: <><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8"/><path d="M12 17v4"/></>,
+    span: '',
   },
   {
     title: 'Partners',
-    desc: 'continuously collaborating to create lasting value and impact',
+    desc: 'continuously collaborating to create lasting value and impact across your entire operation.',
     icon: <><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></>,
+    span: 'bento-wide',
   },
 ]
 
@@ -510,17 +515,30 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <div className="pillars-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 16 }}>
+          <div className="bento-grid">
             {PILLARS.map((p, i) => (
-              <Reveal key={p.title} delay={i * 0.08}>
-                <div className="glass" style={{ padding: '1.75rem 1.25rem', height: '100%' }}>
-                  <div className="pillar-icon">
-                    <svg viewBox="0 0 24 24">{p.icon}</svg>
+              <Reveal key={p.title} delay={i * 0.07}>
+                <div className={`bento-card ${p.span}`}>
+                  <div className="bento-content">
+                    <div className="pillar-icon">
+                      <svg viewBox="0 0 24 24">{p.icon}</svg>
+                    </div>
+                    <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--eerie)', marginBottom: 6 }}>
+                      {p.title.toLowerCase()}
+                    </h3>
+                    <p style={{ fontSize: '0.88rem', color: 'var(--muted)', lineHeight: 1.6 }}>{p.desc}</p>
                   </div>
-                  <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--eerie)', marginBottom: 8, textTransform: 'lowercase' }}>
-                    {p.title.toLowerCase()}
-                  </h3>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6 }}>{p.desc}</p>
+                  <div className="bento-cta">
+                    <a href="#services" style={{
+                      display: 'inline-flex', alignItems: 'center', gap: 6,
+                      fontSize: '0.8rem', fontWeight: 600, color: 'var(--mantis-a)',
+                    }}>
+                      Learn more
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12h14"/><path d="M12 5l7 7-7 7"/>
+                      </svg>
+                    </a>
+                  </div>
                 </div>
               </Reveal>
             ))}
