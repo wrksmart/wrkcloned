@@ -46,7 +46,7 @@ export function Footer() {
         <div style={{
           maxWidth: 1200, margin: '0 auto',
           display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-          minHeight: '26rem', position: 'relative',
+          minHeight: 'auto', position: 'relative',
           padding: '3rem 2rem',
         }}>
           {/* Top content */}
@@ -113,26 +113,6 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Large background text */}
-        <div style={{
-          position: 'absolute', left: '50%', transform: 'translateX(-50%)',
-          bottom: -8, fontWeight: 900, letterSpacing: '-0.04em',
-          fontSize: 'clamp(1.5rem, 5vw, 3.5rem)',
-          lineHeight: 1, pointerEvents: 'none', userSelect: 'none',
-          textAlign: 'center', maxWidth: '95vw',
-          background: 'linear-gradient(180deg, rgba(118,214,105,0.25) 0%, rgba(221,234,127,0.12) 50%, transparent 100%)',
-          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-        }}>
-          wrk smart today.
-        </div>
-
-
-        {/* Divider line */}
-        <div style={{
-          position: 'absolute', bottom: 50, left: '50%', transform: 'translateX(-50%)',
-          width: '100%', height: 1,
-          background: 'linear-gradient(90deg, transparent, var(--line), transparent)',
-        }} />
 
       </footer>
     </section>
