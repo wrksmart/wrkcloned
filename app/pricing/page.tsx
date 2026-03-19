@@ -42,7 +42,7 @@ const TIERS = [
     session: '45-min assessment',
     price: '$1,800',
     description: 'Pick one system or process. We go deep on it.',
-    ideal: 'businesses that want a simple system to improve capacity — CRM, automating, PM.',
+    ideal: 'businesses that want a simple system to improve capacity (CRM, automating, PM).',
     deliverables: [
       'Deep-dive assessment of one system or process',
       'Written strategy report with prioritized recommendations',
@@ -83,7 +83,7 @@ const TIERS = [
 ]
 
 const EXECUTION = {
-  description: 'After the assessment, you can execute in-house or hire wrksourcing to run it. Sprints, retainers, or a hybrid — scoped to the plan that came out of your assessment.',
+  description: 'After the assessment, you can execute in-house or hire wrksourcing to run it. Sprints, retainers, or a hybrid, scoped to the plan that came out of your assessment.',
   features: [
     'Sprints and/or implementation retainer',
     'Based on the phased plan from your assessment',
@@ -100,8 +100,8 @@ const PHASES = [
 
 const FAQ = [
   { q: 'Is this a monthly subscription?', a: 'No. Focus, Momentum, and Transform are one-time project engagements. You pay once, get your assessment and deliverables, and decide what to do next.' },
-  { q: 'What happens after the assessment?', a: 'You get a full strategy report with a phased plan. From there, you can execute in-house or hire wrksourcing to run the Execution phase — sprints, retainer, or a mix.' },
-  { q: 'How long does the process take?', a: 'The assessment session itself is 45–90 minutes depending on tier. The full strategy report is delivered within 2 weeks. Execution timelines vary by scope.' },
+  { q: 'What happens after the assessment?', a: 'You get a full strategy report with a phased plan. From there, you can execute in-house or hire wrksourcing to run the Execution phase: sprints, retainer, or a mix.' },
+  { q: 'How long does the process take?', a: 'The assessment session itself is 45 to 90 minutes depending on tier. The full strategy report is delivered within 2 weeks. Execution timelines vary by scope.' },
   { q: 'Which tier should I pick?', a: "Focus if you need one thing fixed fast. Momentum if you want your full client journey mapped. Transform if you want the whole operation audited. Not sure? Book a discovery call and we'll tell you." },
   { q: 'Can I upgrade from Focus to Transform later?', a: 'Yes. If you start with Focus and realize you need more, we credit the Focus fee toward a Momentum or Transform engagement.' },
 ]
@@ -195,7 +195,7 @@ export default function PricingPage() {
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.35 }}
             style={{ fontSize: '1.05rem', color: 'var(--subtext)', lineHeight: 1.7, maxWidth: 580, margin: '0 auto 28px' }}>
-            every engagement starts with an Assessment and Strategy — choose a tier,
+            every engagement starts with an Assessment and Strategy. choose a tier,
             get the report, then decide how to execute. one-time investment. no subscriptions.
           </motion.p>
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
