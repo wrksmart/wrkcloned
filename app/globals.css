@@ -1,9 +1,16 @@
-/* Avenir font stack */
+/* Avenir font stack — Avenir Black/Heavy for headers, Book/Roman for body */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap');
 
 @font-face {
   font-family: 'Avenir';
-  src: local('Avenir Heavy'), local('Avenir-Heavy'), local('AvenirNext-Bold'), local('Avenir Next Bold');
+  src: local('Avenir Black'), local('Avenir-Black'), local('AvenirNext-Bold'), local('Avenir Next Bold');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Avenir';
+  src: local('Avenir Heavy'), local('Avenir-Heavy'), local('AvenirNext-DemiBold'), local('Avenir Next DemiBold');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -17,25 +24,33 @@
 }
 @font-face {
   font-family: 'Avenir';
-  src: local('Avenir Book'), local('Avenir-Book'), local('AvenirNext-Regular'), local('Avenir Next Regular');
+  src: local('Avenir Roman'), local('Avenir-Roman'), local('AvenirNext-Regular'), local('Avenir Next Regular');
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Avenir';
+  src: local('Avenir Book'), local('Avenir-Book'), local('AvenirNext-Regular'), local('Avenir Next Regular');
+  font-weight: 350;
   font-style: normal;
   font-display: swap;
 }
 
 :root {
-  --green: #7CB663;
-  --green-dark: #5FA348;
-  --green-light: #8EC677;
-  --green-pale: #EAF5E4;
-  --green-bg: #f4f9f2;
-  --forest: #253530;
-  --text: #1d1d1d;
-  --text-secondary: #555;
-  --text-muted: #888;
-  --border: #e8e8e8;
-  --bg: #ffffff;
-  --bg-alt: #fafafa;
+  /* Brand colors — wrksourcing Brand Identity 2024 */
+  --seasalt: #f7f8f9;           /* Background */
+  --eerie: #1d1d1d;             /* Text */
+  --mantis-a: #76d669;          /* Gradient start */
+  --mantis-b: #DDEA7F;          /* Gradient end */
+  --mindaro: #deea88;           /* Accent */
+  --forest: #253530;            /* Dark forest green */
+  --line: #E0E0E0;              /* All borders */
+  --muted: #888888;             /* Secondary text */
+  --subtext: #666666;           /* Descriptions */
+  --subtle: #AAAAAA;            /* Footnotes */
+  --light-accent: #F2F6D8;     /* Table headers, light fills */
+  --white: #ffffff;
 }
 
 *, *::before, *::after {
@@ -50,8 +65,8 @@ html {
 
 body {
   font-family: 'Avenir', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
+  background-color: var(--seasalt);
+  color: var(--eerie);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -60,7 +75,7 @@ body {
 }
 
 ::selection {
-  background: rgba(124,182,99,0.2);
+  background: rgba(118,214,105,0.2);
   color: #000;
 }
 
@@ -81,45 +96,46 @@ a { color: inherit; text-decoration: none; }
 
 /* ────────────── NAV ────────────── */
 .nav-link {
-  color: var(--text);
+  color: var(--eerie);
   text-decoration: none;
   font-size: 0.92rem;
-  font-weight: 500;
+  font-weight: 400;
   transition: color 0.2s;
 }
-.nav-link:hover { color: var(--green); }
+.nav-link:hover { color: var(--mantis-a); }
 .nav-desktop { display: flex; align-items: center; gap: 2rem; }
 .nav-mobile-btn { display: none; background: none; border: none; cursor: pointer; }
 
 /* ────────────── BUTTONS ────────────── */
-.btn-green {
+.btn-gradient {
   display: inline-block;
-  background-color: var(--green);
-  color: #fff;
+  background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
+  color: var(--white);
   padding: 0.85rem 2rem;
   border-radius: 6px;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.82rem;
   text-decoration: none;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  transition: background-color 0.2s, transform 0.15s;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
   cursor: pointer;
   border: none;
   font-family: inherit;
 }
-.btn-green:hover {
-  background-color: var(--green-dark);
+.btn-gradient:hover {
+  opacity: 0.92;
   transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(118,214,105,0.25);
 }
 
 .btn-dark {
   display: inline-block;
-  background-color: var(--forest);
-  color: #fff;
+  background-color: var(--eerie);
+  color: var(--white);
   padding: 0.85rem 2rem;
   border-radius: 6px;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.82rem;
   text-decoration: none;
   letter-spacing: 0.06em;
@@ -130,14 +146,14 @@ a { color: inherit; text-decoration: none; }
   font-family: inherit;
 }
 .btn-dark:hover {
-  background-color: #1a2520;
+  background-color: #333;
   transform: translateY(-1px);
 }
 
-.btn-outline-green {
+.btn-outline {
   display: inline-block;
   background-color: transparent;
-  color: var(--green);
+  color: var(--eerie);
   padding: 0.85rem 2rem;
   border-radius: 6px;
   font-weight: 600;
@@ -145,19 +161,19 @@ a { color: inherit; text-decoration: none; }
   text-decoration: none;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  border: 2px solid var(--green);
+  border: 2px solid var(--line);
   transition: all 0.2s;
 }
-.btn-outline-green:hover {
-  background-color: var(--green);
-  color: #fff;
+.btn-outline:hover {
+  border-color: var(--mantis-a);
+  color: var(--mantis-a);
 }
 
 /* ────────────── CARDS ────────────── */
 .card {
-  background-color: #fff;
+  background-color: var(--white);
   border-radius: 12px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   transition: box-shadow 0.25s, transform 0.25s;
 }
 .card:hover {
@@ -170,7 +186,7 @@ a { color: inherit; text-decoration: none; }
   width: 52px;
   height: 52px;
   border-radius: 12px;
-  background-color: var(--green-pale);
+  background: linear-gradient(135deg, rgba(118,214,105,0.12), rgba(221,234,127,0.12));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,7 +195,7 @@ a { color: inherit; text-decoration: none; }
 .pillar-icon svg {
   width: 24px;
   height: 24px;
-  stroke: var(--green);
+  stroke: var(--mantis-a);
   fill: none;
   stroke-width: 1.8;
   stroke-linecap: round;
@@ -189,23 +205,23 @@ a { color: inherit; text-decoration: none; }
 /* ────────────── SERVICE CARD TOP BAR ────────────── */
 .service-card-bar {
   height: 4px;
-  background: linear-gradient(90deg, var(--green), var(--green-light));
+  background: linear-gradient(90deg, var(--mantis-a), var(--mantis-b));
   border-radius: 12px 12px 0 0;
 }
 
 /* ────────────── INDUSTRY CARD ────────────── */
 .industry-card {
-  background-color: #fff;
+  background-color: var(--white);
   border-radius: 12px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   padding: 1.75rem 1rem;
   text-align: center;
   cursor: default;
   transition: all 0.25s;
 }
 .industry-card:hover {
-  border-color: var(--green);
-  box-shadow: 0 4px 20px rgba(124,182,99,0.12);
+  border-color: var(--mantis-a);
+  box-shadow: 0 4px 20px rgba(118,214,105,0.12);
   transform: translateY(-2px);
 }
 
@@ -214,12 +230,12 @@ a { color: inherit; text-decoration: none; }
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: var(--green);
-  color: #fff;
+  background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
+  color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
+  font-weight: 900;
   font-size: 1.1rem;
   margin-bottom: 16px;
   flex-shrink: 0;
@@ -229,23 +245,23 @@ a { color: inherit; text-decoration: none; }
 .form-input {
   width: 100%;
   padding: 0.8rem 1rem;
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
+  background-color: var(--white);
+  border: 1px solid var(--line);
   border-radius: 6px;
-  color: var(--text);
+  color: var(--eerie);
   font-size: 0.95rem;
   font-family: inherit;
   outline: none;
   transition: border-color 0.2s;
 }
-.form-input:focus { border-color: var(--green); }
-.form-input::placeholder { color: #999; }
+.form-input:focus { border-color: var(--mantis-a); }
+.form-input::placeholder { color: var(--subtle); }
 
 label.form-label {
   display: block;
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--subtext);
   margin-bottom: 0.4rem;
 }
 
@@ -259,18 +275,9 @@ label.form-label {
   transition: width 0.3s, background-color 0.3s;
 }
 
-/* ────────────── GOOGLE STARS ────────────── */
-.google-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  padding: 0.35rem 1rem;
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  font-weight: 600;
+/* ────────────── GRADIENT BG SECTIONS ────────────── */
+.gradient-bg {
+  background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
 }
 
 /* ────────────── RESPONSIVE ────────────── */
