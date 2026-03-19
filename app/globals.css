@@ -1,4 +1,4 @@
-/* Avenir font stack — system Avenir on macOS, Plus Jakarta Sans fallback */
+/* Avenir font stack */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap');
 
 @font-face {
@@ -23,6 +23,21 @@
   font-display: swap;
 }
 
+:root {
+  --green: #7CB663;
+  --green-dark: #5FA348;
+  --green-light: #8EC677;
+  --green-pale: #EAF5E4;
+  --green-bg: #f4f9f2;
+  --forest: #253530;
+  --text: #1d1d1d;
+  --text-secondary: #555;
+  --text-muted: #888;
+  --border: #e8e8e8;
+  --bg: #ffffff;
+  --bg-alt: #fafafa;
+}
+
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -35,8 +50,8 @@ html {
 
 body {
   font-family: 'Avenir', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #ffffff;
-  color: #1d1d1d;
+  background-color: var(--bg);
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -45,57 +60,46 @@ body {
 }
 
 ::selection {
-  background: rgba(0,0,0,0.08);
+  background: rgba(124,182,99,0.2);
   color: #000;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
+img { max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
 
 /* ────────────── LOGO STRIP ────────────── */
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-
 .logo-strip {
   display: flex;
   width: max-content;
   animation: marquee 30s linear infinite;
 }
-.logo-strip:hover {
-  animation-play-state: paused;
-}
+.logo-strip:hover { animation-play-state: paused; }
 
 /* ────────────── NAV ────────────── */
 .nav-link {
-  color: #1d1d1d;
+  color: var(--text);
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 500;
   transition: color 0.2s;
 }
-.nav-link:hover { color: #555; }
-
-.nav-desktop { display: flex; align-items: center; gap: 2.2rem; }
+.nav-link:hover { color: var(--green); }
+.nav-desktop { display: flex; align-items: center; gap: 2rem; }
 .nav-mobile-btn { display: none; background: none; border: none; cursor: pointer; }
 
 /* ────────────── BUTTONS ────────────── */
-.btn-primary {
+.btn-green {
   display: inline-block;
-  background-color: #1d1d1d;
-  color: #ffffff;
+  background-color: var(--green);
+  color: #fff;
   padding: 0.85rem 2rem;
   border-radius: 6px;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   text-decoration: none;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -104,40 +108,121 @@ a {
   border: none;
   font-family: inherit;
 }
-.btn-primary:hover {
-  background-color: #333;
+.btn-green:hover {
+  background-color: var(--green-dark);
   transform: translateY(-1px);
 }
 
-.btn-outline {
+.btn-dark {
+  display: inline-block;
+  background-color: var(--forest);
+  color: #fff;
+  padding: 0.85rem 2rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background-color 0.2s, transform 0.15s;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+.btn-dark:hover {
+  background-color: #1a2520;
+  transform: translateY(-1px);
+}
+
+.btn-outline-green {
   display: inline-block;
   background-color: transparent;
-  color: #1d1d1d;
+  color: var(--green);
   padding: 0.85rem 2rem;
   border-radius: 6px;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   text-decoration: none;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  border: 2px solid #1d1d1d;
+  border: 2px solid var(--green);
   transition: all 0.2s;
 }
-.btn-outline:hover {
-  background-color: #1d1d1d;
+.btn-outline-green:hover {
+  background-color: var(--green);
   color: #fff;
 }
 
 /* ────────────── CARDS ────────────── */
 .card {
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 12px;
-  border: 1px solid #eee;
+  border: 1px solid var(--border);
   transition: box-shadow 0.25s, transform 0.25s;
 }
 .card:hover {
-  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.07);
   transform: translateY(-2px);
+}
+
+/* ────────────── PILLAR ICON ────────────── */
+.pillar-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background-color: var(--green-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.pillar-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--green);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ────────────── SERVICE CARD TOP BAR ────────────── */
+.service-card-bar {
+  height: 4px;
+  background: linear-gradient(90deg, var(--green), var(--green-light));
+  border-radius: 12px 12px 0 0;
+}
+
+/* ────────────── INDUSTRY CARD ────────────── */
+.industry-card {
+  background-color: #fff;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 1.75rem 1rem;
+  text-align: center;
+  cursor: default;
+  transition: all 0.25s;
+}
+.industry-card:hover {
+  border-color: var(--green);
+  box-shadow: 0 4px 20px rgba(124,182,99,0.12);
+  transform: translateY(-2px);
+}
+
+/* ────────────── STEP NUMBER ────────────── */
+.step-number {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--green);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  flex-shrink: 0;
 }
 
 /* ────────────── FORM ────────────── */
@@ -147,43 +232,21 @@ a {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
   border-radius: 6px;
-  color: #1d1d1d;
+  color: var(--text);
   font-size: 0.95rem;
   font-family: inherit;
   outline: none;
   transition: border-color 0.2s;
 }
-.form-input:focus {
-  border-color: #1d1d1d;
-}
+.form-input:focus { border-color: var(--green); }
 .form-input::placeholder { color: #999; }
 
 label.form-label {
   display: block;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #555;
+  color: var(--text-secondary);
   margin-bottom: 0.4rem;
-}
-
-/* ────────────── SERVICE TABS ────────────── */
-.service-tab {
-  padding: 0.6rem 1.25rem;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.85rem;
-  font-family: inherit;
-  transition: all 0.2s;
-  background-color: #fff;
-  color: #666;
-}
-.service-tab:hover { color: #1d1d1d; border-color: #1d1d1d; }
-.service-tab.active {
-  background-color: #1d1d1d;
-  color: #ffffff;
-  border-color: #1d1d1d;
 }
 
 /* ────────────── DOT NAV ────────────── */
@@ -196,17 +259,25 @@ label.form-label {
   transition: width 0.3s, background-color 0.3s;
 }
 
-/* ────────────── ROTATING TEXT ────────────── */
-@keyframes typing-cursor {
-  0%, 100% { border-color: #1d1d1d; }
-  50% { border-color: transparent; }
+/* ────────────── GOOGLE STARS ────────────── */
+.google-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.35rem 1rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 600;
 }
 
 /* ────────────── RESPONSIVE ────────────── */
 @media (max-width: 900px) {
   .nav-desktop { display: none; }
   .nav-mobile-btn { display: flex; align-items: center; }
-  .services-layout { grid-template-columns: 1fr !important; }
+  .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .hero-grid { grid-template-columns: 1fr !important; text-align: center; }
   .hero-cta-row { justify-content: center; }
   .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
@@ -217,6 +288,7 @@ label.form-label {
   .industries-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .testimonials-grid { grid-template-columns: 1fr !important; }
   .steps-grid { grid-template-columns: 1fr !important; }
+  .services-grid { grid-template-columns: 1fr !important; }
   .form-row { grid-template-columns: 1fr !important; }
   .footer-inner { flex-direction: column; gap: 1.5rem; }
   .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
