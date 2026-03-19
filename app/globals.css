@@ -215,8 +215,7 @@ a { color: inherit; text-decoration: none; }
 /* ────────────── GLASS GRADIENT BG ────────────── */
 .glass-hero-bg {
   background:
-    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(118,214,105,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(221,234,127,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 55% 65% at 75% 30%, rgba(118,214,105,0.12) 0%, rgba(221,234,127,0.06) 40%, transparent 70%),
     linear-gradient(180deg, #fff 0%, var(--seasalt) 100%);
 }
 
