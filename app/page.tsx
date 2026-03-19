@@ -37,35 +37,50 @@ const STATS = [
   { value: 95,  suffix: '%',  label: 'client retention' },
 ]
 
+// Custom gradient-filled icons (not generic stroke icons)
+const GradDef = () => (
+  <defs>
+    <linearGradient id="wrk-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stopColor="#76d669" />
+      <stop offset="100%" stopColor="#DDEA7F" />
+    </linearGradient>
+  </defs>
+)
+
 const PILLARS = [
   {
     title: 'Process',
     desc: 'optimizing wrkflows for faster, more effective results. we audit before we hire, building the right foundation for your operations.',
-    icon: <><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></>,
+    // Three stacked horizontal bars — workflow/process
+    icon: <><GradDef/><rect x="3" y="4" width="18" height="3.5" rx="1.75" fill="url(#wrk-grad)" opacity="0.4"/><rect x="3" y="10.25" width="14" height="3.5" rx="1.75" fill="url(#wrk-grad)" opacity="0.65"/><rect x="3" y="16.5" width="10" height="3.5" rx="1.75" fill="url(#wrk-grad)"/></>,
     span: 'bento-wide',
   },
   {
     title: 'Personalization',
     desc: 'custom solutions built to fit your business. no cookie-cutter placements.',
-    icon: <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></>,
+    // Crosshair/target — precision targeting
+    icon: <><GradDef/><circle cx="12" cy="12" r="9" fill="none" stroke="url(#wrk-grad)" strokeWidth="2"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="url(#wrk-grad)" strokeWidth="2" opacity="0.6"/><circle cx="12" cy="12" r="1.5" fill="url(#wrk-grad)"/></>,
     span: '',
   },
   {
     title: 'People',
     desc: 'a team of skilled talent dedicated to drive your success. trained, retained, and continuously developed wrk Specialists.',
-    icon: <><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></>,
+    // Three overlapping circles — team/collaboration
+    icon: <><GradDef/><circle cx="8" cy="13" r="5" fill="url(#wrk-grad)" opacity="0.3"/><circle cx="16" cy="13" r="5" fill="url(#wrk-grad)" opacity="0.3"/><circle cx="12" cy="8" r="5" fill="url(#wrk-grad)" opacity="0.5"/></>,
     span: 'bento-tall',
   },
   {
     title: 'Platforms',
     desc: 'equipping you with the right tools for growth. Zoho, Notion, n8n, Clockify.',
-    icon: <><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8"/><path d="M12 17v4"/></>,
+    // Grid of 4 rounded squares — modular tools
+    icon: <><GradDef/><rect x="3" y="3" width="8" height="8" rx="2" fill="url(#wrk-grad)"/><rect x="13" y="3" width="8" height="8" rx="2" fill="url(#wrk-grad)" opacity="0.6"/><rect x="3" y="13" width="8" height="8" rx="2" fill="url(#wrk-grad)" opacity="0.6"/><rect x="13" y="13" width="8" height="8" rx="2" fill="url(#wrk-grad)" opacity="0.35"/></>,
     span: '',
   },
   {
     title: 'Partners',
     desc: 'continuously collaborating to create lasting value and impact across your entire operation.',
-    icon: <><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></>,
+    // Two interlocking rings — partnership
+    icon: <><GradDef/><circle cx="9" cy="12" r="6.5" fill="none" stroke="url(#wrk-grad)" strokeWidth="2.5"/><circle cx="15" cy="12" r="6.5" fill="none" stroke="url(#wrk-grad)" strokeWidth="2.5" opacity="0.5"/></>,
     span: 'bento-wide',
   },
 ]
@@ -74,32 +89,36 @@ const SERVICES = [
   {
     title: 'wrkflow Solutions',
     desc: 'for businesses needing to establish and optimize their processes, our wrk specialists will help you build the foundational systems you need to improve your core business operations.',
-    icon: <><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></>,
+    // Interlocking arrows — flow/process
+    icon: <><GradDef/><path d="M4 12h10" stroke="url(#wrk-grad)" strokeWidth="2.5" strokeLinecap="round"/><path d="M11 8l4 4-4 4" stroke="url(#wrk-grad)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/><path d="M20 12h-4" stroke="url(#wrk-grad)" strokeWidth="2.5" strokeLinecap="round" opacity="0.4"/></>,
   },
   {
     title: 'Admin',
     desc: 'for start-ups and SMBs needing to offload administrative tasks, our wrk specialists will handle your admin work so you can focus on running your business.',
-    icon: <><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></>,
+    // Stacked cards — organized tasks
+    icon: <><GradDef/><rect x="5" y="3" width="14" height="10" rx="2" fill="url(#wrk-grad)" opacity="0.35"/><rect x="3" y="7" width="14" height="10" rx="2" fill="url(#wrk-grad)" opacity="0.55"/><rect x="7" y="11" width="14" height="10" rx="2" fill="url(#wrk-grad)"/></>,
   },
   {
     title: 'Marketing',
     desc: 'for entrepreneurs and business owners looking to increase their brand awareness and reach, our wrk specialists will help you grow and nurture a community and build your brand reputation.',
-    icon: <><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></>,
+    // Expanding ripples — reach/broadcast
+    icon: <><GradDef/><circle cx="12" cy="12" r="3" fill="url(#wrk-grad)"/><circle cx="12" cy="12" r="7" fill="none" stroke="url(#wrk-grad)" strokeWidth="1.5" opacity="0.5"/><circle cx="12" cy="12" r="11" fill="none" stroke="url(#wrk-grad)" strokeWidth="1.5" opacity="0.25"/></>,
   },
   {
     title: 'Sales',
     desc: 'for start-ups to established businesses aiming to boost sales, our wrk specialists can help identify growth opportunities and maximize your sales potential.',
-    icon: <><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></>,
+    // Rising bars — growth
+    icon: <><GradDef/><rect x="3" y="14" width="4" height="7" rx="1" fill="url(#wrk-grad)" opacity="0.35"/><rect x="10" y="9" width="4" height="12" rx="1" fill="url(#wrk-grad)" opacity="0.6"/><rect x="17" y="4" width="4" height="17" rx="1" fill="url(#wrk-grad)"/></>,
   },
 ]
 
 const INDUSTRIES = [
-  { title: 'Professional Services', icon: <><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path d="M9 12l2 2 4-4"/></> },
-  { title: 'Entrepreneurs', icon: <><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></> },
-  { title: 'Start-ups', icon: <><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></> },
-  { title: 'Creative Services', icon: <><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></> },
-  { title: 'E-commerce', icon: <><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></> },
-  { title: 'Tech, IT, and Software', icon: <><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8"/><path d="M12 17v4"/></> },
+  { title: 'Professional Services', icon: <><GradDef/><rect x="4" y="6" width="16" height="14" rx="2" fill="url(#wrk-grad)" opacity="0.25"/><rect x="7" y="3" width="10" height="4" rx="1" fill="url(#wrk-grad)"/><rect x="8" y="12" width="8" height="1.5" rx="0.75" fill="url(#wrk-grad)" opacity="0.5"/><rect x="8" y="15.5" width="5" height="1.5" rx="0.75" fill="url(#wrk-grad)" opacity="0.35"/></> },
+  { title: 'Entrepreneurs', icon: <><GradDef/><circle cx="12" cy="10" r="4" fill="url(#wrk-grad)" opacity="0.5"/><path d="M12 2v4" stroke="url(#wrk-grad)" strokeWidth="2.5" strokeLinecap="round"/><path d="M12 14v8" stroke="url(#wrk-grad)" strokeWidth="2.5" strokeLinecap="round"/><path d="M8 18h8" stroke="url(#wrk-grad)" strokeWidth="2.5" strokeLinecap="round" opacity="0.4"/></> },
+  { title: 'Start-ups', icon: <><GradDef/><path d="M12 3l2.5 6h6l-5 4 2 6.5L12 16l-5.5 3.5 2-6.5-5-4h6z" fill="url(#wrk-grad)" opacity="0.6"/></> },
+  { title: 'Creative Services', icon: <><GradDef/><circle cx="8" cy="16" r="5" fill="url(#wrk-grad)" opacity="0.3"/><circle cx="16" cy="16" r="5" fill="url(#wrk-grad)" opacity="0.3"/><circle cx="12" cy="9" r="5" fill="url(#wrk-grad)" opacity="0.3"/></> },
+  { title: 'E-commerce', icon: <><GradDef/><rect x="3" y="8" width="18" height="13" rx="2" fill="url(#wrk-grad)" opacity="0.25"/><rect x="6" y="4" width="12" height="7" rx="1.5" fill="url(#wrk-grad)"/><circle cx="9" cy="17" r="1.5" fill="url(#wrk-grad)" opacity="0.5"/><circle cx="15" cy="17" r="1.5" fill="url(#wrk-grad)" opacity="0.5"/></> },
+  { title: 'Tech, IT, and Software', icon: <><GradDef/><rect x="4" y="4" width="7" height="7" rx="1.5" fill="url(#wrk-grad)"/><rect x="13" y="4" width="7" height="7" rx="1.5" fill="url(#wrk-grad)" opacity="0.5"/><rect x="4" y="13" width="7" height="7" rx="1.5" fill="url(#wrk-grad)" opacity="0.5"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="url(#wrk-grad)" opacity="0.25"/></> },
 ]
 
 const TESTIMONIALS = [
@@ -567,8 +586,7 @@ export default function Home() {
                       backgroundColor: 'var(--light-accent)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16,
                     }}>
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                        stroke="var(--mantis-a)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="22" height="22" viewBox="0 0 24 24">
                         {s.icon}
                       </svg>
                     </div>
@@ -604,14 +622,8 @@ export default function Home() {
                     background: 'linear-gradient(135deg, rgba(118,214,105,0.1), rgba(221,234,127,0.1))',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px',
                   }}>
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <defs>
-                        <linearGradient id={`g-${ind.title.replace(/\s/g, '')}`} x1="0" y1="0" x2="1" y2="1">
-                          <stop offset="0%" stopColor="#76d669" />
-                          <stop offset="100%" stopColor="#DDEA7F" />
-                        </linearGradient>
-                      </defs>
-                      <g stroke={`url(#g-${ind.title.replace(/\s/g, '')})`}>{ind.icon}</g>
+                    <svg width="26" height="26" viewBox="0 0 24 24">
+                      {ind.icon}
                     </svg>
                   </div>
                   <p style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--eerie)', lineHeight: 1.35 }}>{ind.title}</p>

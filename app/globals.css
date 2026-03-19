@@ -319,13 +319,8 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 16px;
 }
 .pillar-icon svg {
-  width: 24px;
-  height: 24px;
-  stroke: var(--mantis-a);
-  fill: none;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  width: 26px;
+  height: 26px;
 }
 
 /* ────────────── SERVICE CARD TOP BAR ────────────── */
