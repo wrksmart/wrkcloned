@@ -10,7 +10,7 @@ import { motion, AnimatePresence, useInView, useScroll, useSpring } from 'framer
 const NAV = [
   { label: 'Services', href: '#services' },
   { label: 'Pricing', href: '/pricing' },
-  { label: 'How It Wrks', href: '#how-it-works' },
+  { label: 'how it wrks', href: '#how-it-works' },
   { label: 'About Us', href: '#about' },
   { label: 'Contact Us', href: '#contact' },
 ]
@@ -66,7 +66,7 @@ const PILLARS = [
 
 const SERVICES = [
   {
-    title: 'Wrkflow Solutions',
+    title: 'wrkflow Solutions',
     desc: 'for businesses needing to establish and optimize their processes, our wrk specialists will help you build the foundational systems you need to improve your core business operations.',
     icon: <><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></>,
   },
@@ -108,7 +108,7 @@ const TESTIMONIALS = [
 const STEPS = [
   { n: '01', title: 'Take a Free Discovery Call', desc: "Let's find out what you need. We want to get to know you as a person, as well as your business needs. We dig deep and the more information you share, the better." },
   { n: '02', title: 'We Match You', desc: "After we get to know you and gain a clear picture of what your business needs, our approach is personalized based on your business' goals and current challenges. We start with the foundation and wrk our way up depending on the services you need." },
-  { n: '03', title: 'New Wrkflow Begins!', desc: "Now that we've established the groundwrk, you can spend time on what matters most — running your business. Our team will assist you with onboarding and ongoing support throughout your entire journey here at wrksourcing." },
+  { n: '03', title: 'new wrkflow begins!', desc: "Now that we've established the groundwrk, you can spend time on what matters most — running your business. Our team will assist you with onboarding and ongoing support throughout your entire journey here at wrksourcing." },
 ]
 
 // ─────────────────────────────────────────────
@@ -623,7 +623,7 @@ export default function Home() {
           </div>
           <Reveal delay={0.3}>
             <div style={{ textAlign: 'center', marginTop: 40 }}>
-              <a className="btn-gradient" href="#contact" style={{ boxShadow: '0 4px 20px rgba(118,214,105,0.3)' }}>WRK SMARTER TODAY</a>
+              <a className="btn-gradient" href="#contact" style={{ boxShadow: '0 4px 20px rgba(118,214,105,0.3)' }}>wrk smarter today</a>
             </div>
           </Reveal>
         </div>

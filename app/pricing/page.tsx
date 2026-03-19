@@ -10,7 +10,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion'
 const NAV = [
   { label: 'Services', href: '/#services' },
   { label: 'Pricing', href: '/pricing' },
-  { label: 'How It Wrks', href: '/#how-it-works' },
+  { label: 'how it wrks', href: '/#how-it-works' },
   { label: 'About Us', href: '/#about' },
   { label: 'Contact Us', href: '/#contact' },
 ]
@@ -104,7 +104,6 @@ const FAQ = [
   { q: 'How long does the process take?', a: 'The assessment session itself is 45–90 minutes depending on tier. The full strategy report is delivered within 2 weeks. Execution timelines vary by scope.' },
   { q: 'Which tier should I pick?', a: "Focus if you need one thing fixed fast. Momentum if you want your full client journey mapped. Transform if you want the whole operation audited. Not sure? Book a discovery call and we'll tell you." },
   { q: 'Can I upgrade from Focus to Transform later?', a: 'Yes. If you start with Focus and realize you need more, we credit the Focus fee toward a Momentum or Transform engagement.' },
-  { q: 'What tools do you wrk with?', a: 'Zoho CRM, Notion, Google Workspace, Clockify, n8n, HubSpot, and more. If your team uses it, we can audit and optimize it.' },
 ]
 
 // ─────────────────────────────────────────────
