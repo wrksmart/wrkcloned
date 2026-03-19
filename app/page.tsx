@@ -358,8 +358,8 @@ export default function Home() {
       </nav>
 
       {/* ═══════════════ HERO ═══════════════ */}
-      <section style={{
-        minHeight: '100vh', backgroundColor: '#fff',
+      <section className="glass-hero-bg" style={{
+        minHeight: '100vh',
         display: 'flex', alignItems: 'center',
         padding: '120px 2rem 80px',
       }}>
@@ -491,7 +491,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ WHY WRKSOURCING ═══════════════ */}
-      <section id="about" style={{ padding: '6rem 2rem', backgroundColor: '#fff' }}>
+      <section id="about" className="glass-mesh" style={{ padding: '6rem 2rem' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
@@ -513,7 +513,7 @@ export default function Home() {
           <div className="pillars-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 16 }}>
             {PILLARS.map((p, i) => (
               <Reveal key={p.title} delay={i * 0.08}>
-                <div className="card" style={{ padding: '1.75rem 1.25rem', height: '100%' }}>
+                <div className="glass" style={{ padding: '1.75rem 1.25rem', height: '100%' }}>
                   <div className="pillar-icon">
                     <svg viewBox="0 0 24 24">{p.icon}</svg>
                   </div>
@@ -541,7 +541,7 @@ export default function Home() {
           <div className="services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
             {SERVICES.map((s, i) => (
               <Reveal key={s.title} delay={i * 0.1}>
-                <div className="card" style={{ overflow: 'hidden', height: '100%' }}>
+                <div className="glass-dark" style={{ overflow: 'hidden', height: '100%' }}>
                   <div className="service-card-bar" />
                   <div style={{ padding: '1.75rem 1.5rem' }}>
                     <div style={{
@@ -565,7 +565,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ INDUSTRIES ═══════════════ */}
-      <section style={{ padding: '6rem 2rem', backgroundColor: '#fff' }}>
+      <section className="glass-mesh" style={{ padding: '6rem 2rem' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 40 }}>
@@ -610,6 +610,7 @@ export default function Home() {
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 40 }}>
               <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>testimonials</p>
+
               <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>real results corner</h2>
             </div>
           </Reveal>
@@ -653,12 +654,11 @@ export default function Home() {
           <div className="testimonials-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
             {TESTIMONIALS.map((t, i) => (
               <Reveal key={i} delay={i * 0.06}>
-                <div onClick={() => setTIdx(i)} className="card"
+                <div onClick={() => setTIdx(i)} className="glass"
                   style={{
                     padding: '1.5rem', cursor: 'pointer', height: '100%',
-                    borderColor: tIdx === i ? 'var(--mantis-a)' : 'var(--line)',
-                    background: tIdx === i ? 'var(--light-accent)' : '#fff',
-                    transition: 'all 0.3s',
+                    borderColor: tIdx === i ? 'rgba(118,214,105,0.4)' : 'rgba(255,255,255,0.5)',
+                    background: tIdx === i ? 'rgba(242,246,216,0.6)' : 'rgba(255,255,255,0.55)',
                   }}>
                   <Stars />
                   <p style={{ color: 'var(--subtext)', fontSize: '0.85rem', lineHeight: 1.6, margin: '10px 0 14px', fontStyle: 'italic' }}>
@@ -696,7 +696,7 @@ export default function Home() {
             }} />
             {STEPS.map((s, i) => (
               <Reveal key={s.n} delay={i * 0.15}>
-                <div className="card" style={{ padding: '2rem 1.75rem', position: 'relative', zIndex: 1 }}>
+                <div className="glass-dark" style={{ padding: '2rem 1.75rem', position: 'relative', zIndex: 1 }}>
                   <div className="step-number">{s.n}</div>
                   <h3 style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--eerie)', marginBottom: 10, lineHeight: 1.3 }}>{s.title}</h3>
                   <p style={{ color: 'var(--muted)', fontSize: '0.88rem', lineHeight: 1.7 }}>{s.desc}</p>
@@ -734,8 +734,7 @@ export default function Home() {
 
           <Reveal delay={0.15}>
             {formSent ? (
-              <div style={{
-                background: '#fff', border: '1px solid var(--line)', borderRadius: 16,
+              <div className="glass" style={{
                 padding: '3rem 2rem', textAlign: 'center',
               }}>
                 <div style={{
@@ -751,8 +750,7 @@ export default function Home() {
                 <p style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>we&apos;ll be in touch within one business day.</p>
               </div>
             ) : (
-              <form onSubmit={e => { e.preventDefault(); setFormSent(true) }} style={{
-                background: '#fff', border: '1px solid var(--line)', borderRadius: 16,
+              <form onSubmit={e => { e.preventDefault(); setFormSent(true) }} className="glass" style={{
                 padding: '2rem',
               }}>
                 <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
