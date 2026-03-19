@@ -46,7 +46,7 @@ export function Footer() {
         <div style={{
           maxWidth: 1200, margin: '0 auto',
           display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-          minHeight: '22rem', position: 'relative',
+          minHeight: '26rem', position: 'relative',
           padding: '3rem 2rem',
         }}>
           {/* Top content */}
@@ -116,7 +116,7 @@ export function Footer() {
         {/* Large background text */}
         <div style={{
           position: 'absolute', left: '50%', transform: 'translateX(-50%)',
-          bottom: 20, fontWeight: 900, letterSpacing: '-0.04em',
+          bottom: -8, fontWeight: 900, letterSpacing: '-0.04em',
           fontSize: 'clamp(1.5rem, 5vw, 3.5rem)',
           lineHeight: 1, pointerEvents: 'none', userSelect: 'none',
           textAlign: 'center', maxWidth: '95vw',
