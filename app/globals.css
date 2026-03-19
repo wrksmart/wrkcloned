@@ -275,6 +275,12 @@ label.form-label {
   transition: width 0.3s, background-color 0.3s;
 }
 
+/* ────────────── BLINKING CURSOR ────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 /* ────────────── GRADIENT BG SECTIONS ────────────── */
 .gradient-bg {
   background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));

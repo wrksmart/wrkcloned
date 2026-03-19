@@ -153,7 +153,7 @@ function RotatingText() {
   }, [])
 
   return (
-    <span style={{ display: 'inline-block', position: 'relative', height: '1.2em', verticalAlign: 'bottom' }}>
+    <span style={{ display: 'inline-flex', alignItems: 'center', position: 'relative', height: '1.2em', verticalAlign: 'bottom' }}>
       <AnimatePresence mode="wait">
         <motion.span
           key={index}
@@ -175,6 +175,18 @@ function RotatingText() {
           {ROTATING_WORDS[index]}
         </motion.span>
       </AnimatePresence>
+      {/* Blinking cursor */}
+      <span style={{
+        display: 'inline-block',
+        width: 3,
+        height: '0.85em',
+        background: 'linear-gradient(180deg, #76d669, #DDEA7F)',
+        borderRadius: 2,
+        marginLeft: 4,
+        animation: 'blink 1s step-end infinite',
+        position: 'relative',
+        top: '0.05em',
+      }} />
     </span>
   )
 }
