@@ -8,8 +8,9 @@ import { motion, AnimatePresence, useInView, useScroll, useSpring } from 'framer
 // CONTENT DATA (exact wrksourcing.com copy)
 // ─────────────────────────────────────────────
 const NAV = [
-  { label: 'Services & Pricing', href: '#services' },
-  { label: 'How It Works', href: '#how-it-works' },
+  { label: 'Services', href: '#services' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'How It Wrks', href: '#how-it-works' },
   { label: 'About Us', href: '#about' },
   { label: 'Contact Us', href: '#contact' },
 ]
@@ -105,9 +106,9 @@ const TESTIMONIALS = [
 ]
 
 const STEPS = [
-  { n: '01', title: 'Take a Free Discovery Call', desc: "Let's find out what you need. We want to get to know you as a person, as well as your business needs. We dig deep." },
-  { n: '02', title: 'We Match You', desc: "After we get to know you and gain a clear picture of what your business needs, our approach is personalized based on your business' goals and current challenges." },
-  { n: '03', title: 'New Wrkflow Begins!', desc: "Now that we've established the groundwrk, you can spend time on what matters most — running your business. Our team will assist you with onboarding and ongoing support." },
+  { n: '01', title: 'Take a Free Discovery Call', desc: "Let's find out what you need. We want to get to know you as a person, as well as your business needs. We dig deep and the more information you share, the better." },
+  { n: '02', title: 'We Match You', desc: "After we get to know you and gain a clear picture of what your business needs, our approach is personalized based on your business' goals and current challenges. We start with the foundation and wrk our way up depending on the services you need." },
+  { n: '03', title: 'New Wrkflow Begins!', desc: "Now that we've established the groundwrk, you can spend time on what matters most — running your business. Our team will assist you with onboarding and ongoing support throughout your entire journey here at wrksourcing." },
 ]
 
 // ─────────────────────────────────────────────
@@ -424,12 +425,14 @@ export default function Home() {
               <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>
                 why wrksourcing?
               </p>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
-                why wrksourcing?
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 16 }}>
+                wrksourcing is driven by our passion for helping businesses grow and succeed.
               </h2>
-              <p style={{ maxWidth: 600, margin: '14px auto 0', color: 'var(--muted)', fontSize: '1.02rem', lineHeight: 1.7 }}>
-                partner with us for streamlined processes, access to specialized expertise, and the
-                implementation of smarter workflows that drive results.
+              <p style={{ maxWidth: 680, margin: '0 auto', color: 'var(--subtext)', fontSize: '1.02rem', lineHeight: 1.75 }}>
+                we wrk with companies of all sizes to streamline processes, access specialized expertise,
+                and implement smarter ways of working — bringing your brand to new heights while giving
+                you the freedom to prosper as a business owner. with wrksourcing, you don&apos;t just get a
+                service — you gain a partner invested in your success.
               </p>
             </div>
           </Reveal>
@@ -453,12 +456,12 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ SERVICES ═══════════════ */}
-      <section id="services" style={{ padding: '6rem 2rem', backgroundColor: 'var(--seasalt)' }}>
+      <section id="services" style={{ padding: '6rem 2rem', backgroundColor: 'var(--forest)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
-              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>services</p>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>what we do best</h2>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mindaro)', textTransform: 'uppercase', marginBottom: 12 }}>services</p>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--white)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>what we do best</h2>
             </div>
           </Reveal>
 
@@ -493,9 +496,12 @@ export default function Home() {
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 40 }}>
-              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>industries</p>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 8 }}>from emerging startups to industry giants</h2>
-              <p style={{ color: 'var(--muted)', fontSize: '1.02rem' }}>we fuel growth across diverse sectors</p>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>industries we improve</p>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 12 }}>from emerging startups to industry giants</h2>
+              <p style={{ maxWidth: 640, margin: '0 auto', color: 'var(--subtext)', fontSize: '1rem', lineHeight: 1.7 }}>
+                we fuel growth across diverse sectors. our experts bridge the gap between your ambitions and
+                your customers&apos; needs, positioning you to lead, not follow.
+              </p>
             </div>
           </Reveal>
           <div className="industries-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 14 }}>
@@ -590,12 +596,12 @@ export default function Home() {
       </section>
 
       {/* ═══════════════ HOW IT WORKS ═══════════════ */}
-      <section id="how-it-works" style={{ padding: '6rem 2rem', backgroundColor: '#fff' }}>
+      <section id="how-it-works" style={{ padding: '6rem 2rem', backgroundColor: 'var(--forest)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
-              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>how it works</p>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>three steps to get started</h2>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mindaro)', textTransform: 'uppercase', marginBottom: 12 }}>how it wrks</p>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--white)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>three steps to get started</h2>
             </div>
           </Reveal>
           <div className="steps-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, position: 'relative' }}>
@@ -617,7 +623,7 @@ export default function Home() {
           </div>
           <Reveal delay={0.3}>
             <div style={{ textAlign: 'center', marginTop: 40 }}>
-              <a className="btn-gradient" href="#contact">WRK SMARTER TODAY</a>
+              <a className="btn-gradient" href="#contact" style={{ boxShadow: '0 4px 20px rgba(118,214,105,0.3)' }}>WRK SMARTER TODAY</a>
             </div>
           </Reveal>
         </div>
