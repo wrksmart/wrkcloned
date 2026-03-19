@@ -19,6 +19,7 @@ const CLIENT_LOGOS = [
   'BluRoot', 'Hive Growth', 'Pilot Solutions', 'Consilium Wealth',
   'National Wireless', 'Practice Perfect', 'Open Doors Mortgage',
   'MSP Saber', 'FP Fitness', 'MPG Law', 'Green Link', 'Sandler',
+  'BeSpoke', 'Starts w/ Me', 'Liddiard Law', 'Goldfarm',
 ]
 
 const ROTATING_WORDS = [
@@ -31,8 +32,8 @@ const ROTATING_WORDS = [
 
 const STATS = [
   { value: 200, suffix: 'K+', label: 'hours delivered' },
-  { value: 50,  suffix: '+',  label: 'active clients' },
-  { value: 40,  suffix: '+',  label: 'wrk Specialists' },
+  { value: 85,  suffix: '+',  label: 'active clients' },
+  { value: 50,  suffix: '+',  label: 'wrk Specialists' },
   { value: 95,  suffix: '%',  label: 'client retention' },
 ]
 
@@ -391,24 +392,28 @@ export default function Home() {
 
       {/* ═══════════════ LOGO STRIP ═══════════════ */}
       <section style={{
-        backgroundColor: 'var(--seasalt)', padding: '1.75rem 0',
-        borderBottom: '1px solid var(--line)', overflow: 'hidden',
+        backgroundColor: '#fff', padding: '2.5rem 0',
+        borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)',
+        overflow: 'hidden',
       }}>
         <p style={{
           textAlign: 'center', fontSize: '0.72rem', fontWeight: 700,
-          letterSpacing: '0.12em', color: 'var(--subtle)', textTransform: 'uppercase', marginBottom: 16,
+          letterSpacing: '0.12em', color: 'var(--subtle)', textTransform: 'uppercase', marginBottom: 20,
         }}>
           trusted by the best
         </p>
         <div style={{ overflow: 'hidden', position: 'relative' }}>
-          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 80, background: 'linear-gradient(to right, var(--seasalt), transparent)', zIndex: 2, pointerEvents: 'none' }} />
-          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 80, background: 'linear-gradient(to left, var(--seasalt), transparent)', zIndex: 2, pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 100, background: 'linear-gradient(to right, #fff, transparent)', zIndex: 2, pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 100, background: 'linear-gradient(to left, #fff, transparent)', zIndex: 2, pointerEvents: 'none' }} />
           <div className="logo-strip">
             {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((name, i) => (
               <div key={i} style={{
-                flexShrink: 0, padding: '0.4rem 1.5rem', marginRight: 20,
-                fontSize: '0.85rem', fontWeight: 600, color: 'var(--subtle)',
-                letterSpacing: '0.02em', whiteSpace: 'nowrap',
+                flexShrink: 0, padding: '0.55rem 1.6rem', marginRight: 14,
+                fontSize: '0.82rem', fontWeight: 700, color: 'var(--eerie)',
+                letterSpacing: '0.03em', whiteSpace: 'nowrap',
+                border: '1px solid var(--line)', borderRadius: 8,
+                background: 'var(--seasalt)',
+                opacity: 0.6,
               }}>
                 {name}
               </div>
