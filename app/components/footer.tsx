@@ -126,24 +126,6 @@ export function Footer() {
           wrksourcing
         </div>
 
-        {/* Center logo badge */}
-        <div style={{
-          position: 'absolute', bottom: 100, left: '50%', transform: 'translateX(-50%)',
-          zIndex: 10, backdropFilter: 'blur(8px)',
-          borderRadius: 24, border: '2px solid var(--line)',
-          background: 'rgba(247,248,249,0.6)', padding: 12,
-          transition: 'border-color 0.3s',
-          boxShadow: '0 0 20px rgba(0,0,0,0.06)',
-        }}>
-          <div style={{
-            width: 72, height: 72, borderRadius: 16,
-            background: 'linear-gradient(135deg, var(--mantis-a), var(--mantis-b))',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 4px 16px rgba(118,214,105,0.3)',
-          }}>
-            <Image src="/images/logo-icon.png" alt="" width={48} height={48} style={{ borderRadius: 8 }} />
-          </div>
-        </div>
 
         {/* Divider line */}
         <div style={{
