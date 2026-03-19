@@ -117,7 +117,7 @@ export function Footer() {
         <div style={{
           position: 'absolute', left: '50%', transform: 'translateX(-50%)',
           bottom: 160, fontWeight: 900, letterSpacing: '-0.04em',
-          fontSize: 'clamp(3rem, 12vw, 10rem)',
+          fontSize: 'clamp(2rem, 8vw, 6.5rem)',
           lineHeight: 1, pointerEvents: 'none', userSelect: 'none',
           textAlign: 'center', maxWidth: '95vw',
           background: 'linear-gradient(180deg, rgba(37,53,48,0.15) 0%, rgba(37,53,48,0.06) 50%, transparent 100%)',
