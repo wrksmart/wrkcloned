@@ -572,8 +572,8 @@ export default function Home() {
                         {s.icon}
                       </svg>
                     </div>
-                    <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--eerie)', marginBottom: 12 }}>{s.title}</h3>
-                    <p style={{ fontSize: '0.88rem', color: 'var(--muted)', lineHeight: 1.65 }}>{s.desc}</p>
+                    <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#fff', marginBottom: 12 }}>{s.title}</h3>
+                    <p style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.65 }}>{s.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -716,8 +716,8 @@ export default function Home() {
               <Reveal key={s.n} delay={i * 0.15}>
                 <div className="glass-dark" style={{ padding: '2rem 1.75rem', position: 'relative', zIndex: 1 }}>
                   <div className="step-number">{s.n}</div>
-                  <h3 style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--eerie)', marginBottom: 10, lineHeight: 1.3 }}>{s.title}</h3>
-                  <p style={{ color: 'var(--muted)', fontSize: '0.88rem', lineHeight: 1.7 }}>{s.desc}</p>
+                  <h3 style={{ fontWeight: 700, fontSize: '1.05rem', color: '#fff', marginBottom: 10, lineHeight: 1.3 }}>{s.title}</h3>
+                  <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.88rem', lineHeight: 1.7 }}>{s.desc}</p>
                 </div>
               </Reveal>
             ))}
