@@ -79,12 +79,30 @@ const SERVICES = [
 ]
 
 const INDUSTRIES = [
-  { title: 'Professional Services', icon: '⚖️' },
-  { title: 'Entrepreneurs', icon: '🚀' },
-  { title: 'Start-ups', icon: '💡' },
-  { title: 'Creative Services', icon: '🎨' },
-  { title: 'E-commerce', icon: '🛒' },
-  { title: 'Tech, IT, and Software', icon: '💻' },
+  {
+    title: 'Professional Services',
+    icon: <><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path d="M9 12l2 2 4-4"/></>,
+  },
+  {
+    title: 'Entrepreneurs',
+    icon: <><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></>,
+  },
+  {
+    title: 'Start-ups',
+    icon: <><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></>,
+  },
+  {
+    title: 'Creative Services',
+    icon: <><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></>,
+  },
+  {
+    title: 'E-commerce',
+    icon: <><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></>,
+  },
+  {
+    title: 'Tech, IT, and Software',
+    icon: <><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8"/><path d="M12 17v4"/></>,
+  },
 ]
 
 const TESTIMONIALS = [
@@ -414,7 +432,25 @@ export default function Home() {
           <div className="industries-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 14 }}>
             {INDUSTRIES.map(ind => (
               <div key={ind.title} className="industry-card">
-                <div style={{ fontSize: '2rem', marginBottom: 10 }}>{ind.icon}</div>
+                <div style={{
+                  width: 56, height: 56, borderRadius: 14,
+                  background: 'linear-gradient(135deg, rgba(118,214,105,0.1), rgba(221,234,127,0.1))',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  margin: '0 auto 14px',
+                }}>
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+                    strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <defs>
+                      <linearGradient id={`grad-${ind.title.replace(/\s/g, '')}`} x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stopColor="#76d669" />
+                        <stop offset="100%" stopColor="#DDEA7F" />
+                      </linearGradient>
+                    </defs>
+                    <g stroke={`url(#grad-${ind.title.replace(/\s/g, '')})`}>
+                      {ind.icon}
+                    </g>
+                  </svg>
+                </div>
                 <p style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--eerie)', lineHeight: 1.35 }}>
                   {ind.title}
                 </p>
