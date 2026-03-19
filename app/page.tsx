@@ -177,7 +177,7 @@ function RotatingText() {
           exit={{ opacity: 0, y: -40, filter: 'blur(10px)' }}
           transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{
-            fontWeight: 900,
+            fontWeight: 600,
             background: 'linear-gradient(135deg, #76d669, #DDEA7F)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
