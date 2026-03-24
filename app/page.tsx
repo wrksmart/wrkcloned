@@ -42,7 +42,7 @@ const STATS = [
 
 // Singular pillar icons (clean, minimal, white stroke)
 const PillarIcon = ({ d }: { d: string }) => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#76d669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mantis-a)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d={d} />
   </svg>
 )
@@ -119,7 +119,7 @@ const TESTIMONIALS = [
 const STEPS = [
   { n: '01', title: 'Take a Free Discovery Call', desc: "Let's find out what you need. We want to get to know you as a person, as well as your business needs. We dig deep and the more information you share, the better." },
   { n: '02', title: 'We Match You', desc: "After we get to know you and gain a clear picture of what your business needs, our approach is personalized based on your business' goals and current challenges. We start with the foundation and wrk our way up depending on the services you need." },
-  { n: '03', title: 'new wrkflow begins!', desc: "Now that we've established the groundwrk, you can spend time on what matters most — running your business. Our team will assist you with onboarding and ongoing support throughout your entire journey here at wrksourcing." },
+  { n: '03', title: 'Your New Wrkflow Begins', desc: "Now that we've established the groundwrk, you can spend time on what matters most — running your business. Our team will assist you with onboarding and ongoing support throughout your entire journey here at wrksourcing." },
 ]
 
 // ─────────────────────────────────────────────
@@ -188,7 +188,7 @@ function RotatingText() {
           transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{
             fontWeight: 600,
-            background: 'linear-gradient(135deg, #76d669, #DDEA7F)',
+            background: 'linear-gradient(135deg, var(--mantis-a), var(--mantis-b))',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             display: 'inline-block',
@@ -202,7 +202,7 @@ function RotatingText() {
       </AnimatePresence>
       <span style={{
         display: 'inline-block', width: 3, height: '0.85em',
-        background: 'linear-gradient(180deg, #76d669, #DDEA7F)',
+        background: 'linear-gradient(180deg, var(--mantis-a), var(--mantis-b))',
         borderRadius: 2, marginLeft: 4,
         animation: 'blink 1s step-end infinite',
         position: 'relative', top: '0.05em',
@@ -272,8 +272,8 @@ function GoogleBadge() {
 export default function Home() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [tIdx, setTIdx] = useState(0)
   const [formSent, setFormSent] = useState(false)
+  const heroRef = useRef<HTMLElement>(null)
 
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
@@ -284,25 +284,50 @@ export default function Home() {
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
+  // Cursor-responsive gradient mesh
   useEffect(() => {
-    const id = setInterval(() => setTIdx(i => (i + 1) % TESTIMONIALS.length), 5500)
-    return () => clearInterval(id)
+    const hero = heroRef.current
+    if (!hero) return
+    let rafId: number
+    const onMove = (e: MouseEvent) => {
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => {
+        const rect = hero.getBoundingClientRect()
+        const x = ((e.clientX - rect.left) / rect.width) * 100
+        const y = ((e.clientY - rect.top) / rect.height) * 100
+        hero.style.setProperty('--mouse-x', `${x}%`)
+        hero.style.setProperty('--mouse-y', `${y}%`)
+      })
+    }
+    hero.addEventListener('mousemove', onMove, { passive: true })
+    return () => { hero.removeEventListener('mousemove', onMove); cancelAnimationFrame(rafId) }
   }, [])
 
   return (
     <div style={{ fontFamily: "'Avenir', 'Plus Jakarta Sans', sans-serif" }}>
 
+      {/* SKIP NAV (a11y) */}
+      <a href="#main" style={{
+        position: 'absolute', left: '-9999px', top: 'auto',
+        width: '1px', height: '1px', overflow: 'hidden',
+        zIndex: 10000, padding: '1rem', background: 'var(--forest)', color: 'var(--white)',
+        fontSize: '0.9rem', fontWeight: 700, textDecoration: 'none',
+      }} onFocus={e => { e.currentTarget.style.left = '1rem'; e.currentTarget.style.top = '1rem'; e.currentTarget.style.width = 'auto'; e.currentTarget.style.height = 'auto' }}
+         onBlur={e => { e.currentTarget.style.left = '-9999px'; e.currentTarget.style.width = '1px'; e.currentTarget.style.height = '1px' }}>
+        Skip to content
+      </a>
+
       {/* SCROLL PROGRESS BAR */}
       <motion.div style={{
         scaleX, position: 'fixed', top: 0, left: 0, right: 0,
-        height: 3, background: 'linear-gradient(90deg, #76d669, #DDEA7F)',
+        height: 3, background: 'linear-gradient(90deg, var(--mantis-a), var(--mantis-b))',
         transformOrigin: 'left', zIndex: 9999,
       }} />
 
       {/* ═══════════════ NAV ═══════════════ */}
-      <nav style={{
+      <nav aria-label="Main navigation" style={{
         position: 'fixed', top: 3, left: 0, right: 0, zIndex: 100,
-        transition: 'all 0.3s',
+        transition: 'background-color 0.3s, backdrop-filter 0.3s, box-shadow 0.3s',
         backgroundColor: scrolled ? 'rgba(255,255,255,0.97)' : 'transparent',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
         boxShadow: scrolled ? '0 1px 0 rgba(0,0,0,0.06)' : 'none',
@@ -340,12 +365,12 @@ export default function Home() {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25 }}
-              style={{ overflow: 'hidden', backgroundColor: '#fff', borderTop: '1px solid #eee' }}
+              style={{ overflow: 'hidden', backgroundColor: 'var(--white)', borderTop: '1px solid var(--line)' }}
             >
               <div style={{ padding: '1rem 2rem 1.5rem' }}>
                 {NAV.map(l => (
                   <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}
-                    style={{ display: 'block', color: 'var(--eerie)', textDecoration: 'none', padding: '0.8rem 0', fontSize: '1rem', fontWeight: 500, borderBottom: '1px solid #f0f0f0' }}>
+                    style={{ display: 'block', color: 'var(--eerie)', textDecoration: 'none', padding: '0.8rem 0', fontSize: '1rem', fontWeight: 500, borderBottom: '1px solid var(--line)' }}>
                     {l.label}
                   </a>
                 ))}
@@ -359,13 +384,15 @@ export default function Home() {
         </AnimatePresence>
       </nav>
 
+      <main id="main">
       {/* ═══════════════ HERO ═══════════════ */}
-      <section className="glass-hero-bg" style={{
+      <section ref={heroRef} className="glass-hero-bg" style={{
         minHeight: '100vh',
         display: 'flex', alignItems: 'center',
         padding: '120px 2rem 80px',
         position: 'relative', overflow: 'hidden',
-      }}>
+        '--mouse-x': '60%', '--mouse-y': '45%',
+      } as React.CSSProperties}>
         {/* Interactive pixel trail background */}
         <PixelTrail pixelSize={70} fadeDuration={0} delay={1500} color="rgba(118,214,105,0.15)" />
 
@@ -375,6 +402,7 @@ export default function Home() {
         }}>
           <div style={{ maxWidth: 680, pointerEvents: 'auto' }}>
             <motion.h1
+              className="hero-parallax"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
@@ -437,15 +465,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════ STATS BAR ═══════════════ */}
-      <section style={{ backgroundColor: 'var(--forest)', padding: '3rem 2rem' }}>
-        <div className="stats-grid" style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32, textAlign: 'center' }}>
+      {/* ═══════════════ STATS STRIP ═══════════════ */}
+      <section style={{ backgroundColor: 'var(--seasalt)', padding: '2rem 2rem', borderBottom: '1px solid var(--line)' }}>
+        <div className="stats-grid" style={{
+          maxWidth: 1200, margin: '0 auto',
+          display: 'flex', justifyContent: 'center', flexWrap: 'wrap',
+          gap: '0.5rem 2.5rem',
+        }}>
           {STATS.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.08}>
-              <div style={{ fontSize: 'clamp(2rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--mindaro)', letterSpacing: '-0.03em', lineHeight: 1 }}>
-                <Counter target={s.value} suffix={s.suffix} />
+            <Reveal key={s.label} delay={i * 0.06}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+                <span style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em' }}>
+                  <Counter target={s.value} suffix={s.suffix} />
+                </span>
+                <span style={{ fontSize: '0.82rem', color: 'var(--muted)', fontWeight: 500 }}>{s.label}</span>
               </div>
-              <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.5)', marginTop: 6, fontWeight: 500 }}>{s.label}</div>
             </Reveal>
           ))}
         </div>
@@ -488,10 +522,10 @@ export default function Home() {
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
-              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>
+              <p className="scroll-reveal" style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>
                 why wrksourcing?
               </p>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 16 }}>
+              <h2 className="scroll-reveal" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 16 }}>
                 wrksourcing is driven by our passion for helping businesses grow and succeed.
               </h2>
               <p style={{ maxWidth: 680, margin: '0 auto', color: 'var(--subtext)', fontSize: '1.02rem', lineHeight: 1.75 }}>
@@ -535,140 +569,158 @@ export default function Home() {
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
-              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mindaro)', textTransform: 'uppercase', marginBottom: 12 }}>services</p>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--white)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>what we do best</h2>
+              <p className="scroll-reveal" style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mindaro)', textTransform: 'uppercase', marginBottom: 12 }}>services</p>
+              <h2 className="scroll-reveal" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--white)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>what we do best</h2>
             </div>
           </Reveal>
 
-          <div className="services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
-            {SERVICES.map((s, i) => (
-              <Reveal key={s.title} delay={i * 0.1}>
-                <div className="glass-dark" style={{ overflow: 'hidden', height: '100%' }}>
-                  <div className="service-card-bar" />
-                  <div style={{ padding: '1.75rem 1.5rem' }}>
-                    <div style={{
-                      width: 44, height: 44, borderRadius: 10,
-                      backgroundColor: '#fff',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16,
-                    }}>
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--mantis-a)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d={s.iconPath} />
-                      </svg>
-                    </div>
-                    <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#fff', marginBottom: 12 }}>{s.title}</h3>
-                    <p style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.65 }}>{s.desc}</p>
+          {/* Asymmetric layout: featured card left, 3 stacked right */}
+          <div className="services-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+            {/* Featured: wrkflow Solutions */}
+            <Reveal delay={0.05}>
+              <div className="glass-dark" style={{ overflow: 'hidden', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                <div className="service-card-bar" />
+                <div style={{ padding: '2.5rem 2rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                  <div style={{
+                    width: 52, height: 52, borderRadius: 12,
+                    background: 'linear-gradient(135deg, var(--mantis-a), var(--mantis-b))',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20,
+                  }}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--white)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d={SERVICES[0].iconPath} />
+                    </svg>
                   </div>
+                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--white)', marginBottom: 14, letterSpacing: '-0.01em' }}>{SERVICES[0].title}</h3>
+                  <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.7 }}>{SERVICES[0].desc}</p>
                 </div>
-              </Reveal>
-            ))}
+              </div>
+            </Reveal>
+
+            {/* 3 compact cards stacked */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+              {SERVICES.slice(1).map((s, i) => (
+                <Reveal key={s.title} delay={0.1 + i * 0.08}>
+                  <div className="glass-dark" style={{ overflow: 'hidden' }}>
+                    <div className="service-card-bar" />
+                    <div style={{ padding: '1.4rem 1.5rem', display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+                      <div style={{
+                        width: 40, height: 40, borderRadius: 10, flexShrink: 0,
+                        backgroundColor: 'rgba(255,255,255,0.1)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      }}>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mantis-a)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d={s.iconPath} />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--white)', marginBottom: 6 }}>{s.title}</h3>
+                        <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.6 }}>{s.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ═══════════════ INDUSTRIES ═══════════════ */}
-      <section style={{ padding: '6rem 2rem', backgroundColor: 'var(--forest)' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+      <section style={{ padding: '5rem 2rem', backgroundColor: 'var(--seasalt)' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
           <Reveal>
-            <div style={{ textAlign: 'center', marginBottom: 40 }}>
-              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mindaro)', textTransform: 'uppercase', marginBottom: 12 }}>industries we improve</p>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: 12 }}>from emerging startups to industry giants</h2>
-              <p style={{ maxWidth: 640, margin: '0 auto', color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: 1.7 }}>
-                we fuel growth across diverse sectors. our experts bridge the gap between your ambitions and
-                your customers&apos; needs, positioning you to lead, not follow.
-              </p>
+            <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>industries we serve</p>
+            <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.2, marginBottom: 16 }}>
+              from emerging startups to industry leaders
+            </h2>
+            <p style={{ maxWidth: 580, margin: '0 auto', color: 'var(--subtext)', fontSize: '1rem', lineHeight: 1.7, marginBottom: 32 }}>
+              we fuel growth across diverse sectors, bridging the gap between your ambitions and
+              your customers&apos; needs.
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 10 }}>
+              {INDUSTRIES.map((ind) => (
+                <div key={ind.title} className="industry-pill scroll-reveal-card" style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  padding: '0.65rem 1.25rem', borderRadius: 100,
+                  border: '1px solid var(--line)',
+                  backgroundColor: 'var(--white)',
+                  fontSize: '0.88rem', fontWeight: 600, color: 'var(--eerie)',
+                  cursor: 'default',
+                }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--mantis-a)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d={ind.iconPath} />
+                  </svg>
+                  {ind.title}
+                </div>
+              ))}
             </div>
           </Reveal>
-          <div className="industries-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 14 }}>
-            {INDUSTRIES.map((ind, i) => (
-              <Reveal key={ind.title} delay={i * 0.06}>
-                <div className="industry-card">
-                  <div style={{
-                    width: 48, height: 48, borderRadius: 12,
-                    background: 'rgba(118,214,105,0.1)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px',
-                  }}>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--mantis-a)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                      <path d={ind.iconPath} />
-                    </svg>
-                  </div>
-                  <p style={{ fontWeight: 700, fontSize: '0.85rem', color: '#fff', lineHeight: 1.35 }}>{ind.title}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 
       {/* ═══════════════ TESTIMONIALS ═══════════════ */}
-      <section style={{ padding: '6rem 2rem', backgroundColor: 'var(--seasalt)' }}>
+      <section style={{ padding: '6rem 2rem', backgroundColor: 'var(--seasalt)', borderTop: '1px solid var(--line)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 40 }}>
-              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>testimonials</p>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>real results corner</h2>
+              <p className="scroll-reveal" style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mantis-a)', textTransform: 'uppercase', marginBottom: 12 }}>testimonials</p>
+              <h2 className="scroll-reveal" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--eerie)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>what our clients say</h2>
             </div>
           </Reveal>
 
-          {/* Featured testimonial with AnimatePresence */}
-          <div style={{ maxWidth: 680, margin: '0 auto 32px', textAlign: 'center', minHeight: 180 }}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={tIdx}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.4 }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}><Stars /></div>
-                <blockquote style={{
-                  fontSize: 'clamp(1rem, 2vw, 1.12rem)', color: 'var(--subtext)',
-                  lineHeight: 1.72, margin: '0 0 1.25rem', fontStyle: 'italic',
-                }}>
-                  &ldquo;{TESTIMONIALS[tIdx].text}&rdquo;
-                </blockquote>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
-                  <Avatar name={TESTIMONIALS[tIdx].name} />
-                  <div>
-                    <p style={{ fontWeight: 700, color: 'var(--eerie)', fontSize: '0.9rem', textAlign: 'left' }}>{TESTIMONIALS[tIdx].name}</p>
-                    <p style={{ color: 'var(--muted)', fontSize: '0.8rem', textAlign: 'left' }}>{TESTIMONIALS[tIdx].company}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 6, marginBottom: 40 }}>
-            {TESTIMONIALS.map((_, i) => (
-              <button key={i} className="dot-btn" onClick={() => setTIdx(i)}
-                style={{ width: tIdx === i ? 24 : 8, backgroundColor: tIdx === i ? 'var(--mantis-a)' : '#ddd' }}
-                aria-label={`Testimonial ${i + 1}`} />
-            ))}
-          </div>
-
-          <div className="testimonials-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
-            {TESTIMONIALS.map((t, i) => (
-              <Reveal key={i} delay={i * 0.06}>
-                <div onClick={() => setTIdx(i)} className="glass"
-                  style={{
-                    padding: '1.5rem', cursor: 'pointer', height: '100%',
-                    borderColor: tIdx === i ? 'rgba(118,214,105,0.4)' : 'rgba(255,255,255,0.5)',
-                    background: tIdx === i ? 'rgba(242,246,216,0.6)' : 'rgba(255,255,255,0.55)',
-                  }}>
+          <div className="testimonials-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+            {TESTIMONIALS.slice(0, 3).map((t, i) => (
+              <Reveal key={i} delay={i * 0.08}>
+                <div style={{
+                  padding: '2rem', height: '100%',
+                  backgroundColor: 'var(--white)',
+                  border: '1px solid var(--line)',
+                  borderRadius: 16,
+                  display: 'flex', flexDirection: 'column',
+                  transition: 'transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.25s, box-shadow 0.25s',
+                  cursor: 'default',
+                }}
+                onMouseEnter={e => { const el = e.currentTarget; el.style.transform = 'translateY(-3px)'; el.style.borderColor = 'rgba(118,214,105,0.3)'; el.style.boxShadow = '0 8px 24px rgba(0,0,0,0.06)' }}
+                onMouseLeave={e => { const el = e.currentTarget; el.style.transform = 'translateY(0)'; el.style.borderColor = 'var(--line)'; el.style.boxShadow = 'none' }}
+                >
                   <Stars />
-                  <p style={{ color: 'var(--subtext)', fontSize: '0.85rem', lineHeight: 1.6, margin: '10px 0 14px', fontStyle: 'italic' }}>
-                    &ldquo;{t.text.length > 140 ? t.text.slice(0, 140) + '…' : t.text}&rdquo;
-                  </p>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <blockquote style={{
+                    color: 'var(--subtext)', fontSize: '0.92rem', lineHeight: 1.7,
+                    margin: '14px 0', fontStyle: 'italic', flex: 1,
+                  }}>
+                    &ldquo;{t.text}&rdquo;
+                  </blockquote>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 'auto' }}>
                     <Avatar name={t.name} />
                     <div>
-                      <p style={{ fontWeight: 700, color: 'var(--eerie)', fontSize: '0.82rem' }}>{t.name}</p>
-                      <p style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>{t.company}</p>
+                      <p style={{ fontWeight: 700, color: 'var(--eerie)', fontSize: '0.88rem' }}>{t.name}</p>
+                      <p style={{ color: 'var(--muted)', fontSize: '0.78rem' }}>{t.company}</p>
                     </div>
                   </div>
                 </div>
               </Reveal>
             ))}
           </div>
+
+          <Reveal delay={0.3}>
+            <div style={{ textAlign: 'center', marginTop: 32 }}>
+              <a href="https://www.google.com/search?q=wrksourcing+reviews" target="_blank" rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  fontSize: '0.88rem', fontWeight: 600, color: 'var(--muted)',
+                  transition: 'color 0.2s',
+                }}
+              >
+                <GoogleBadge />
+                <span style={{ marginLeft: 4 }}>read all reviews</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -677,8 +729,8 @@ export default function Home() {
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
-              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mindaro)', textTransform: 'uppercase', marginBottom: 12 }}>how it wrks</p>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--white)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>three steps to get started</h2>
+              <p className="scroll-reveal" style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mindaro)', textTransform: 'uppercase', marginBottom: 12 }}>how it wrks</p>
+              <h2 className="scroll-reveal" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900, color: 'var(--white)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>three steps to get started</h2>
             </div>
           </Reveal>
           <div className="steps-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, position: 'relative' }}>
@@ -711,62 +763,76 @@ export default function Home() {
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }} className="hero-grid">
           <Reveal>
             <div>
-              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mindaro)', textTransform: 'uppercase', marginBottom: 12 }}>contact us</p>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', color: 'var(--mindaro)', textTransform: 'uppercase', marginBottom: 12 }}>get started</p>
               <h2 style={{
                 fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 900,
-                color: '#fff', letterSpacing: '-0.025em', lineHeight: 1.12, marginBottom: 16,
+                color: 'var(--white)', letterSpacing: '-0.025em', lineHeight: 1.12, marginBottom: 16,
               }}>
-                let&apos;s make your brand unforgettable, shall we?
+                ready to fix the bottleneck?
               </h2>
               <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', lineHeight: 1.72, marginBottom: 24 }}>
-                find out what partnering with wrksourcing can do for you. schedule a chat
-                now for a free assessment to identify your business support needs.
+                book a free 30-minute assessment. we&apos;ll audit your workflows,
+                identify what&apos;s slowing you down, and map out a plan to fix it.
               </p>
-              <GoogleBadge />
             </div>
           </Reveal>
 
           <Reveal delay={0.15}>
             {formSent ? (
-              <div className="glass-dark" style={{
-                padding: '3rem 2rem', textAlign: 'center',
-              }}>
+              <motion.div
+                className="glass-dark"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+                style={{ padding: '3rem 2rem', textAlign: 'center' }}
+              >
                 <div style={{
                   width: 56, height: 56, borderRadius: '50%', margin: '0 auto 16px',
                   background: 'linear-gradient(135deg, var(--mantis-a), var(--mantis-b))',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  animation: 'checkmark-circle-fill 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards',
                 }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 6L9 17l-5-5"/>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--white)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 6L9 17l-5-5" style={{ strokeDasharray: 24, animation: 'checkmark-draw 0.4s 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards', strokeDashoffset: 24 }} />
                   </svg>
                 </div>
-                <p style={{ fontWeight: 700, color: '#fff', fontSize: '1.1rem', marginBottom: 6 }}>message received.</p>
-                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>we&apos;ll be in touch within one business day.</p>
-              </div>
+                <motion.p
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.3 }}
+                  style={{ fontWeight: 700, color: 'var(--white)', fontSize: '1.1rem', marginBottom: 6 }}
+                >message received.</motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.65, duration: 0.3 }}
+                  style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}
+                >we&apos;ll be in touch within one business day.</motion.p>
+              </motion.div>
             ) : (
               <form onSubmit={e => { e.preventDefault(); setFormSent(true) }} className="glass-dark" style={{
                 padding: '2rem',
               }}>
                 <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
                   <div>
-                    <label className="form-label">First Name</label>
-                    <input type="text" placeholder="Tyler" required className="form-input" />
+                    <label htmlFor="contact-name" className="form-label" style={{ color: 'rgba(255,255,255,0.5)' }}>Your name</label>
+                    <input id="contact-name" type="text" placeholder="Jane Smith" required className="form-input" />
                   </div>
                   <div>
-                    <label className="form-label">Company</label>
-                    <input type="text" placeholder="Acme Inc." required className="form-input" />
+                    <label htmlFor="contact-company" className="form-label" style={{ color: 'rgba(255,255,255,0.5)' }}>Company</label>
+                    <input id="contact-company" type="text" placeholder="Acme Inc." required className="form-input" />
                   </div>
                 </div>
                 <div style={{ marginBottom: 12 }}>
-                  <label className="form-label">Work Email</label>
-                  <input type="email" placeholder="tyler@yourcompany.com" required className="form-input" />
+                  <label htmlFor="contact-email" className="form-label" style={{ color: 'rgba(255,255,255,0.5)' }}>Work email</label>
+                  <input id="contact-email" type="email" placeholder="jane@yourcompany.com" required className="form-input" />
                 </div>
                 <div style={{ marginBottom: 12 }}>
-                  <label className="form-label">What do you need help with?</label>
-                  <textarea rows={3} placeholder="We need help with..." required className="form-input" style={{ resize: 'vertical' }} />
+                  <label htmlFor="contact-message" className="form-label" style={{ color: 'rgba(255,255,255,0.5)' }}>What do you need help with?</label>
+                  <textarea id="contact-message" rows={3} placeholder="We need help with..." required className="form-input" style={{ resize: 'vertical' }} />
                 </div>
                 <button type="submit" className="btn-gradient" style={{ width: '100%', padding: '0.9rem', fontSize: '0.85rem', display: 'block', textAlign: 'center' }}>
-                  Book a discovery call
+                  Book a free assessment
                 </button>
               </form>
             )}
@@ -774,6 +840,7 @@ export default function Home() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   )

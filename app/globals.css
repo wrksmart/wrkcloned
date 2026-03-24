@@ -76,11 +76,27 @@ body {
 
 ::selection {
   background: rgba(118,214,105,0.2);
-  color: #000;
+  color: var(--eerie);
 }
 
 img { max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
+
+/* ────────────── FOCUS INDICATORS ────────────── */
+:focus-visible {
+  outline: 2px solid var(--mantis-a);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--mantis-a);
+  outline-offset: 2px;
+}
+.form-input:focus-visible {
+  outline: none;
+  border-color: var(--mantis-a);
+  box-shadow: 0 0 0 3px rgba(118,214,105,0.15);
+}
 
 /* ────────────── LOGO STRIP ────────────── */
 @keyframes marquee {
@@ -101,8 +117,21 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.92rem;
   font-weight: 400;
   transition: color 0.2s;
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--mantis-a), var(--mantis-b));
+  border-radius: 1px;
+  transition: width 0.25s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .nav-link:hover { color: var(--mantis-a); }
+.nav-link:hover::after { width: 100%; }
 .nav-desktop { display: flex; align-items: center; gap: 2rem; }
 .nav-mobile-btn { display: none; background: none; border: none; cursor: pointer; }
 
@@ -124,9 +153,13 @@ a { color: inherit; text-decoration: none; }
   font-family: inherit;
 }
 .btn-gradient:hover {
-  opacity: 0.92;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(118,214,105,0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(118,214,105,0.3);
+}
+.btn-gradient:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 4px rgba(118,214,105,0.2);
+  transition: transform 0.08s, box-shadow 0.08s;
 }
 
 .btn-dark {
@@ -146,8 +179,12 @@ a { color: inherit; text-decoration: none; }
   font-family: inherit;
 }
 .btn-dark:hover {
-  background-color: #333;
-  transform: translateY(-1px);
+  background-color: #2a2a2a;
+  transform: translateY(-2px);
+}
+.btn-dark:active {
+  transform: translateY(1px);
+  transition: transform 0.08s;
 }
 
 .btn-outline {
@@ -162,7 +199,8 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.04em;
   text-transform: uppercase;
   border: 2px solid var(--line);
-  transition: all 0.2s;
+  transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  cursor: pointer;
 }
 .btn-outline:hover {
   border-color: var(--mantis-a);
@@ -182,28 +220,13 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ────────────── GLASS CARDS ────────────── */
-.glass {
-  background: rgba(255,255,255,0.55);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border: 1px solid rgba(255,255,255,0.5);
-  border-radius: 16px;
-  transition: all 0.3s ease;
-}
-.glass:hover {
-  background: rgba(255,255,255,0.7);
-  border-color: rgba(118,214,105,0.3);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.06), 0 0 0 1px rgba(118,214,105,0.08);
-  transform: translateY(-3px);
-}
-
 .glass-dark {
   background: rgba(37,53,48,0.65);
   backdrop-filter: blur(24px) saturate(1.3);
   -webkit-backdrop-filter: blur(24px) saturate(1.3);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 16px;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 .glass-dark:hover {
   background: rgba(37,53,48,0.8);
@@ -215,16 +238,54 @@ a { color: inherit; text-decoration: none; }
 /* ────────────── GLASS GRADIENT BG ────────────── */
 .glass-hero-bg {
   position: relative;
-  background: #fff;
+  background: var(--white);
 }
+/* Primary blob — follows cursor */
 .glass-hero-bg::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 60% 45%, #DDEA7F 0%, transparent 70%);
-  opacity: 0.45;
+  background:
+    radial-gradient(
+      600px circle at var(--mouse-x, 60%) var(--mouse-y, 45%),
+      rgba(221,234,127,0.5) 0%,
+      transparent 60%
+    );
   mix-blend-mode: multiply;
   pointer-events: none;
+  transition: background 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+/* Secondary blob — drifts opposite to cursor for depth */
+.glass-hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      500px circle at calc(100% - var(--mouse-x, 60%)) calc(100% - var(--mouse-y, 45%)),
+      rgba(118,214,105,0.12) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      300px circle at 20% 80%,
+      rgba(222,234,136,0.08) 0%,
+      transparent 50%
+    );
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  transition: background 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Reduced motion: static gradient */
+@media (prefers-reduced-motion: reduce) {
+  .glass-hero-bg::before {
+    background: radial-gradient(circle at 60% 45%, rgba(221,234,127,0.45) 0%, transparent 70%);
+    transition: none;
+  }
+  .glass-hero-bg::after {
+    background: radial-gradient(400px circle at 30% 70%, rgba(118,214,105,0.1) 0%, transparent 50%);
+    transition: none;
+  }
 }
 
 .glass-mesh {
@@ -234,85 +295,6 @@ a { color: inherit; text-decoration: none; }
     var(--seasalt);
 }
 
-/* ────────────── BENTO GRID ────────────── */
-.bento-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 13rem;
-  gap: 16px;
-}
-
-.bento-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.55);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border: 1px solid rgba(255,255,255,0.5);
-  padding: 1.75rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.bento-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(118,214,105,0.04) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.35s;
-  pointer-events: none;
-}
-.bento-card:hover::before { opacity: 1; }
-.bento-card:hover {
-  background: rgba(255,255,255,0.75);
-  border-color: rgba(118,214,105,0.3);
-  box-shadow: 0 16px 48px rgba(118,214,105,0.08), 0 0 0 1px rgba(118,214,105,0.06);
-  transform: translateY(-3px);
-}
-
-.bento-card .bento-content {
-  position: relative;
-  z-index: 2;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.bento-card:hover .bento-content {
-  transform: translateY(-28px);
-}
-
-.bento-card .bento-cta {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem 1.75rem;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 3;
-}
-.bento-card:hover .bento-cta {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Bento span variants */
-.bento-wide { grid-column: span 2; }
-.bento-tall { grid-row: span 2; }
-
-@media (max-width: 900px) {
-  .bento-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: auto; }
-  .bento-wide { grid-column: span 2; }
-  .bento-tall { grid-row: span 1; }
-  .bento-card .bento-content { transform: none !important; }
-  .bento-card .bento-cta { position: static; opacity: 1; transform: none; padding: 0.5rem 0 0; }
-}
-@media (max-width: 600px) {
-  .bento-grid { grid-template-columns: 1fr; }
-  .bento-wide { grid-column: span 1; }
-}
 
 /* ────────────── PILLAR ICON ────────────── */
 .pillar-icon {
@@ -337,25 +319,6 @@ a { color: inherit; text-decoration: none; }
   border-radius: 12px 12px 0 0;
 }
 
-/* ────────────── INDUSTRY CARD ────────────── */
-.industry-card {
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 1.75rem 1rem;
-  text-align: center;
-  cursor: default;
-  transition: all 0.3s ease;
-  color: #fff;
-}
-.industry-card:hover {
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(118,214,105,0.35);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  transform: translateY(-3px);
-}
 
 /* ────────────── STEP NUMBER ────────────── */
 .step-number {
@@ -397,14 +360,26 @@ label.form-label {
   margin-bottom: 0.4rem;
 }
 
-/* ────────────── DOT NAV ────────────── */
-.dot-btn {
-  height: 8px;
-  border-radius: 100px;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: width 0.3s, background-color 0.3s;
+
+/* ────────────── INDUSTRY PILL HOVER ────────────── */
+.industry-pill {
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.2s, box-shadow 0.2s;
+}
+.industry-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--mantis-a);
+  box-shadow: 0 4px 12px rgba(118,214,105,0.12);
+}
+
+/* ────────────── CHECKMARK DRAW ────────────── */
+@keyframes checkmark-draw {
+  from { stroke-dashoffset: 24; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes checkmark-circle-fill {
+  from { transform: scale(0); opacity: 0; }
+  50%  { transform: scale(1.1); opacity: 1; }
+  to   { transform: scale(1); opacity: 1; }
 }
 
 /* ────────────── BLINKING CURSOR ────────────── */
@@ -418,19 +393,78 @@ label.form-label {
   background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
 }
 
+/* ────────────── SCROLL-DRIVEN REVEALS ────────────── */
+/* Progressive enhancement: CSS scroll-driven animations (Chrome/Edge/Safari) */
+/* Framer Motion handles the fallback for Firefox */
+
+@supports (animation-timeline: view()) {
+  @keyframes scroll-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scroll-scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Section headings get a scroll-driven fade */
+  .scroll-reveal {
+    animation: scroll-fade-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+
+  /* Cards get a subtle scale-in */
+  .scroll-reveal-card {
+    animation: scroll-scale-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+
+  /* Hero parallax — heading moves slower than background */
+  .hero-parallax {
+    animation: scroll-fade-in linear both;
+    animation-timeline: scroll();
+    animation-range: 0% 40%;
+    animation-direction: reverse;
+  }
+}
+
+/* Reduced motion: disable all scroll-driven animations */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal,
+  .scroll-reveal-card,
+  .hero-parallax {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* ────────────── RESPONSIVE ────────────── */
 @media (max-width: 900px) {
   .nav-desktop { display: none; }
   .nav-mobile-btn { display: flex; align-items: center; }
-  .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .services-grid { grid-template-columns: 1fr !important; }
   .hero-grid { grid-template-columns: 1fr !important; text-align: center; }
   .hero-cta-row { justify-content: center; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
 @media (max-width: 600px) {
   .pillars-grid { grid-template-columns: 1fr !important; }
-  .industries-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .testimonials-grid { grid-template-columns: 1fr !important; }
   .steps-grid { grid-template-columns: 1fr !important; }
   .steps-connector { display: none !important; }
