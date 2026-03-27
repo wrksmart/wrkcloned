@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mock Figma Frames — wrksourcing Training</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --seasalt: #f7f8f9;
+    --eerie: #1d1d1d;
+    --mantis-a: #76d669;
+    --mantis-b: #DDEA7F;
+    --mindaro: #deea88;
+    --forest: #253530;
+    --line: #E0E0E0;
+    --muted: #888888;
+    --subtext: #666666;
+    --subtle: #AAAAAA;
+    --light-accent: #F2F6D8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #e8e8e8;
+    padding: 40px;
+    color: var(--eerie);
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--eerie);
+  }
+
+  .page-subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 40px;
+    max-width: 640px;
+    line-height: 1.5;
+  }
+
+  .instructions {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 40px;
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 700px;
+  }
+
+  .instructions strong { color: #856404; }
+
+  .frame-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .frame-label .badge {
+    background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
+    color: var(--forest);
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .exercise-note {
+    font-size: 13px;
+    color: var(--subtext);
+    margin-bottom: 16px;
+    font-style: italic;
+    max-width: 800px;
+    line-height: 1.5;
+  }
+
+  .prompt-example {
+    background: var(--forest);
+    color: #ccc;
+    font-size: 13px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 24px;
+    max-width: 800px;
+    font-family: monospace;
+    line-height: 1.5;
+  }
+
+  .prompt-example em {
+    color: var(--mindaro);
+    font-style: normal;
+  }
+
+  /* ── Frame containers ── */
+  .frame-wrapper { margin-bottom: 60px; }
+
+  .frame {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    max-width: 1200px;
+    position: relative;
+  }
+
+  .frame::before {
+    content: 'Figma Export';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0,0,0,0.06);
+    color: var(--subtle);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ────────────────────────────────────────
+     FRAME 1: Updated Hero Section
+     ──────────────────────────────────────── */
+  .hero-frame {
+    background: var(--seasalt);
+    padding: 80px 60px 60px;
+    text-align: center;
+  }
+
+  .hero-frame .eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mantis-a);
+    margin-bottom: 20px;
+  }
+
+  .hero-frame h2 {
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--eerie);
+    margin-bottom: 24px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-frame h2 .gradient-text {
+    background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-frame .hero-sub {
+    font-size: 18px;
+    color: var(--subtext);
+    max-width: 520px;
+    margin: 0 auto 36px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .hero-frame .hero-ctas {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .hero-frame .btn-primary {
+    background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
+    color: var(--forest);
+    border: none;
+    padding: 14px 32px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+  }
+
+  .hero-frame .btn-secondary {
+    background: transparent;
+    color: var(--eerie);
+    border: 1.5px solid var(--line);
+    padding: 14px 32px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .hero-frame .trust-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+
+  .hero-frame .trust-item {
+    text-align: center;
+  }
+
+  .hero-frame .trust-value {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--eerie);
+  }
+
+  .hero-frame .trust-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ────────────────────────────────────────
+     FRAME 2: About Page — Team Section
+     ──────────────────────────────────────── */
+  .about-frame {
+    background: var(--seasalt);
+  }
+
+  .about-hero {
+    background: var(--forest);
+    padding: 80px 60px 60px;
+    text-align: center;
+    color: #fff;
+  }
+
+  .about-hero .eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mindaro);
+    margin-bottom: 16px;
+  }
+
+  .about-hero h2 {
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .about-hero p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.7);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .about-values {
+    padding: 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .value-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 32px 28px;
+  }
+
+  .value-card .value-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--light-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 18px;
+  }
+
+  .value-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--eerie);
+  }
+
+  .value-card p {
+    font-size: 14px;
+    color: var(--subtext);
+    line-height: 1.6;
+  }
+
+  .about-team {
+    padding: 60px;
+    text-align: center;
+  }
+
+  .about-team h3 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .about-team .team-sub {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .team-card {
+    text-align: center;
+  }
+
+  .team-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--forest);
+  }
+
+  .team-card .team-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--eerie);
+    margin-bottom: 4px;
+  }
+
+  .team-card .team-role {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ────────────────────────────────────────
+     FRAME 3: Testimonial Card Redesign
+     ──────────────────────────────────────── */
+  .testimonial-frame {
+    background: var(--forest);
+    padding: 60px;
+  }
+
+  .testimonial-frame .section-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mindaro);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .testimonial-frame h2 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .testimonial-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 32px;
+    backdrop-filter: blur(8px);
+  }
+
+  .testimonial-card .quote-mark {
+    font-size: 36px;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+
+  .testimonial-card .quote-text {
+    font-size: 15px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .testimonial-card .quote-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .testimonial-card .author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--forest);
+  }
+
+  .testimonial-card .author-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .testimonial-card .author-title {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ────────────────────────────────────────
+     FRAME 4: Contact Section Redesign
+     ──────────────────────────────────────── */
+  .contact-frame {
+    background: var(--seasalt);
+    padding: 80px 60px;
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .contact-left h2 {
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    color: var(--eerie);
+  }
+
+  .contact-left h2 .gradient-text {
+    background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .contact-left p {
+    font-size: 15px;
+    color: var(--subtext);
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .contact-info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .contact-info-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--light-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .contact-info-text {
+    font-size: 14px;
+    color: var(--eerie);
+    font-weight: 500;
+  }
+
+  .contact-info-label {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-form {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 36px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--eerie);
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--eerie);
+    background: var(--seasalt);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--mantis-a);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .contact-form .btn-submit {
+    width: 100%;
+    background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
+    color: var(--forest);
+    border: none;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+  }
+
+  /* ────────────────────────────────────────
+     FRAME 5: Mobile Nav (375px)
+     ──────────────────────────────────────── */
+  .mobile-frame {
+    background: var(--seasalt);
+    max-width: 375px;
+    margin: 0;
+  }
+
+  .mobile-nav {
+    background: #fff;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mobile-nav .logo-text {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--eerie);
+  }
+
+  .mobile-nav .logo-text span {
+    color: var(--mantis-a);
+  }
+
+  .hamburger {
+    width: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .hamburger span {
+    display: block;
+    height: 2px;
+    background: var(--eerie);
+    border-radius: 2px;
+  }
+
+  .mobile-menu {
+    background: #fff;
+    padding: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mobile-menu a {
+    display: block;
+    padding: 14px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--eerie);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mobile-menu a:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-menu .mobile-cta {
+    margin-top: 16px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
+    color: var(--forest);
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 14px;
+    border-bottom: none;
+  }
+
+  .mobile-hero {
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .mobile-hero .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mantis-a);
+    margin-bottom: 12px;
+  }
+
+  .mobile-hero h2 {
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .mobile-hero h2 .gradient-text {
+    background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .mobile-hero p {
+    font-size: 15px;
+    color: var(--subtext);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .mobile-hero .btn-primary {
+    display: block;
+    background: linear-gradient(135deg, var(--mantis-a), var(--mantis-b));
+    color: var(--forest);
+    border: none;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 8px;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .mobile-hero .btn-secondary {
+    display: block;
+    background: transparent;
+    color: var(--eerie);
+    border: 1.5px solid var(--line);
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    width: 100%;
+  }
+
+  /* ────────────────────────────────────────
+     Dividers
+     ──────────────────────────────────────── */
+  .divider {
+    height: 1px;
+    background: var(--line);
+    margin: 60px 0;
+    max-width: 1200px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Mock Figma Frames for Training</h1>
+<p class="page-subtitle">
+  Open this file in a browser. Screenshot each frame and save as PNG.
+  These are your mock "Figma exports" for the live demo with Jen.
+</p>
+
+<div class="instructions">
+  <strong>How to use:</strong> For each frame below, take a screenshot (Cmd+Shift+4 on Mac, drag over the frame).
+  Save to Desktop. During the live training, you will drag these PNGs into Claude Code
+  to show Jen the Figma-to-code workflow.
+</div>
+
+<!-- ═══════════════════════════════════════════
+     EXERCISE 1: Update the Hero Section
+     ═══════════════════════════════════════════ -->
+<div class="frame-wrapper">
+  <div class="frame-label">
+    Frame 1 — Hero Redesign
+    <span class="badge">Exercise 1</span>
+  </div>
+  <div class="exercise-note">
+    Jen drags this into Claude Code and asks it to update the existing hero section.
+    This tests updating an existing section from a Figma export.
+  </div>
+  <div class="prompt-example">
+    <em>Prompt Jen will type:</em> "Update the hero section to match this design.
+    Keep the existing animation on the rotating words."
+  </div>
+  <div class="frame hero-frame">
+    <div class="eyebrow">Canadian Workflow Solutions</div>
+    <h2>Stop hiring.<br>Start <span class="gradient-text">building systems</span>.</h2>
+    <p class="hero-sub">
+      We audit your operations, build the infrastructure,
+      deploy trained wrk Specialists, and optimize continuously.
+    </p>
+    <div class="hero-ctas">
+      <button class="btn-primary">Book a Discovery Call</button>
+      <button class="btn-secondary">See How It Wrks</button>
+    </div>
+    <div class="trust-row">
+      <div class="trust-item">
+        <div class="trust-value">200K+</div>
+        <div class="trust-label">Hours Delivered</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-value">85+</div>
+        <div class="trust-label">Active Clients</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-value">50+</div>
+        <div class="trust-label">wrk Specialists</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-value">95%</div>
+        <div class="trust-label">Client Retention</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════
+     EXERCISE 2: Create a New About Page
+     ═══════════════════════════════════════════ -->
+<div class="frame-wrapper">
+  <div class="frame-label">
+    Frame 2 — About Page (Full)
+    <span class="badge">Exercise 2</span>
+  </div>
+  <div class="exercise-note">
+    Jen drags this into Claude Code and asks it to create a brand new page.
+    This tests creating a new route from a Figma export.
+  </div>
+  <div class="prompt-example">
+    <em>Prompt Jen will type:</em> "Create a new About page at /about to match this design.
+    Use the same animation style as the homepage."
+  </div>
+  <div class="frame about-frame">
+    <div class="about-hero">
+      <div class="eyebrow">About wrksourcing</div>
+      <h2>We build the systems<br>behind growing companies.</h2>
+      <p>
+        wrksourcing is a Canadian workflow solutions company. We audit operations,
+        build infrastructure, deploy trained people, and optimize continuously.
+      </p>
+    </div>
+    <div class="about-values">
+      <div class="value-card">
+        <div class="value-icon">&#9881;</div>
+        <h3>Systems First</h3>
+        <p>Every engagement starts with an operations audit. We understand your workflows before making a single hire.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">&#9733;</div>
+        <h3>People Who Stay</h3>
+        <p>Our wrk Specialists are trained, retained, and continuously developed. 95% retention because we invest in people.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">&#9998;</div>
+        <h3>Built on Real Tools</h3>
+        <p>Zoho, Notion, n8n, Clockify. We build around the platforms that actually run your business.</p>
+      </div>
+    </div>
+    <div class="about-team">
+      <h3>The Leadership Team</h3>
+      <p class="team-sub">The people who make wrksourcing wrk.</p>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">TC</div>
+          <div class="team-name">Tyler Cameron</div>
+          <div class="team-role">CEO, Visionary</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">DE</div>
+          <div class="team-name">Diana Eby</div>
+          <div class="team-role">Client Growth Partner</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">DJ</div>
+          <div class="team-name">DJ Verzo</div>
+          <div class="team-role">People, Culture &amp; Ops</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════
+     EXERCISE 3: Redesign Testimonials
+     ═══════════════════════════════════════════ -->
+<div class="frame-wrapper">
+  <div class="frame-label">
+    Frame 3 — Testimonials Section
+    <span class="badge">Exercise 3</span>
+  </div>
+  <div class="exercise-note">
+    Jen drags this in to replace the existing testimonials section on the homepage.
+    This tests redesigning an existing section with a different layout.
+  </div>
+  <div class="prompt-example">
+    <em>Prompt Jen will type:</em> "Replace the testimonials section on the homepage with this design.
+    Use a dark background like this. Keep the frosted glass card style."
+  </div>
+  <div class="frame testimonial-frame">
+    <div class="section-eyebrow">What Clients Say</div>
+    <h2>Trusted by businesses across Canada.</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="quote-text">
+          wrksourcing didn't just give us a person. They audited our entire client onboarding process,
+          rebuilt it in Zoho, and then deployed a specialist who already knew the system.
+        </p>
+        <div class="quote-author">
+          <div class="author-avatar">BS</div>
+          <div>
+            <div class="author-name">Benji Smith</div>
+            <div class="author-title">Hive Growth Partners</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="quote-text">
+          We went from drowning in admin to having real operational infrastructure.
+          The ROI was obvious within the first month.
+        </p>
+        <div class="quote-author">
+          <div class="author-avatar">DC</div>
+          <div>
+            <div class="author-name">Daniel C.</div>
+            <div class="author-title">Consilium Wealth</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="quote-text">
+          The difference between wrksourcing and every VA service we tried before is that they actually
+          build the systems before placing people. Night and day.
+        </p>
+        <div class="quote-author">
+          <div class="author-avatar">KY</div>
+          <div>
+            <div class="author-name">Katherine Yager</div>
+            <div class="author-title">Pilot Solutions</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="quote-text">
+          Their specialist hit the ground running on day one. That never happens with outsourced talent.
+          The wrk Integration Program actually works.
+        </p>
+        <div class="quote-author">
+          <div class="author-avatar">JL</div>
+          <div>
+            <div class="author-name">Jacob L.</div>
+            <div class="author-title">Goldfarm Inc</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════
+     EXERCISE 4: Contact Section
+     ═══════════════════════════════════════════ -->
+<div class="frame-wrapper">
+  <div class="frame-label">
+    Frame 4 — Contact Section Redesign
+    <span class="badge">Exercise 4</span>
+  </div>
+  <div class="exercise-note">
+    Jen redesigns the contact form section. Two-column layout with info + form.
+    This tests a more complex layout change with form elements.
+  </div>
+  <div class="prompt-example">
+    <em>Prompt Jen will type:</em> "Update the contact section on the homepage to match this design.
+    The form should have name, email, company, service dropdown, and message fields."
+  </div>
+  <div class="frame contact-frame">
+    <div class="contact-layout">
+      <div class="contact-left">
+        <h2>Let's talk about<br><span class="gradient-text">your operations.</span></h2>
+        <p>
+          Book a free discovery call. We will audit your workflows and show you
+          exactly where wrksourcing can save you time and money.
+        </p>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">&#9993;</div>
+          <div>
+            <div class="contact-info-label">Email</div>
+            <div class="contact-info-text">info@wrksourcing.com</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">&#128205;</div>
+          <div>
+            <div class="contact-info-label">Location</div>
+            <div class="contact-info-text">Remote-first, HQ in Canada</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">&#9201;</div>
+          <div>
+            <div class="contact-info-label">Response Time</div>
+            <div class="contact-info-text">Within 24 hours</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Work Email</label>
+          <input type="email" placeholder="jane@company.com">
+        </div>
+        <div class="form-group">
+          <label>Company</label>
+          <input type="text" placeholder="Acme Corp">
+        </div>
+        <div class="form-group">
+          <label>What do you need help with?</label>
+          <select>
+            <option>Select a service...</option>
+            <option>General Admin & Operations</option>
+            <option>CRM Setup (Zoho)</option>
+            <option>Marketing & Content</option>
+            <option>Sales & Outreach</option>
+            <option>Project-Based Work</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell us about your challenge</label>
+          <textarea placeholder="What's the biggest operational headache you're dealing with right now?"></textarea>
+        </div>
+        <button class="btn-submit">Book a Discovery Call</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════
+     EXERCISE 5: Mobile Navigation
+     ═══════════════════════════════════════════ -->
+<div class="frame-wrapper">
+  <div class="frame-label">
+    Frame 5 — Mobile View (375px)
+    <span class="badge">Exercise 5</span>
+  </div>
+  <div class="exercise-note">
+    Jen uses this to fix or create the mobile navigation and hero.
+    This tests responsive design work from a mobile mockup.
+  </div>
+  <div class="prompt-example">
+    <em>Prompt Jen will type:</em> "Update the mobile navigation to match this design.
+    Add a hamburger menu that opens this menu panel. Mobile breakpoint is 600px."
+  </div>
+  <div class="frame mobile-frame">
+    <div class="mobile-nav">
+      <div class="logo-text"><span>wrk</span>sourcing</div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="mobile-menu">
+      <a href="#">Services</a>
+      <a href="#">Pricing</a>
+      <a href="#">How It Wrks</a>
+      <a href="#">About Us</a>
+      <a href="#" class="mobile-cta">Book a Call</a>
+    </div>
+    <div class="mobile-hero">
+      <div class="eyebrow">Canadian Workflow Solutions</div>
+      <h2>Stop hiring.<br>Start <span class="gradient-text">building systems</span>.</h2>
+      <p>We audit, build, deploy, and optimize your operations.</p>
+      <button class="btn-primary">Book a Discovery Call</button>
+      <button class="btn-secondary">See How It Wrks</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
